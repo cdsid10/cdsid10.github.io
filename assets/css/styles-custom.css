@@ -143,6 +143,10 @@
   #pro {
     margin-left: -150px;
   }
+
+  #contact-para{
+    margin-bottom: 30px;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 992px) {
@@ -282,6 +286,10 @@
     position: relative;
     animation: textColor 10s ease infinite;
   }
+
+  #contact-para{
+    margin-bottom: 25px;
+  }
 }
 
 /* ipad */
@@ -389,6 +397,10 @@
   #gaming {
     margin-left: -50px;
     margin-bottom: 15px;
+  }
+
+  #contact-para{
+    margin-bottom: 35px;
   }
 }
 
@@ -585,6 +597,10 @@
   #pro {
     margin-left: -200px;
     margin-bottom: 25px;
+  }
+
+  #contact-para{
+    margin-bottom: 35px;
   }
 }
 
@@ -819,6 +835,7 @@
   #contact-para {
     text-align: left;
     font-size: 1.25rem;
+    margin-bottom: 20px;
   }
 
   #sidd{
