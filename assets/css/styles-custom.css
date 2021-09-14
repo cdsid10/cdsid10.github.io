@@ -466,9 +466,9 @@
     left: 0;
     right: 0;
     z-index: -1;
-    height: 105%;
+    height: 100%;
     width: 100%;
-    transform: scale(0.55);
+    transform: scale(0.75);
     -webkit-filter: blur(5vw);
     -moz-filter: blur(5vw);
     -ms-filter: blur(5vw);
@@ -495,7 +495,7 @@
     z-index: -1;
     height: 100%;
     width: 100%;
-    transform: scale(0.5);
+    transform: scale(0.6);
     -webkit-filter: blur(5vw);
     -moz-filter: blur(5vw);
     -ms-filter: blur(5vw);
