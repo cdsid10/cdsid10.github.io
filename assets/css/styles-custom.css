@@ -818,6 +818,11 @@
 @media (max-width: 575px) {
   #contact-para {
     text-align: left;
+    font-size: 1.25rem;
+  }
+
+  #sidd{
+    font-size: 2rem;
   }
 }
 
