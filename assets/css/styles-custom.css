@@ -1,0 +1,1248 @@
+.gradient {
+  background-color: black!important;
+  color: #fff;
+}
+
+.bg-white {
+  background-color: rgba(0,0,0,0)!important;
+}
+
+#home {
+  background: url("../../assets/img/backgrounds/blurredvg2.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-color: black;
+}
+
+#body {
+  background-color: rgba(0,0,0,0)!important;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #brand {
+    width: 6%;
+    height: auto;
+    margin-left: 5px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #projects-body {
+    margin-top: 6em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .headings.main-name {
+    font-size: 6em;
+    margin-left: 100px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .headings.main-job {
+    font-size: 5em;
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .headings {
+    font-size: 4em;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #cards:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.7);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(6vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 100% 100%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #cards {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #human {
+    margin-top: -80px;
+    margin-left: -100px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #gaming {
+    margin-left: -50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #ui {
+    margin-left: 0px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #playstation {
+    margin-left: 50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #hardware {
+    margin-left: 0px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #anime {
+    margin-left: -50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #movie {
+    margin-left: -100px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .contact-me {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    margin-top: -100px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  #pro {
+    margin-left: -150px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #brand {
+    width: 10%;
+    height: auto;
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #projects-body {
+    margin-top: 6em;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #heading-col {
+    margin-top: 20em;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .headings.main-name {
+    font-size: 4em;
+    margin-left: 50px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .headings.main-job {
+    font-size: 3.5em;
+    margin-left: 25px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .headings {
+    font-size: 3em;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #heading-col {
+    margin-top: 5em;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #human {
+    margin-top: -125px;
+    margin-left: -50px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #playstation {
+    margin-left: 25px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .contact-me {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    margin-top: -150px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #ui {
+    margin-left: 0px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #gaming {
+    margin-left: -25px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #hardware {
+    margin-left: 0px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #anime {
+    margin-left: -25px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #movie {
+    margin-left: -50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #pro {
+    margin-left: -75px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #cards:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.8);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(6vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 100% 100%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #cards {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+/* ipad */
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #brand {
+    width: 5%;
+    height: auto;
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #pics:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.6);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(5vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 100% 100%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #cards:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.7);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(5vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 100% 100%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #cards {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .contact-me {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    margin-top: -50px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #projects-body {
+    margin-top: 6em;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .headings.main-name {
+    font-size: 6.5em;
+    margin-left: 100px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .headings.main-job {
+    font-size: 5.5em;
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .headings {
+    font-size: 4.5em;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #human {
+    margin-top: -80px;
+    margin-left: -100px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #gaming {
+    margin-left: -50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #pics {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #ui {
+    margin-left: 0px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #playstation {
+    margin-left: 50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #hardware {
+    margin-left: 0px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #anime {
+    margin-left: -50px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #movie {
+    margin-left: -100px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  #pro {
+    margin-left: -150px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #brand {
+    width: 5%;
+    height: auto;
+  }
+}
+
+@media (min-width: 1441px) {
+  #cards:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 105%;
+    width: 100%;
+    transform: scale(0.55);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(5vw);
+    background: linear-gradient(270deg, #0fffc1, #7e0fff);
+    background-size: 400% 400%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (min-width: 1441px) {
+  #cards {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (min-width: 1441px) {
+  #pics:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.5);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(5vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 300% 300%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (min-width: 1441px) {
+  #pics {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes textColor {
+  0% {
+    color: #7e0fff;
+  }
+  50% {
+    color: #10cf9f;
+  }
+  100% {
+    color: #7e0fff;
+  }
+}
+
+@media (min-width: 1441px) {
+  .headings.main-name {
+    font-size: 8em;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    opacity: 0.95;
+  }
+}
+
+@media (min-width: 1441px) {
+  #projects-body {
+    margin-top: 8em;
+  }
+}
+
+@media (min-width: 1441px) {
+  .headings.main-job {
+    font-size: 7em;
+    margin-left: 0px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .headings {
+    font-size: 6em;
+  }
+}
+
+@media (min-width: 1441px) {
+  #playstation {
+    margin-left: 0px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #hardware {
+    margin-left: -50px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #anime {
+    margin-left: -100px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #movie {
+    margin-left: -150px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #pro {
+    margin-left: -200px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #ui {
+    margin-left: -50px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #gaming {
+    margin-left: -100px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1441px) {
+  #human {
+    margin-left: -150px;
+    margin-top: -150px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .contact-me {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    margin-top: -100px;
+  }
+}
+
+/* my monitor */
+
+@media (min-width: 1920px) {
+  #brand {
+    width: 4%;
+    height: auto;
+    margin-left: 100px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #projects-body {
+    margin-top: 8em;
+  }
+}
+
+@media (min-width: 1920px) {
+  #navbarNav {
+    margin-right: 100px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .headings.main-name {
+    font-size: 8em;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    opacity: 0.95;
+  }
+}
+
+@media (min-width: 1920px) {
+  .headings.main-job {
+    font-size: 7em;
+    margin-left: 0px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #playstation {
+    margin-left: 0px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #hardware {
+    margin-left: -50px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .contact-me {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    margin-top: -100px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #anime {
+    margin-left: -100px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #movie {
+    margin-left: -150px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #pro {
+    margin-left: -200px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #ui {
+    margin-left: -50px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #gaming {
+    margin-left: -100px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #human {
+    margin-left: -150px;
+    margin-top: -75px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .headings {
+    font-size: 6em;
+  }
+}
+
+@media (min-width: 1920px) {
+  #heading-col {
+    margin-top: -5em;
+  }
+}
+
+/* mobiles probably */
+
+@media (max-width: 575px) {
+  #brand {
+    width: 12%;
+    height: auto;
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 575px) {
+  #cards {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (max-width: 575px) {
+  #cards:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.9);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(6vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 100% 100%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (max-width: 575px) {
+  #pics:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.7);
+    -webkit-filter: blur(10vw);
+    -moz-filter: blur(10vw);
+    -ms-filter: blur(10vw);
+    filter: blur(10vw);
+    background: linear-gradient(270deg, #0dd3a1, #6f0edf);
+    background-size: 100% 100%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@media (max-width: 575px) {
+  #pics {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (max-width: 575px) {
+  #projects-body {
+    margin-top: 4em;
+  }
+}
+
+@media (max-width: 575px) {
+  .contact-me {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    margin-top: -20px;
+  }
+}
+
+@media (max-width: 575px) {
+  #contact-para {
+    text-align: left;
+  }
+}
+
+@media (max-width: 575px) {
+  .headings.main-name {
+    font-size: 3em;
+    margin-left: -10px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 575px) {
+  .headings.main-job {
+    font-size: 2.5em;
+    margin-left: -20px;
+  }
+}
+
+@media (max-width: 575px) {
+  #playstation {
+    margin-left: -20px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  #hardware {
+    margin-left: -25px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  #anime {
+    margin-left: -30px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  #movie {
+    margin-left: -35px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  #pro {
+    margin-left: -40px;
+  }
+}
+
+@media (max-width: 575px) {
+  #ui {
+    margin-left: -25px;
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 575px) {
+  #gaming {
+    margin-left: -30px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  #human {
+    margin-left: -35px;
+    margin-top: -90px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  .headings {
+    font-size: 2em;
+    margin-left: -30px;
+  }
+}
+
+@media (max-width: 575px) {
+  #heading-col {
+    margin-top: 5em;
+  }
+}
+
+.navbar-toggler {
+  padding: .25rem .75rem;
+  font-size: 1rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.5em;
+}
+
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+  color: ghostwhite;
+}
+
+.other-links:hover {
+  color: gray!important;
+}
+
+.navbar-dark .navbar-nav .nav-link.disabled, .disabled {
+  color: hsla(0,0%,100%,.25);
+}
+
+.disabled {
+  color: hsla(0,0%,100%,.25);
+}
+
+.nav-link.active.active-button {
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.nav-link.active.active-button:hover {
+  border-color: ghostwhite!important;
+  background-color: ghostwhite;
+  color: black;
+}
+
+.headings {
+  color: ghostwhite;
+  cursor: default;
+  display: table;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: black;
+}
+
+#twitter:hover {
+  color: #309AE7;
+}
+
+#itch:hover {
+  color: #F55860;
+}
+
+#git:hover {
+  color: #999FB2;
+}
+
+#art:hover {
+  color: #3099E3;
+}
+
+#behance:hover {
+  color: #3967FC;
+}
+
+#in:hover {
+  color: #2171AC;
+}
+
+#side-menu .disabled {
+  color: rgba(0,0,0,0.5);
+}
+
+.nav-link.active.active-button {
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.nav-link.active.active-button:hover {
+  border-color: ghostwhite!important;
+  background-color: ghostwhite;
+  color: black!important;
+}
+
+.itch-btn {
+  background-color: #553683;
+  border-color: #553683;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+/* .itch-btn {
+  background-color: #ED555D;
+  border-color: #ED555D;
+} */
+
+.github-btn {
+  background-color: #288739;
+  border-color: #288739;
+}
+
+.itch-btn:hover {
+  background-color: gainsboro;
+  color: #553683;
+  border-color: #553683;
+}
+
+.github-btn:hover {
+  background-color: gainsboro;
+  color: #288739;
+  border-color: #288739;
+}
+
+.itch-btn:active {
+  background-color: #553683!important;
+  border-color: #553683!important;
+  color: #ffffff!important;
+}
+
+.itch-btn:focus {
+  background-color: #553683;
+  border-color: #553683;
+  color: #ffffff;
+}
+
+.itch-btn:active:focus {
+  background-color: #553683;
+  color: #553683;
+  color: #ffffff;
+  box-shadow: 0 0 0 .25rem rgba(255,255,255,.5);
+}
+
+.itch-btn:focus {
+  box-shadow: 0 0 0 .25rem rgba(255,255,255,.5);
+}
+
+.github-btn:active {
+  background-color: #288739!important;
+  border-color: #288739!important;
+  color: #ffffff!important;
+}
+
+.github-btn:focus {
+  background-color: #288739;
+  border-color: #288739;
+  color: #ffffff;
+}
+
+.github-btn:active:focus {
+  background-color: #288739;
+  color: #288739;
+  color: #ffffff;
+}
+
+.github-btn:focus {
+  box-shadow: 0 0 0 .25rem rgba(255,255,255,.5);
+}
+
+.github-btn.disabled {
+  background-color: #288739;
+  border-color: #288739;
+}
+
+.btn-primary.focus, .btn-primary:focus, .github-btn:focus {
+  box-shadow: 0 0 0 .25rem rgba(255,255,255,.2)!important;
+}
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+  background-color: rgba(0,0,0,0.8);
+  border-bottom: 2px solid var(--gray-dark);
+  border-right: 2px solid var(--gray-dark);
+  border-left: 2px solid var(--gray-dark);
+}
+
+#projects {
+  background-color: black;
+}
+
+#body2 {
+  background-color: rgba(0,0,0,0)!important;
+}
+
+.border-0 {
+  border: 0!important;
+  background-color: rgba(0,0,0,0);
+}
+
+.h6, h6 {
+  font-size: 1rem;
+  color: ghostwhite;
+}
+
+.display-4 {
+  font-size: 1.5rem;
+  color: ghostwhite;
+}
+
+.text-muted {
+  color: var(--gray-dark);
+}
+
+.badge-dark {
+  color: black;
+  background-color: gainsboro;
+}
+
+.btn.purple {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid ghostwhite;
+  padding: .375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 3em;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.purple:hover {
+  background-color: #553683;
+}
+
+.btn-outline-primary.purple {
+  color: ghostwhite;
+  border-color: #553683;
+}
+
+.btn-outline-primary.email {
+  color: ghostwhite;
+  border-color: #553683;
+  background-color: #553683;
+}
+
+.btn-outline-primary.email:hover {
+  color: #553683;
+  border-color: #553683;
+  background-color: ghostwhite;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active.purple.purple, .show > .btn-outline-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #553683;
+  border-color: #553683;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active.purple.email, .show > .btn-outline-primary.dropdown-toggle {
+  color: #553683;
+  background-color: ghostwhite;
+  border-color: ghostwhite;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus, .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 .2rem rgb(169,169,169,.5);
+}
+
+.btn-outline-primary.focus, .btn-outline-primary:focus.purple {
+  box-shadow: 0 0 0 .2rem rgb(169,169,169,.5);
+}
+
+/* @media (max-width: 2560px) {
+  #mann {
+    position: relative;
+    animation: textColor 10s ease infinite;
+  }
+}
+
+@media (max-width: 2560px) {
+  #mann:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.55);
+    -webkit-filter: blur(5vw);
+    -moz-filter: blur(5vw);
+    -ms-filter: blur(5vw);
+    filter: blur(5vw);
+    background: linear-gradient(270deg, #0fffc1, #7e0fff);
+    background-size: 300% 300%;
+    animation: animateGlow 10s ease infinite;
+  }
+}
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes textColor {
+  0% {
+    color: #7e0fff;
+  }
+  50% {
+    color: #0fffc1;
+  }
+  100% {
+    color: #7e0fff;
+  }
+} */
+
+@media (min-width:576px) {
+  .scale-on-hover:hover {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    box-shadow: 0 10px 10px rgba(0,0,0,.15)!important;
+    border: 1px solid var(--gray-dark);
+  }
+}
+
+.portfolio-block.projects-cards .card img {
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  border: 2px solid var(--gray-dark);
+}
+

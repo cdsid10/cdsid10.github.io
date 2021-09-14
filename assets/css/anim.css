@@ -1,0 +1,21 @@
+#projects {
+  /*background: linear-gradient(270deg, #0fffc1, #7e0fff);*/
+  /*background-size: 400% 400%;*/
+  background-image: linear-gradient(to right bottom, #050214, #000815, #000c12, #000e0d, #010f07);
+  /*background-image: linear-gradient(to right bottom, #0b0336, #001438, #001b2b, #001d1b, #031c0f);*/
+  -o-animation: yolo 30s ease infinite;
+  /*animation: yolo 30s ease infinite;*/
+}
+
+@keyframes yolo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 51%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
