@@ -941,8 +941,15 @@
   color: ghostwhite;
 }
 
-.other-links:hover {
-  color: gray!important;
+.nav-item > .other-links{
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s;
+}
+
+.nav-item > .other-links:hover{
+  color: #BDBDBD!important;
+  border-bottom: 1px solid ghostwhite;
+  transition: border-bottom 0.2s color 0.2s;
 }
 
 .navbar-dark .navbar-nav .nav-link.disabled, .disabled {
