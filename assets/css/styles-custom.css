@@ -367,7 +367,7 @@
 
 @media (min-width: 1201px) and (max-width: 1440px) {
   .headings.main-name {
-    font-size: 6.5em;
+    font-size: 6em;
     margin-left: 100px;
     margin-bottom: 25px;
   }
@@ -375,14 +375,14 @@
 
 @media (min-width: 1201px) and (max-width: 1440px) {
   .headings.main-job {
-    font-size: 5.5em;
+    font-size: 5em;
     margin-left: 50px;
   }
 }
 
 @media (min-width: 1201px) and (max-width: 1440px) {
   .headings {
-    font-size: 4.5em;
+    font-size: 4em;
   }
 }
 
@@ -539,7 +539,7 @@
 
 @media (min-width: 1441px) {
   .headings.main-name {
-    font-size: 8em;
+    font-size: 6.5em;
     margin-left: 50px;
     margin-bottom: 30px;
     opacity: 0.95;
@@ -554,14 +554,14 @@
 
 @media (min-width: 1441px) {
   .headings.main-job {
-    font-size: 7em;
+    font-size: 5.5em;
     margin-left: 0px;
   }
 }
 
 @media (min-width: 1441px) {
   .headings {
-    font-size: 6em;
+    font-size: 4em;
   }
 }
 
@@ -635,7 +635,7 @@
   }
 }
 
-/* my monitor */
+/* 1080p */
 
 @media (min-width: 1920px) {
   #brand {
@@ -659,7 +659,7 @@
 
 @media (min-width: 1920px) {
   .headings.main-name {
-    font-size: 8em;
+    font-size: 6.5em;
     margin-left: 50px;
     margin-bottom: 30px;
     opacity: 0.95;
@@ -668,7 +668,7 @@
 
 @media (min-width: 1920px) {
   .headings.main-job {
-    font-size: 7em;
+    font-size: 5.5em;
     margin-left: 0px;
   }
 }
@@ -735,13 +735,13 @@
 @media (min-width: 1920px) {
   #human {
     margin-left: -150px;
-    margin-top: -75px;
+    margin-top: -65px;
   }
 }
 
 @media (min-width: 1920px) {
   .headings {
-    font-size: 6em;
+    font-size: 4em;
   }
 }
 
@@ -750,6 +750,64 @@
     margin-top: -5em;
   }
 }
+
+/* 2560px or 2k*/
+@media (min-width: 2560px) {
+  .headings.main-name {
+    font-size: 8em;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    opacity: 0.95;
+  }
+}
+
+@media (min-width: 2560px) {
+  .headings.main-job {
+    font-size: 7em;
+    margin-left: 0px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .headings {
+    font-size: 6em;
+  }
+
+  #human{
+    margin-top: -75px;
+  }
+}
+
+/* 4k */
+
+@media (min-width: 3620px) {
+  .headings.main-name {
+    font-size: 12em;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    opacity: 0.95;
+  }
+}
+
+@media (min-width: 3620px) {
+  .headings.main-job {
+    font-size: 10em;
+    margin-left: 0px;
+  }
+}
+
+@media (min-width: 3620px) {
+  .headings {
+    font-size: 9em;
+  }
+}
+
+
+  @media (min-width: 3620px) {
+    #projects-body {
+      margin-left: -8em;
+    }
+  }
 
 /* mobiles probably */
 
