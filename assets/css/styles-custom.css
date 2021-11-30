@@ -1333,3 +1333,14 @@ body {
   border: 2px solid var(--gray-dark);
 }
 
+.linker{
+  color:rgba(255,255,255,0.5)!important;
+  margin-right: 10px;
+}
+
+.linker:hover{
+  color: black!important;
+  background-color: ghostwhite;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
