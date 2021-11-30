@@ -1336,6 +1336,7 @@ body {
 .linker{
   color:rgba(255,255,255,0.5)!important;
   margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .linker:hover{
