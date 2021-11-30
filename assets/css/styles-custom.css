@@ -643,6 +643,11 @@
     height: auto;
     margin-left: 100px;
   }
+
+  .linker{
+    font-size: 1em;
+    margin-bottom: 50px;
+  }
 }
 
 @media (min-width: 1920px) {
@@ -816,6 +821,11 @@
     width: 12%;
     height: auto;
     margin-left: 5px;
+  }
+
+  .linker{
+    font-size: 0.75em;
+    margin-bottom: 50px;
   }
 }
 
@@ -1343,5 +1353,10 @@ body {
   color: black!important;
   background-color: ghostwhite;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.linker-top{
+  margin-bottom: 40px;
+  
 }
 
