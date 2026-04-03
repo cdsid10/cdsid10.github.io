@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 
@@ -303,6 +303,19 @@ function DesktopHome() {
 
   // --- HANDLERS ---
 
+  const handleHoverStart = useCallback((index: number) => {
+    isMousePhysicallyOverCard.current = true;
+    if (!isScrolling && index === activeSectionRef.current) {
+      setIsHoveringActiveCard(true);
+    }
+  }, [isScrolling]);
+
+  const handleHoverEnd = useCallback(() => {
+    isMousePhysicallyOverCard.current = false;
+    setIsHoveringActiveCard(false);
+    setActiveCollectionColor(null);
+  }, []);
+
   /**
    * [GLOBAL]
    * This logic performs the programmatic scroll pushing the viewport to the exact selected section.
@@ -466,33 +479,16 @@ function DesktopHome() {
               {project.isCollection ? (
                 <DesktopCollectionCard
                   project={project}
-                  onHoverStart={() => {
-                    isMousePhysicallyOverCard.current = true;
-                    if (!isScrolling && index === activeSection) {
-                      setIsHoveringActiveCard(true);
-                    }
-                  }}
-                  onHoverEnd={() => {
-                    isMousePhysicallyOverCard.current = false;
-                    setIsHoveringActiveCard(false);
-                    setActiveCollectionColor(null);
-                  }}
+                  onHoverStart={() => handleHoverStart(index)}
+                  onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
                   isActive={index === activeSection}
                 />
               ) : (
                 <ProjectCard
                   project={project}
-                  onHoverStart={() => {
-                    isMousePhysicallyOverCard.current = true;
-                    if (!isScrolling && index === activeSection) {
-                      setIsHoveringActiveCard(true);
-                    }
-                  }}
-                  onHoverEnd={() => {
-                    isMousePhysicallyOverCard.current = false;
-                    setIsHoveringActiveCard(false);
-                  }}
+                  onHoverStart={() => handleHoverStart(index)}
+                  onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
                 />
               )}

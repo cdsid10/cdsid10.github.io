@@ -86,6 +86,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
     }, CONFIG.MOBILE_DIM_DELAY_MS);
   };
 
+  // Cancel navigations ONLY when tab/page becomes visible again after being hidden
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && navTimeoutRef.current) {
@@ -97,12 +98,20 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [onHoverEnd]);
+
+  // Forceful cleanup ONLY on true component unmount
+  useEffect(() => {
     resetInactivityTimer();
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+      if (navTimeoutRef.current) {
+        clearTimeout(navTimeoutRef.current);
+        navTimeoutRef.current = null;
+      }
     };
-  }, [onHoverEnd]);
+  }, []);
 
   const handleScroll = () => {
     resetInactivityTimer();

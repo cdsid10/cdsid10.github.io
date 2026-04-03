@@ -53,7 +53,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Cancel navigations when path changes or tab/page becomes visible again after being hidden
+  // Cancel navigations ONLY when tab/page becomes visible again after being hidden
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && navTimeoutRef.current) {
@@ -65,14 +65,18 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [onHoverEnd]);
+
+  // Forceful cleanup ONLY on true component unmount
+  useEffect(() => {
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;
       }
     };
-  }, [location.pathname, onHoverEnd]);
+  }, []);
 
   /**
    * [GLOBAL] Resize Listener

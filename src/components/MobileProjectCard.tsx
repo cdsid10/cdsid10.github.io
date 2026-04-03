@@ -40,7 +40,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Cancel navigations when path changes or tab/page becomes visible again after being hidden
+  // Cancel navigations ONLY when tab/page becomes visible again after being hidden
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible' && navTimeoutRef.current) {
@@ -52,14 +52,18 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [onHoverEnd]);
+
+  // Forceful cleanup ONLY on true component unmount
+  useEffect(() => {
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;
       }
     };
-  }, [location.pathname, onHoverEnd]);
+  }, []);
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (navTimeoutRef.current) {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
 
@@ -219,6 +219,16 @@ export default function MobileHome() {
   }, [activeSection]);
 
   // --- HANDLERS ---
+  const handleHoverStart = useCallback((index: number) => {
+    if (index === activeSectionRef.current) {
+      setIsHoveringActiveCard(true);
+    }
+  }, []);
+
+  const handleHoverEnd = useCallback(() => {
+    setIsHoveringActiveCard(false);
+  }, []);
+
   const scrollToSection = (index: number) => {
     const clampedIndex = Math.max(0, Math.min(index, projects.length - 1));
     const projectSections = document.querySelectorAll('.mobile-project-section');
@@ -299,28 +309,16 @@ export default function MobileHome() {
               {project.isCollection ? (
                 <MobileCollectionCard
                   project={project}
-                  onHoverStart={() => {
-                    if (index === activeSection) {
-                      setIsHoveringActiveCard(true);
-                    }
-                  }}
-                  onHoverEnd={() => {
-                    setIsHoveringActiveCard(false);
-                  }}
+                  onHoverStart={() => handleHoverStart(index)}
+                  onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
                   isActive={index === activeSection}
                 />
               ) : (
                 <MobileProjectCard
                   project={project}
-                  onHoverStart={() => {
-                    if (index === activeSection) {
-                      setIsHoveringActiveCard(true);
-                    }
-                  }}
-                  onHoverEnd={() => {
-                    setIsHoveringActiveCard(false);
-                  }}
+                  onHoverStart={() => handleHoverStart(index)}
+                  onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
                 />
               )}
