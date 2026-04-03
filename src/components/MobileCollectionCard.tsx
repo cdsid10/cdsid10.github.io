@@ -87,8 +87,8 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
   };
 
   useEffect(() => {
-    const handleFocus = () => {
-      if (navTimeoutRef.current) {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;
         setIsEffectActive(false);
@@ -96,10 +96,10 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
       }
     };
 
-    window.addEventListener('focus', handleFocus);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     resetInactivityTimer();
     return () => {
-      window.removeEventListener('focus', handleFocus);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
     };
   }, [onHoverEnd]);
@@ -173,8 +173,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
           {/* Snap Carousel */}
           <div
             ref={scrollContainerRef}
-            className="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pointer-events-auto touch-action-pan-x"
-            style={{ touchAction: 'pan-x' }}
+            className="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pointer-events-auto"
             onScroll={handleScroll}
             onTouchStart={resetInactivityTimer}
           >

@@ -348,7 +348,7 @@ The game expanded from isolated encounters into a connected world structure. Mul
 </figure>
 </br>
 
-**Final Version — Boss Rush with Exploration Elements**  
+**Final Version - Boss Rush with Exploration Elements**  
 Scope was deliberately reduced, allowing the project to refocus on its strongest element: combat. The game evolved into a boss-driven experience, with light exploration supporting progression between encounters.
 
 <imagegrid 

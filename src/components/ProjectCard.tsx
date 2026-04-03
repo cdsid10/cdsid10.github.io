@@ -53,10 +53,10 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Cancel navigations when path changes or window regains focus
+  // Cancel navigations when path changes or tab/page becomes visible again after being hidden
   useEffect(() => {
-    const handleFocus = () => {
-      if (navTimeoutRef.current) {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;
         setIsEffectActive(false);
@@ -64,9 +64,9 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
       }
     };
 
-    window.addEventListener('focus', handleFocus);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
-      window.removeEventListener('focus', handleFocus);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;

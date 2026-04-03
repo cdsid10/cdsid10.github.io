@@ -120,6 +120,7 @@ export default function MobileHome() {
   // --- STATE ---
   const [activeSection, setActiveSection] = useState(0);
   const [isHoveringActiveCard, setIsHoveringActiveCard] = useState(false);
+  const [activeCollectionColor, setActiveCollectionColor] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isIndicatorDimmed, setIsIndicatorDimmed] = useState(false);
 
@@ -130,9 +131,23 @@ export default function MobileHome() {
 
   // --- EFFECTS ---
 
+  /**
+   * [GLOBAL]
+   * Listens for hover events specifically from Collection sub-items to dynamically
+   * inject their unique accent colors into the global bloom overlay.
+   */
+  useEffect(() => {
+    const handleCollectionHover = (e: CustomEvent) => {
+      setActiveCollectionColor(e.detail.accentColor);
+    };
+    window.addEventListener('collectionItemHovered', handleCollectionHover as EventListener);
+    return () => window.removeEventListener('collectionItemHovered', handleCollectionHover as EventListener);
+  }, []);
+
   // Location reset
   useEffect(() => {
     setIsHoveringActiveCard(false);
+    setActiveCollectionColor(null);
   }, [location.pathname]);
 
   // Sidebar observer
@@ -247,7 +262,7 @@ export default function MobileHome() {
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           backgroundColor: isHoveringActiveCard && projects[activeSection]
-            ? `color-mix(in srgb, ${projects[activeSection].accentColor} 98.5%, black)`
+            ? `color-mix(in srgb, ${activeCollectionColor || projects[activeSection].accentColor} 98.5%, black)`
             : 'transparent',
           transitionProperty: 'background-color',
           transitionDuration: '600ms',

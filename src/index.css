@@ -169,11 +169,3 @@ body.sidebar-open .scroll-indicators {
 .mobile-project-section {
   scroll-snap-stop: always;
 }
-
-.touch-action-pan-x {
-  touch-action: pan-x !important;
-}
-
-.touch-action-pan-y {
-  touch-action: pan-y !important;
-}

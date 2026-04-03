@@ -195,7 +195,6 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
             <div
               ref={scrollContainerRef}
               className="flex w-full h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pointer-events-auto"
-              style={{ touchAction: 'pan-x' }}
               onScroll={handleScroll}
             >
               {items.map((item, index) => (
