@@ -126,16 +126,9 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
 
     const link = activeItem.link;
     if (link) {
-      // Trigger visual states but DO NOT prevent default, allowing native new tab
-      onHoverStart();
-      setIsEffectActive(true);
-
-      navTimeoutRef.current = setTimeout(() => {
-        setIsEffectActive(false);
-        onHoverEnd();
-        navTimeoutRef.current = null;
-        window.open(link, '_blank');
-      }, 700); // Give it a slight delay so visual feedback occurs before jump
+      // [ACCENT FIX] Skip all visual accent transitions for external links on mobile/ipad
+      // to ensure immediate navigation without the cinematic bloom delay.
+      window.open(link, '_blank');
       return;
     }
   };

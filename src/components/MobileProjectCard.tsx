@@ -57,15 +57,8 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
     }
 
     if (project.isExternalOnly && project.link) {
-      // Trigger visual states but DO NOT prevent default, allowing native new tab
-      onHoverStart();
-      setIsEffectActive(true);
-
-      navTimeoutRef.current = setTimeout(() => {
-        setIsEffectActive(false);
-        onHoverEnd();
-        navTimeoutRef.current = null;
-      }, 1000);
+      // [ACCENT FIX] Skip all visual accent transitions for external links on mobile/ipad
+      // as per user request to ensure more direct navigation.
       return;
     }
 
