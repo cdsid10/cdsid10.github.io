@@ -13,7 +13,7 @@ import MobileHome from './MobileHome';
  * for logic breakpoints and timeout constraints.
  */
 const DESKTOP_BREAKPOINT = 1024;
-const SCROLL_LOCK_MS = 600;
+const SCROLL_LOCK_MS = 500;
 const MOBILE_DIM_DELAY_MS = 3000;
 
 /**
@@ -324,6 +324,7 @@ function DesktopHome() {
     if (!mainEl) return;
 
     let touchStartY = 0;
+    let touchStartX = 0;
 
     const beginScroll = () => {
       setIsScrolling(true);
@@ -361,16 +362,21 @@ function DesktopHome() {
 
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
       if (isScrollLocked.current) return;
-      const delta = touchStartY - e.changedTouches[0].clientY;
+      const deltaY = touchStartY - e.changedTouches[0].clientY;
+      const deltaX = touchStartX - e.changedTouches[0].clientX;
+
+      // AXIS LOCK: Only proceed if vertical swipe is clearly dominant
+      if (Math.abs(deltaX) > Math.abs(deltaY)) return;
 
       // Ignore phantom micro-drifts suppressing false positives seamlessly
-      if (Math.abs(delta) < 30) return;
+      if (Math.abs(deltaY) < 30) return;
 
-      const targetSection = activeSectionRef.current + (delta > 0 ? 1 : -1);
+      const targetSection = activeSectionRef.current + (deltaY > 0 ? 1 : -1);
 
       if (targetSection < 0 || targetSection >= projects.length) return;
 

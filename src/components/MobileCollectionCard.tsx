@@ -87,11 +87,22 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
   };
 
   useEffect(() => {
+    const handleFocus = () => {
+      if (navTimeoutRef.current) {
+        clearTimeout(navTimeoutRef.current);
+        navTimeoutRef.current = null;
+        setIsEffectActive(false);
+        onHoverEnd();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
     resetInactivityTimer();
     return () => {
+      window.removeEventListener('focus', handleFocus);
       if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
     };
-  }, []);
+  }, [onHoverEnd]);
 
   const handleScroll = () => {
     resetInactivityTimer();
@@ -126,9 +137,16 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
 
     const link = activeItem.link;
     if (link) {
-      // [ACCENT FIX] Skip all visual accent transitions for external links on mobile/ipad
-      // to ensure immediate navigation without the cinematic bloom delay.
-      window.open(link, '_blank');
+      // Trigger visual states but DO NOT prevent default, allowing native new tab
+      onHoverStart();
+      setIsEffectActive(true);
+
+      navTimeoutRef.current = setTimeout(() => {
+        setIsEffectActive(false);
+        onHoverEnd();
+        navTimeoutRef.current = null;
+        window.open(link, '_blank');
+      }, 700); // Give it a slight delay so visual feedback occurs before jump
       return;
     }
   };
@@ -155,7 +173,8 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
           {/* Snap Carousel */}
           <div
             ref={scrollContainerRef}
-            className="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pointer-events-auto"
+            className="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pointer-events-auto touch-action-pan-x"
+            style={{ touchAction: 'pan-x' }}
             onScroll={handleScroll}
             onTouchStart={resetInactivityTimer}
           >

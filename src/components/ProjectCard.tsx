@@ -53,19 +53,26 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
   const navigate = useNavigate();
   const location = useLocation();
 
-  /**
-   * [GLOBAL] Navigation Cleanup
-   * Cancels any pending "bloom" transitions if the user navigates away 
-   * via other means (like browser back button or menu).
-   */
+  // Cancel navigations when path changes or window regains focus
   useEffect(() => {
+    const handleFocus = () => {
+      if (navTimeoutRef.current) {
+        clearTimeout(navTimeoutRef.current);
+        navTimeoutRef.current = null;
+        setIsEffectActive(false);
+        onHoverEnd();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
     return () => {
+      window.removeEventListener('focus', handleFocus);
       if (navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;
       }
     };
-  }, [location.pathname]);
+  }, [location.pathname, onHoverEnd]);
 
   /**
    * [GLOBAL] Resize Listener
@@ -181,8 +188,15 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
     }
 
     if (project.isExternalOnly && project.link) {
-      // [ACCENT FIX] Skip all visual accent transitions for external links on mobile/ipad
-      // ensuring user feels an immediate response when bypassing internal pages.
+      // Trigger visual states but DO NOT prevent default, allowing native new tab
+      onHoverStart();
+      setIsEffectActive(true);
+
+      navTimeoutRef.current = setTimeout(() => {
+        setIsEffectActive(false);
+        onHoverEnd();
+        navTimeoutRef.current = null;
+      }, 1000);
       return;
     }
 
@@ -276,11 +290,11 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
             animate={{
               scale: isEffectActive ? 1.05 : 1
             }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             style={{
               x: translateX,
               y: translateY
             }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
             className="w-full h-full object-cover pointer-events-none"
           />
         </div>

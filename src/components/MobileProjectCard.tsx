@@ -40,15 +40,26 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Cancel navigations when path changes externally
+  // Cancel navigations when path changes or window regains focus
   useEffect(() => {
+    const handleFocus = () => {
+      if (navTimeoutRef.current) {
+        clearTimeout(navTimeoutRef.current);
+        navTimeoutRef.current = null;
+        setIsEffectActive(false);
+        onHoverEnd();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
     return () => {
+      window.removeEventListener('focus', handleFocus);
       if (navTimeoutRef.current) {
         clearTimeout(navTimeoutRef.current);
         navTimeoutRef.current = null;
       }
     };
-  }, [location.pathname]);
+  }, [location.pathname, onHoverEnd]);
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (navTimeoutRef.current) {
@@ -57,8 +68,15 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
     }
 
     if (project.isExternalOnly && project.link) {
-      // [ACCENT FIX] Skip all visual accent transitions for external links on mobile/ipad
-      // as per user request to ensure more direct navigation.
+      // Trigger visual states but DO NOT prevent default, allowing native new tab
+      onHoverStart();
+      setIsEffectActive(true);
+
+      navTimeoutRef.current = setTimeout(() => {
+        setIsEffectActive(false);
+        onHoverEnd();
+        navTimeoutRef.current = null;
+      }, 1000);
       return;
     }
 
@@ -117,7 +135,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
             animate={{
               scale: isEffectActive ? 1.05 : 1
             }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="w-full h-full object-cover pointer-events-none"
           />
         </div>

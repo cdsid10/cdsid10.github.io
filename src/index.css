@@ -160,3 +160,20 @@
 body.sidebar-open .scroll-indicators {
   display: none !important;
 }
+
+/* ─────────────────────────────────────────────────────────
+   UX REFINEMENTS: Snap stop and Touch axis-locking
+───────────────────────────────────────────────────────── */
+
+.project-section, 
+.mobile-project-section {
+  scroll-snap-stop: always;
+}
+
+.touch-action-pan-x {
+  touch-action: pan-x !important;
+}
+
+.touch-action-pan-y {
+  touch-action: pan-y !important;
+}

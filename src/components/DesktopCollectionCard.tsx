@@ -188,13 +188,14 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
           <motion.div
             style={{ x: translateX, y: translateY }}
             animate={{ scale: isEffectActive ? 1.025 : 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="w-full h-full absolute inset-0"
           >
             {/* Scrollable Carousel Wrapper */}
             <div
               ref={scrollContainerRef}
               className="flex w-full h-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pointer-events-auto"
+              style={{ touchAction: 'pan-x' }}
               onScroll={handleScroll}
             >
               {items.map((item, index) => (
