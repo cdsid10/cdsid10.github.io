@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Source+Sans+3:wght@300;400&display=swap');
+
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+}
+
+@layer base {
+  :root {
+    --paper: #FAFAFA;
+    --ink: #1A1A1A;
+    --muted: #888888;
+  }
+
+  /* Explicit dark mode variables */
+  html.dark {
+    --paper: #0A0A0A;
+    --ink: #F5F5F5;
+    --muted: #A1A1A1;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    /* Prevent rubber-banding on the body itself */
+    position: fixed;
+    width: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased lg:transition-colors lg:duration-300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-[2px];
+  }
+
+  p {
+    @apply leading-[1.6em] font-light;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+}
+
+.aspect-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+/* ─────────────────────────────────────────────────────────
+   EYEBROW LABEL TOKENS  — single source of truth
+   Used by: Home hero labels, ProjectOverview next-project
+   banner, and OtherWorks Archive header.
+   Change here → all instances update automatically.
+───────────────────────────────────────────────────────── */
+:root {
+  /* Mobile-first values */
+  --eyebrow-size:        10px;
+  --eyebrow-tracking:    2px;
+  --eyebrow-weight:      600;    /* semibold */
+  --eyebrow-opacity:     0.6;
+  --eyebrow-gap:         0.5rem; /* gap between label, dot, number */
+
+  /* Desktop overrides (applied via .eyebrow--responsive media query below) */
+  --eyebrow-size-lg:     14px;
+  --eyebrow-tracking-lg: 2px;
+
+  /* Caption Tokens — shared source of truth */
+  --caption-size:     14px;
+  --caption-tracking: 1px;
+  --caption-weight:   350; /* Normal weight to fix "heavy" look */
+  --caption-opacity:  0.5;
+}
+
+.eyebrow {
+  font-size:      var(--eyebrow-size);
+  letter-spacing: var(--eyebrow-tracking);
+  font-weight:    var(--eyebrow-weight);
+  text-transform: uppercase;
+  opacity:        var(--eyebrow-opacity);
+  line-height:    1;
+}
+
+/* Desktop scale-up */
+@media (min-width: 1024px) {
+  .eyebrow {
+    font-size:      var(--eyebrow-size-lg);
+    letter-spacing: var(--eyebrow-tracking-lg);
+  }
+}
+
+/* The separator · between label segments */
+.eyebrow-dot {
+  /* Smaller middle-dot using a pseudo-element sized relative to eyebrow font */
+  display:        inline-block;
+  width:          3px;
+  height:         3px;
+  border-radius:  50%;
+  background:     currentColor;
+  opacity:        var(--eyebrow-opacity);
+  flex-shrink:    0;
+  /* Vertical aligns with cap-height of surrounding text */
+  margin-top:     0.05em;
+  align-self:     center;
+}
+
+.caption {
+  font-size:      var(--caption-size);
+  letter-spacing: var(--caption-tracking);
+  font-weight:    var(--caption-weight);
+  text-transform: uppercase;
+  opacity:        var(--caption-opacity);
+  margin-top:     12px;
+  display:        block;
+  color:          var(--ink) !important;
+}
+
+.ken-burns {
+  transition: transform 1.5s ease-out;
+}
+
+.ken-burns:hover {
+  transform: scale(1.05);
+}
+
+/* Custom scrollbar for minimalist feel */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--ink) 25%, transparent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+/* Sidebar context fixes */
+body.sidebar-open .scroll-indicators {
+  display: none !important;
+}
