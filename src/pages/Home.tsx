@@ -423,7 +423,12 @@ function DesktopHome() {
         className="fixed inset-0 lg:left-[300px] pointer-events-none z-0 lg:transition-colors"
         style={{
           backgroundColor: isHoveringActiveCard && projects[activeSection]
-            ? `color-mix(in srgb, ${activeCollectionColor || projects[activeSection].accentColor} ${windowWidth < DESKTOP_BREAKPOINT ? '98.5%' : '85%'}, black)`
+            ? (() => {
+              const project = projects[activeSection];
+              const displayColor = project.isCollection ? activeCollectionColor : project.accentColor;
+              const mixPercentage = windowWidth < DESKTOP_BREAKPOINT ? '98.5%' : '85%';
+              return displayColor ? `color-mix(in srgb, ${displayColor} ${mixPercentage}, black)` : 'transparent';
+            })()
             : 'transparent',
           transitionProperty: 'background-color',
           transitionDuration: isHoveringActiveCard && windowWidth < DESKTOP_BREAKPOINT ? '600ms' : '1250ms',

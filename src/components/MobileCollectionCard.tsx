@@ -58,6 +58,15 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
     }
   }, [isActive]);
 
+  // Dispatch active item color for global bloom
+  useEffect(() => {
+    if (isEffectActive) {
+      window.dispatchEvent(new CustomEvent('collectionItemHovered', {
+        detail: { accentColor: items[activeItemIndex]?.accentColor || project.accentColor }
+      }));
+    }
+  }, [isEffectActive, activeItemIndex, items, project.accentColor]);
+
   // Handle global home-click reset
   useEffect(() => {
     const handleReset = () => {

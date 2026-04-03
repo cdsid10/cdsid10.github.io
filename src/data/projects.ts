@@ -651,7 +651,7 @@ Designed and refined the limb-based interaction system, focusing on responsive i
         title: 'Football Academy',
         thumbnail_16_9: '/images/Football_Academy/1.jpg',
         thumbnail_mobile: '/images/Football_Academy/1.jpg',
-        accentColor: '#599ad8',
+        accentColor: '#599ad8', //'#59A5D8'
         year: '2023',
         roles: ['Junior Developer - Rawky Games'],
         link: 'https://appmagic.rocks/google-play/soccer-academy/com.RawkyStudios.SoccerAcademy',

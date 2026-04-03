@@ -272,7 +272,11 @@ export default function MobileHome() {
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           backgroundColor: isHoveringActiveCard && projects[activeSection]
-            ? `color-mix(in srgb, ${activeCollectionColor || projects[activeSection].accentColor} 98.5%, black)`
+            ? (() => {
+              const project = projects[activeSection];
+              const displayColor = project.isCollection ? activeCollectionColor : project.accentColor;
+              return displayColor ? `color-mix(in srgb, ${displayColor} 98.5%, black)` : 'transparent';
+            })()
             : 'transparent',
           transitionProperty: 'background-color',
           transitionDuration: '600ms',
