@@ -609,32 +609,31 @@ export default function ProjectOverview() {
             {/* 
               [GLOBAL] Metadata layout block
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
-              [MOBILE] Auto 100% width fallback internally stacking arrays vertically.
+              [MOBILE] Responsive grid: Year and Roles share a row, Tech and Systems take full width.
             */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2 transition-all">
-              <div className="w-full">
+            <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-8 gap-y-10 lg:gap-4 pt-8 lg:pt-2 border-t border-ink/5 lg:border-t-0">
+              <div className="col-span-1">
+                {/* [GLOBAL] Year array mapping directly into simplified StaticTags */}
+                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Year</h3>
+                <StaticTag label={project.year} />
+              </div>
+
+              <div className="col-span-1">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Roles</h3>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.roles.map(role => (
                     <StaticTag key={role} label={role} />
                   ))}
                 </div>
               </div>
 
-              <div className="w-full">
-                {/* [GLOBAL] Year array mapping directly into simplified StaticTags */}
-                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Year</h3>
-                <StaticTag label={project.year} />
-              </div>
-
-              <div className="w-full">
+              <div className="col-span-2 lg:col-span-1">
                 {/* 
                   [GLOBAL] Tech block handles iteration over specific software arrays.
-                  Calls InteractiveTag for localized definitions.
                 */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Tech</h3>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.tech.map(techItem => (
                     <InteractiveTag
                       key={techItem}
@@ -648,14 +647,12 @@ export default function ProjectOverview() {
               </div>
 
               {/* 
-                [GLOBAL]
-                This logic handles conditional parsing for advanced system metadata exclusively.
-                Maps similar structures specifically bound to `systems` namespaces.
+                [GLOBAL] Systems block conditionally visualized for advanced project specifications.
               */}
               {project.systems && project.systems.length > 0 && (
                 <div className="col-span-2 lg:col-span-1">
                   <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Systems</h3>
-                  <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {project.systems.map(systemItem => (
                       <InteractiveTag
                         key={systemItem}
