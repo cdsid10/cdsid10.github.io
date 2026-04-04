@@ -42,7 +42,7 @@ export default function OtherWorkCard({ project, index }: OtherWorkCardProps) {
       {/* Info Row */}
       <div className="pt-4 flex flex-col gap-3">
         <div>
-          <h3 className="text-sm lg:text-lg font-display tracking-[1.25px] text-ink mb-0 transition-colors duration-200">
+          <h3 className="text-sm lg:text-lg font-display tracking-[1.25px] text-ink mb-0 transition-colors duration-75">
             {title}
           </h3>
           <div className="flex items-center gap-2 text-[10px] lg:text-[12px] tracking-[1px] uppercase text-muted font-normal">
@@ -86,7 +86,7 @@ export default function OtherWorkCard({ project, index }: OtherWorkCardProps) {
             href={typeof github === 'string' ? github : github.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[12px] uppercase tracking-[1.25px] font-semibold text-ink/40 hover:text-ink/80 transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 text-[12px] uppercase tracking-[1.25px] font-semibold text-ink/40 hover:text-ink/80 transition-colors duration-75"
           >
             {typeof github === 'object' ? github.label : 'Source'}
             {(typeof github === 'string' ? github : github.url).includes('github.com') ? (

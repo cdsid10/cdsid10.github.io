@@ -11,7 +11,7 @@ import { cn } from '../lib/utils';
 const THEME_CONFIG = {
   STORAGE_KEY: 'theme',
   DARK_CLASS: 'dark',
-  TRANSITION_DURATION: 'duration-300', // Speed of icon rotation/fade
+  TRANSITION_DURATION: 'duration-150', // Speed of icon rotation/fade
 };
 
 interface ThemeToggleProps {
@@ -73,7 +73,7 @@ export default function ThemeToggle({
     <button
       onClick={toggleTheme}
       className={cn(
-        "flex items-center gap-3 py-1 text-sm text-muted opacity-60 transition-all duration-300 group",
+        "flex items-center gap-3 py-1 text-sm text-muted opacity-60 transition-all duration-150 group",
         "hover:opacity-100" // [DESKTOP] Visual feedback on mouse hover
       )}
       aria-label="Toggle visual theme"

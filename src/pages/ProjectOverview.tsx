@@ -181,7 +181,7 @@ function InteractiveTag({
           [GLOBAL] Base rendering and static aesthetic styles. 
           [DESKTOP] Hover classes conditionally applied based on `description` availability.
         */
-        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] transition-colors ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper' : ''} ${isActive ? 'bg-ink text-paper' : ''}`}
+        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] transition-colors duration-75 ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper' : ''} ${isActive ? 'bg-ink text-paper' : ''}`}
       >
         {label}
       </span>
@@ -192,7 +192,7 @@ function InteractiveTag({
             [DESKTOP] Driven by `lg:group-hover/tooltip:...` transitioning visibility on hover.
             [MOBILE] Controlled dynamically via `isActive`, ignoring hover completely.
           */
-          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed transition-all duration-200 z-50 pointer-events-none ${isActive
+          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed transition-all duration-100 z-50 pointer-events-none ${isActive
             ? 'opacity-100 visible translate-y-0'
             : `opacity-0 invisible translate-y-2 group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-hover/tooltip:translate-y-0`
             }`}
@@ -609,31 +609,32 @@ export default function ProjectOverview() {
             {/* 
               [GLOBAL] Metadata layout block
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
-              [MOBILE] Responsive grid: Year and Roles share a row, Tech and Systems take full width.
+              [MOBILE] Auto 100% width fallback internally stacking arrays vertically.
             */}
-            <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-8 gap-y-10 lg:gap-4 pt-8 lg:pt-2 border-t border-ink/5 lg:border-t-0">
-              <div className="col-span-1">
-                {/* [GLOBAL] Year array mapping directly into simplified StaticTags */}
-                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Year</h3>
-                <StaticTag label={project.year} />
-              </div>
-
-              <div className="col-span-1">
+            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2 transition-all">
+              <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Roles</h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
                   {project.roles.map(role => (
                     <StaticTag key={role} label={role} />
                   ))}
                 </div>
               </div>
 
-              <div className="col-span-2 lg:col-span-1">
+              <div className="w-full">
+                {/* [GLOBAL] Year array mapping directly into simplified StaticTags */}
+                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Year</h3>
+                <StaticTag label={project.year} />
+              </div>
+
+              <div className="w-full">
                 {/* 
                   [GLOBAL] Tech block handles iteration over specific software arrays.
+                  Calls InteractiveTag for localized definitions.
                 */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Tech</h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
                   {project.tech.map(techItem => (
                     <InteractiveTag
                       key={techItem}
@@ -647,12 +648,14 @@ export default function ProjectOverview() {
               </div>
 
               {/* 
-                [GLOBAL] Systems block conditionally visualized for advanced project specifications.
+                [GLOBAL]
+                This logic handles conditional parsing for advanced system metadata exclusively.
+                Maps similar structures specifically bound to `systems` namespaces.
               */}
               {project.systems && project.systems.length > 0 && (
                 <div className="col-span-2 lg:col-span-1">
                   <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Systems</h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
                     {project.systems.map(systemItem => (
                       <InteractiveTag
                         key={systemItem}
