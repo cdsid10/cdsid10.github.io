@@ -40,7 +40,7 @@
     @apply font-display font-bold tracking-[2px] transition-colors duration-75;
   }
 
-  p {
+  p, span, label, small {
     @apply leading-[1.6em] font-light transition-colors duration-75;
   }
 

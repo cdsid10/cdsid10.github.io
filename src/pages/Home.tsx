@@ -48,7 +48,7 @@ function ScrollIndicators({
         <button
           key={index}
           onClick={() => onDotClick(index)}
-          className="group p-1.25 cursor-pointer flex items-center justify-center transition-all duration-300"
+          className="group p-1.25 cursor-pointer flex items-center justify-center transition-all duration-150"
         >
           <div
             /*
@@ -56,7 +56,7 @@ function ScrollIndicators({
               Dynamic styling changes color and height drastically based on whether 
               this dot represents the currently viewed section, incorporating bloom hover overrides.
             */
-            className={`w-1.5 rounded-full transition-all duration-500 ease-out ${activeSection === index
+            className={`w-1.5 rounded-full transition-all duration-150 ease-out ${activeSection === index
               ? (isHoveringActiveCard ? 'h-8 bg-white' : 'h-8 bg-ink')
               : (isHoveringActiveCard ? 'h-1.5 bg-white/20 group-hover:bg-white/40' : 'h-1.5 bg-ink/20 group-hover:bg-ink/40 shadow-sm')
               }`}

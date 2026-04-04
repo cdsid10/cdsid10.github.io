@@ -724,7 +724,7 @@ export default function ProjectOverview() {
         >
           <div
             ref={bannerRef}
-            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center transition-colors duration-200 group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
+            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center transition-colors duration-75 group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
             style={isTouchDevice && isTouching ? {
               backgroundColor: nextProject.accentColor,
               color: 'white',
@@ -736,17 +736,17 @@ export default function ProjectOverview() {
               className="flex flex-col items-center justify-center"
             >
               <div
-                className={`flex items-center justify-center mb-4 lg:mb-6 transition-colors duration-200 group-hover:duration-200 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
+                className={`flex items-center justify-center mb-4 lg:mb-6 transition-colors duration-75 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
                 style={{ gap: 'var(--eyebrow-gap)' }}
               >
                 <span className="eyebrow">Featured Work</span>
                 <span className="eyebrow-dot" />
                 <span className="eyebrow">0{nextProjectIndex + 1}</span>
               </div>
-              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 transition-transform duration-200 group-hover:duration-300 ease-out group-hover:scale-105">
+              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 transition-transform duration-100 group-hover:duration-200 ease-out group-hover:scale-105">
                 {nextProject.title}
               </h2>
-              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 transition-all duration-200 group-hover:duration-300 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25">
+              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 transition-all duration-75 group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <polyline points="19 12 12 19 5 12"></polyline>

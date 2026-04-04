@@ -47,7 +47,7 @@ function MobileScrollIndicators({
 
   return (
     <div
-      className={`fixed ${INDICATOR_CONFIG.bottomOffset} left-1/2 -translate-x-1/2 z-50 flex flex-col items-center justify-center transition-opacity duration-300 ${isSidebarOpen ? 'opacity-0 pointer-events-none' : (isIndicatorDimmed ? 'opacity-[0.25]' : 'opacity-40')
+      className={`fixed ${INDICATOR_CONFIG.bottomOffset} left-1/2 -translate-x-1/2 z-50 flex flex-col items-center justify-center transition-opacity duration-100 ${isSidebarOpen ? 'opacity-0 pointer-events-none' : (isIndicatorDimmed ? 'opacity-[0.25]' : 'opacity-40')
         }`}
       style={{
         // Fixed container height to ensure the "middle point" remains stable 
@@ -60,7 +60,7 @@ function MobileScrollIndicators({
       */}
       <button
         onClick={() => onDotClick(activeSection - 1)}
-        className={`p-0 transition-all duration-300 flex items-center justify-center drop-shadow-sm active:scale-90 ${
+        className={`p-0 transition-all duration-100 flex items-center justify-center drop-shadow-sm active:scale-90 ${
           canScrollUp ? 'opacity-100 text-ink/80 hover:text-ink/90' : 'opacity-0 pointer-events-none'
         }`}
         aria-label="Scroll Up"
@@ -88,7 +88,7 @@ function MobileScrollIndicators({
       */}
       <button
         onClick={() => onDotClick(activeSection + 1)}
-        className={`p-0 transition-all duration-300 flex items-center justify-center drop-shadow-sm active:scale-90 ${
+        className={`p-0 transition-all duration-100 flex items-center justify-center drop-shadow-sm active:scale-90 ${
           canScrollDown ? 'opacity-100 text-ink/80 hover:text-ink/90' : 'opacity-0 pointer-events-none'
         }`}
         aria-label="Scroll Down"

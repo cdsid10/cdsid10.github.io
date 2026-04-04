@@ -158,7 +158,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
           {/* Title */}
           <h2 className={cn(
             "text-[22px] sm:text-2xl tracking-[1px] mb-1 transition-colors font-bold text-left",
-            isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white` : "duration-200 text-ink"
+            isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white` : "duration-75 text-ink"
           )}>
             {project.title}
           </h2>

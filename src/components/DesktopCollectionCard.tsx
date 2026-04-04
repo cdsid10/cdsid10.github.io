@@ -275,7 +275,7 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
               "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 transition-colors font-bold",
               isEffectActive
                 ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms] text-white`
-                : "duration-200 text-ink"
+                : "duration-75 text-ink"
             )}>
               {activeItem.title}
             </h2>
@@ -311,7 +311,7 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
             <span className={cn(
               "text-[11px] tracking-[1px] uppercase transition-all block",
               isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink',
-              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : 'duration-200'
+              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : 'duration-75'
             )}>
               View Project
             </span>

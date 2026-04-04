@@ -321,7 +321,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
                 ? (windowWidth < CONFIG.MOBILE_BREAKPOINT
                   ? `duration-[${CONFIG.TRANSITION_MOBILE}ms]`
                   : `duration-[${CONFIG.TRANSITION_DESKTOP}ms]`) + " text-white"
-                : "duration-200 text-ink"
+                : "duration-75 text-ink"
             )}>
               {project.title}
             </h2>
@@ -373,7 +373,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
               "text-[11px] tracking-[1px] uppercase transition-all",
               isTouchDevice ? "hidden" : "block",
               isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink',
-              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : 'duration-200'
+              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : 'duration-75'
             )}>
               View Project
             </span>
