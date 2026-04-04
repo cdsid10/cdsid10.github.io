@@ -611,11 +611,11 @@ export default function ProjectOverview() {
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
               [MOBILE] Auto 100% width fallback internally stacking arrays vertically.
             */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2 transition-all">
+            <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-8 gap-y-10 lg:gap-y-4 pt-2 transition-all">
               <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Roles</h3>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.roles.map(role => (
                     <StaticTag key={role} label={role} />
                   ))}
@@ -634,7 +634,7 @@ export default function ProjectOverview() {
                   Calls InteractiveTag for localized definitions.
                 */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Tech</h3>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
                   {project.tech.map(techItem => (
                     <InteractiveTag
                       key={techItem}
@@ -653,9 +653,9 @@ export default function ProjectOverview() {
                 Maps similar structures specifically bound to `systems` namespaces.
               */}
               {project.systems && project.systems.length > 0 && (
-                <div className="col-span-2 lg:col-span-1">
+                <div className="w-full">
                   <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Systems</h3>
-                  <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {project.systems.map(systemItem => (
                       <InteractiveTag
                         key={systemItem}

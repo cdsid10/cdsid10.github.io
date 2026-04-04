@@ -171,9 +171,9 @@ By tying all of this to a strict stamina system, combat becomes less about execu
 Each encounter enforces a clear set of rules on the player:
 
 - **Standard attacks** allow multiple responses - parry, dodge, or block  
-- **Unblockable attacks** must be dodged  
-- **Undodgeable attacks** must be blocked  
-- **Heavy attacks** punish passive defense through stamina drain  
+- <span style="color:#CC2D48; font-weight:350;">**Unblockable**</span> attacks must be dodged  
+- <span style="color:#3478CC; font-weight:350;">**Undodgeable**</span> attacks must be blocked  
+- <span style="color:#FFAF00; font-weight:350;">**Heavy**</span> attacks punish passive defense through stamina drain  
 
 While every attack can be parried, some carry significantly higher risk, demanding tighter timing and punishing failure more severely.
 
