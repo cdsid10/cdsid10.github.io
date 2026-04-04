@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { Project } from '../data/projects';
 import { cn } from '../lib/utils';
@@ -19,9 +19,10 @@ interface DesktopCollectionCardProps {
   onHoverEnd: () => void;
   isHovered: boolean;
   isActive: boolean;
+  priority?: boolean;
 }
 
-export default function DesktopCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: DesktopCollectionCardProps) {
+export default function DesktopCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive, priority = false }: DesktopCollectionCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
@@ -33,7 +34,6 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
 
   const [isIndicatorDimmed, setIsIndicatorDimmed] = useState(false);
 
-  const navigate = useNavigate();
   const items = project.collectionItems || [];
   const activeItem = items[activeItemIndex] || project;
 
@@ -202,6 +202,8 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
                   <img
                     src={item.thumbnail_16_9}
                     alt={item.title}
+                    loading={priority ? "eager" : "lazy"}
+                    {...(priority && index === 0 ? { fetchpriority: "high" } : {})}
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   {/* Subtle gradient for indicating it's a card */}

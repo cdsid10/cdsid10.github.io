@@ -563,10 +563,6 @@ It’s where everything I’ve learned begins to compound.**
     systems: [],
     summary: 'A chaotic physics-puzzler where you play as Mr. Limbs, a fragmented monster trying to rebuild his body piece by piece. Each limb reshapes how you move, turning progression into a constant negotiation with physics and control.',
     keyFeatures: [
-      'Modular Limb Assembly',
-      'Physics-Driven Equilibrium',
-      'Shifting POV Progression',
-      '48-Hour Jam Prototype'
     ],
     link: 'https://el-studios.itch.io/self-apart',
     storefronts: [
@@ -642,7 +638,7 @@ Designed and refined the limb-based interaction system, focusing on responsive i
     thumbnail_16_9: '/images/Football_Academy/1.jpg',
     thumbnail_mobile: '/images/Football_Academy/1.jpg',
     accentColor: '#599ad8', //'#59A5D8'
-    year: '2022-2024',
+    year: '2023-2024',
     roles: ['Junior Developer - Rawky Games'],
     tech: ['Unity', 'C#'],
     summary: 'A collection of smaller mobile games, and experimental works published by others.',

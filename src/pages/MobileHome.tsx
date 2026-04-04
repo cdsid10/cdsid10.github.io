@@ -317,6 +317,7 @@ export default function MobileHome() {
                   onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
                   isActive={index === activeSection}
+                  priority={index === 0}
                 />
               ) : (
                 <MobileProjectCard
@@ -324,6 +325,7 @@ export default function MobileHome() {
                   onHoverStart={() => handleHoverStart(index)}
                   onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
+                  priority={index === 0}
                 />
               )}
             </motion.div>

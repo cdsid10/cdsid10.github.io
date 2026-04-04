@@ -28,9 +28,10 @@ interface ProjectCardProps {
   onHoverStart: () => void;
   onHoverEnd: () => void;
   isHovered: boolean;
+  priority?: boolean;
 }
 
-export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHovered }: ProjectCardProps) {
+export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHovered, priority = false }: ProjectCardProps) {
   // [GLOBAL] State for responsiveness and navigation
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const [isEffectActive, setIsEffectActive] = useState(false);
@@ -299,6 +300,8 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
               x: translateX,
               y: translateY
             }}
+            loading={priority ? "eager" : "lazy"}
+            {...(priority ? { fetchpriority: "high" } : {})}
             className="w-full h-full object-cover pointer-events-none"
           />
         </div>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Project, CollectionItem } from '../data/projects';
+import { Project } from '../data/projects';
 import { cn } from '../lib/utils';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,9 +19,10 @@ interface MobileCollectionCardProps {
   onHoverEnd: () => void;
   isHovered: boolean;
   isActive: boolean;
+  priority?: boolean;
 }
 
-export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: MobileCollectionCardProps) {
+export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive, priority = false }: MobileCollectionCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
@@ -133,7 +134,6 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
       // On mobile, blooming happens strictly based on the main accent 
       // but we can update it immediately if we're technically hovered.
       if (isEffectActive) {
-         // Using the same mechanism as Desktop, if MobileHome is listening (which it isn't currently, but it keeps parity)
          window.dispatchEvent(new CustomEvent('collectionItemHovered', {
            detail: { accentColor: items[newIndex]?.accentColor || project.accentColor }
          }));
@@ -195,7 +195,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
             onScroll={handleScroll}
             onTouchStart={resetInactivityTimer}
           >
-            {items.map((item) => (
+            {items.map((item, index) => (
               <div
                 key={item.id}
                 onClick={handleCardClick}
@@ -204,6 +204,8 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
                 <img
                   src={item.thumbnail_mobile || item.thumbnail_16_9}
                   alt={item.title}
+                  loading={priority ? "eager" : "lazy"}
+                  {...(priority && index === 0 ? { fetchpriority: "high" } : {})}
                   className="w-full h-full object-cover pointer-events-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
@@ -277,7 +279,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
           )}>
             <div className="flex flex-col sm:flex-row gap-0 sm:gap-2 text-left w-full leading-relaxed overflow-hidden">
                <div className="flex gap-2 whitespace-nowrap">
-                  {(activeItem.roles || []).map((role, i, arr) => (
+                   {(activeItem.roles || []).map((role, i, arr) => (
                     <span key={role} className="flex items-center">
                       {role}
                       {i < arr.length - 1 && <span className="ml-2.5">/</span>}

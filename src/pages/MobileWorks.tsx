@@ -70,7 +70,7 @@ export default function MobileWorks() {
       >
         {mobileProjects.map((project, index) => (
           <motion.div key={project.id} variants={itemVariants}>
-            <OtherWorkCard project={project} index={index} />
+            <OtherWorkCard project={project} index={index} priority={index < 2} />
           </motion.div>
         ))}
       </motion.div>

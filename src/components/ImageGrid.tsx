@@ -39,6 +39,7 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
               key={i}
               src={src}
               onClick={() => openGallery(i)}
+              loading="lazy"
               style={{
                 width: "100%",
                 height: rows ? `calc(100% / ${rows})` : "auto",
