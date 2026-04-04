@@ -195,3 +195,30 @@ body.sidebar-open .scroll-indicators {
   20% { transform: translateX(100%); }
   100% { transform: translateX(100%); }
 }
+
+/* Interaction Shine Layer */
+.shine-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+@keyframes shine-once {
+  0% { 
+    transform: translateX(-100%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
+  }
+  20% {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  }
+  100% { 
+    transform: translateX(100%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
+  }
+}
+
+.shine-animate {
+  animation: shine-once 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}

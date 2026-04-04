@@ -24,6 +24,16 @@ interface DesktopCollectionCardProps {
 export default function DesktopCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: DesktopCollectionCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const [showShine, setShowShine] = useState(false);
+
+  // Trigger "Shine" animation when project becomes active/hovered
+  useEffect(() => {
+    if (isHovered) {
+      setShowShine(true);
+      const timer = setTimeout(() => setShowShine(false), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isHovered]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -184,6 +194,9 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
         <div
           className="relative overflow-hidden aspect-16-9 img-placeholder shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]"
         >
+          {/* Shine Layer (Interaction/Scroll Trigger) */}
+          <div className={cn("shine-layer", showShine && "shine-animate")} />
+
           <motion.div
             style={{ x: translateX, y: translateY }}
             animate={{ scale: isEffectActive ? 1.025 : 1 }}
