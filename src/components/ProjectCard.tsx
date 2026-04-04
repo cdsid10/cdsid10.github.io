@@ -281,7 +281,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
           ref={cardRef}
           /* [GLOBAL] 16:9 on desktop, slightly taller 3:2 or similar on mobile if needed. 
              For now staying with 16:9 but allowing mobile-specific crops in future. */
-          className="relative overflow-hidden aspect-16-9 bg-[#0a0a0a] shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]"
+          className="relative overflow-hidden aspect-16-9 img-placeholder shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]"
         >
           {/* [GLOBAL] Project Thumbnail with Parallax [DESKTOP] and Zoom [GLOBAL] */}
           <motion.img
@@ -290,6 +290,8 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
               : project.thumbnail_16_9
             }
             alt={project.title}
+            loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
             animate={{
               scale: isEffectActive ? 1.05 : 1

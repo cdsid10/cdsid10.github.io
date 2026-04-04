@@ -182,7 +182,7 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
       <motion.div className="w-full h-full">
         {/* Visual Container */}
         <div
-          className="relative overflow-hidden aspect-16-9 bg-[#0a0a0a] shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]"
+          className="relative overflow-hidden aspect-16-9 img-placeholder shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]"
         >
           <motion.div
             style={{ x: translateX, y: translateY }}
@@ -201,6 +201,8 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
                   <img
                     src={item.thumbnail_16_9}
                     alt={item.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   {/* Subtle gradient for indicating it's a card */}

@@ -40,13 +40,16 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
               src={src}
               onClick={() => openGallery(i)}
               loading="lazy"
+              decoding="async"
               style={{
                 width: "100%",
                 height: rows ? `calc(100% / ${rows})` : "auto",
+                aspectRatio: "16 / 9",
                 objectFit: "cover",
                 borderRadius: "0px",
                 display: "block",
                 cursor: "pointer",
+                backgroundColor: "#0f0f0f"
               }}
             />
           ))}

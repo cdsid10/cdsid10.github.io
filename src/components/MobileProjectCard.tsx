@@ -128,13 +128,15 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
         {/* Visual Container: Taller aspect ratio for mobile screens */}
         <div
           className={cn(
-            "relative overflow-hidden bg-[#0a0a0a] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]",
+            "relative overflow-hidden img-placeholder shadow-[0_30px_60px_-20px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]",
             CONFIG.ASPECT_RATIO
           )}
         >
           <motion.img
             src={project.thumbnail_mobile || project.thumbnail_16_9}
             alt={project.title}
+            loading="lazy"
+            decoding="async"
             referrerPolicy="no-referrer"
             animate={{
               scale: isEffectActive ? 1.05 : 1

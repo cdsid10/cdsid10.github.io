@@ -169,3 +169,28 @@ body.sidebar-open .scroll-indicators {
 .mobile-project-section {
   scroll-snap-stop: always;
 }
+
+/* Image Performance: Placeholder Pulse */
+.img-placeholder {
+  background-color: #0f0f0f;
+  position: relative;
+  overflow: hidden;
+}
+
+.img-placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  animation: img-pulse 2s infinite;
+}
+
+@keyframes img-pulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

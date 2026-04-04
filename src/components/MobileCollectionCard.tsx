@@ -183,7 +183,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
         {/* Visual Container */}
         <div
           className={cn(
-            "relative overflow-hidden bg-[#0a0a0a] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]",
+            "relative overflow-hidden img-placeholder shadow-[0_30px_60px_-20px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]",
             CONFIG.ASPECT_RATIO
           )}
         >
@@ -203,6 +203,8 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
                 <img
                   src={item.thumbnail_mobile || item.thumbnail_16_9}
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover pointer-events-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />

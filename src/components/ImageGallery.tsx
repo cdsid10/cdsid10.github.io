@@ -234,7 +234,7 @@ export default function ImageGallery({
    */
   const renderContent = (isModal: boolean) => (
     <div 
-      className={`relative group w-full h-full overflow-hidden ${isModal ? 'flex items-center justify-center overscroll-none' : ''}`}
+      className={`relative group w-full h-full overflow-hidden bg-[#0a0a0a] ${isModal ? 'flex items-center justify-center overscroll-none' : ''}`}
       style={{ touchAction: isModal ? 'pan-x pan-y pinch-zoom' : 'pan-y' }} // Allow native pinch-zoom and panning in modal
       onMouseMove={resetInactivityTimer}
       onTouchStart={(e) => { resetInactivityTimer(); handleTouchStart(e); }}
@@ -247,6 +247,7 @@ export default function ImageGallery({
           key={currentIndex}
           src={images[currentIndex]}
           custom={direction}
+          decoding="async"
           initial={{ 
             opacity: 0, 
             x: direction > 0 ? (windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 30 : 50) : (windowWidth >= CONFIG.MOBILE_BREAKPOINT ? -30 : -50),

@@ -40,7 +40,9 @@ function MarkdownImage(props: any) {
           setIsOpen(true);
           if (props.onClick) props.onClick(e);
         }}
-        style={{ ...props.style, cursor: 'pointer' }}
+        loading="lazy"
+        decoding="async"
+        style={{ ...props.style, cursor: 'pointer', backgroundColor: '#0f0f0f' }}
       />
       <ImageGallery
         images={[props.src].filter(Boolean)}
