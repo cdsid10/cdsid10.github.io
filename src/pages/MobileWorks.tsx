@@ -91,7 +91,8 @@ export default function MobileWorks() {
   };
 
   return (
-    <div className="min-h-screen px-6 lg:px-20 pt-6 lg:pt-19 pb-14 max-w-[1560px] mx-auto">
+    <>
+      <div className="min-h-screen px-6 lg:px-20 pt-6 lg:pt-19 pb-14 max-w-[1560px] mx-auto">
 
       {/* ── PAGE HEADER ─────────────────────────────────────────────── */}
       <motion.header
@@ -131,66 +132,68 @@ export default function MobileWorks() {
           </motion.div>
         ))}
       </motion.div>
-      {/* ── NEXT PROJECT BANNER ────────────────────────────────────────── */}
-      {isFeatured && nextProject && (
-        <motion.div
-          animate={isTouching ? { scale: 0.985 } : { scale: 1 }}
-          transition={{ duration: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-24 -mx-6 lg:-mx-20"
-        >
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              if (nextProject.customInternalLink) {
-                navigate(nextProject.customInternalLink);
-              } else if (nextProject.isCollection) {
-                navigate('/', { state: { scrollToProject: nextProject.id } });
-              } else {
-                navigate(`/project/${nextProject.id}`);
-              }
-            }}
-            className="group block w-full border-t border-ink/10 overflow-hidden text-left"
-            style={{ '--hover-bg': nextProject.accentColor } as React.CSSProperties}
-            onMouseMove={handleBannerMouseMove}
-            onMouseLeave={handleBannerMouseLeave}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-          >
-            <div
-              ref={bannerRef}
-              className="px-6 lg:px-20 py-12 lg:py-20 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
-              style={isTouching ? {
-                backgroundColor: nextProject.accentColor,
-                color: 'white',
-              } : undefined}
-            >
-              <motion.div
-                style={{ x: contentTranslateX, y: contentTranslateY }}
-                className="flex flex-col items-center justify-center pointer-events-none"
-              >
-                <div
-                  className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
-                  style={{ gap: 'var(--eyebrow-gap)' }}
-                >
-                  <span className="eyebrow">Next Featured Work</span>
-                  <span className="eyebrow-dot" />
-                  <span className="eyebrow">0{nextProjectIndex + 1}</span>
-                </div>
-                <h2 className="text-2xl lg:text-5xl tracking-[2px] font-display mb-6 group-hover:scale-105">
-                  {nextProject.title}
-                </h2>
-                <div className="inline-flex items-center justify-center p-4 lg:p-6 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <polyline points="19 12 12 19 5 12"></polyline>
-                  </svg>
-                </div>
-              </motion.div>
-            </div>
-          </button>
-        </motion.div>
-      )}
     </div>
+
+    {/* ── NEXT PROJECT BANNER ────────────────────────────────────────── */}
+    {isFeatured && nextProject && (
+      <motion.div
+        animate={isTouching ? { scale: 0.985 } : { scale: 1 }}
+        transition={{ duration: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="mt-12 lg:mt-20 w-full"
+      >
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            if (nextProject.customInternalLink) {
+              navigate(nextProject.customInternalLink);
+            } else if (nextProject.isCollection) {
+              navigate('/', { state: { scrollToProject: nextProject.id } });
+            } else {
+              navigate(`/project/${nextProject.id}`);
+            }
+          }}
+          className="group block w-full border-t border-ink/10 overflow-hidden text-left"
+          style={{ '--hover-bg': nextProject.accentColor } as React.CSSProperties}
+          onMouseMove={handleBannerMouseMove}
+          onMouseLeave={handleBannerMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
+            ref={bannerRef}
+            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
+            style={isTouching ? {
+              backgroundColor: nextProject.accentColor,
+              color: 'white',
+            } : undefined}
+          >
+            <motion.div
+              style={{ x: contentTranslateX, y: contentTranslateY }}
+              className="flex flex-col items-center justify-center pointer-events-none"
+            >
+              <div
+                className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
+                style={{ gap: 'var(--eyebrow-gap)' }}
+              >
+                <span className="eyebrow">Next Featured Work</span>
+                <span className="eyebrow-dot" />
+                <span className="eyebrow">0{nextProjectIndex + 1}</span>
+              </div>
+              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105">
+                {nextProject.title}
+              </h2>
+              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+              </div>
+            </motion.div>
+          </div>
+        </button>
+      </motion.div>
+    )}
+  </>
   );
 }
