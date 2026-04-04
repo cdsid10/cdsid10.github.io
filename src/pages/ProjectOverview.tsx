@@ -161,11 +161,13 @@ function InteractiveTag({
   label,
   prefix,
   activeTooltip,
+  alignRight = false,
   onToggle
 }: {
   label: string,
   prefix: string,
   activeTooltip: string | null,
+  alignRight?: boolean,
   onToggle: (e: React.MouseEvent, id: string, hasDesc: boolean) => void
 }) {
   const description = techDefinitions[label];
@@ -194,10 +196,14 @@ function InteractiveTag({
             [DESKTOP] Driven by `lg:group-hover/tooltip:...` transitioning visibility on hover.
             [MOBILE] Positioned safely, tooltip triggers dynamically on tap ignoring hover.
           */
-          className={`absolute bottom-full lg:-left-2 -left-1 mb-2 w-[55vw] min-w-[180px] max-w-[220px] lg:w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none transition-all duration-200 ${isActive ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 lg:group-hover/tooltip:opacity-100 lg:group-hover/tooltip:visible lg:group-hover/tooltip:translate-y-0'}`}
+          className={`absolute bottom-full mb-2 w-[55vw] min-w-[180px] max-w-[220px] lg:w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none transition-all duration-200 ${
+            alignRight 
+              ? 'right-0 lg:left-0 lg:right-auto' 
+              : '-left-1 lg:-left-2'
+          } ${isActive ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 lg:group-hover/tooltip:opacity-100 lg:group-hover/tooltip:visible lg:group-hover/tooltip:translate-y-0'}`}
         >
           {description}
-          <div className="absolute top-full left-4 w-2 h-2 bg-ink rotate-45 -translate-y-1" />
+          <div className={`absolute top-full w-2 h-2 bg-ink rotate-45 -translate-y-1 ${alignRight ? 'right-4 lg:left-4 lg:right-auto' : 'left-4'}`} />
         </div>
       )}
     </div>
@@ -610,7 +616,7 @@ export default function ProjectOverview() {
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
               [MOBILE] Uses a tight 2-column grid to save vertical space with text-based lists.
             */}
-            <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-4 gap-y-8 lg:gap-y-4 pt-4 lg:pt-2">
+            <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-2 gap-y-6 lg:gap-x-4 lg:gap-y-4 pt-4 lg:pt-2">
               <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
                 <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Roles</h3>
@@ -664,6 +670,7 @@ export default function ProjectOverview() {
                         prefix="system"
                         activeTooltip={activeTooltip}
                         onToggle={toggleTooltip}
+                        alignRight={true}
                       />
                     ))}
                   </div>
