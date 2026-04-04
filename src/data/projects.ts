@@ -117,8 +117,8 @@ export const projects: Project[] = [
     id: 'katavader',
     title: 'Katavader',
     category: 'featured-works',
-    thumbnail_16_9: '/images/Katavader/Level_5_SS_NEW.png',
-    thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile.png',
+    thumbnail_16_9: '/images/Katavader/Level_5_SS_NEW.webp',
+    thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile.webp',
     accentColor: '#7A1F2B', // [DESKTOP] Triggered on ProjectCard hover
     year: '2026',
     roles: ['Game Designer', 'Technical Designer'],
@@ -132,13 +132,13 @@ export const projects: Project[] = [
     ],
     source: '#',
     gallery: [
-      '/images/Katavader/Level_5_SS_NEW.png',
-      '/images/Katavader/Level_16_SS.png',
-      '/images/Katavader/Level_18_SS.png',
-      '/images/Katavader/Potion_Temple_SS_2.jpg',
-      '/images/Katavader/Training_Dummy_SS.jpg',
-      '/images/Katavader/Level_11_SS_2.jpg',
-      '/images/Katavader/Shrine_Level_Up_SS.png'
+      '/images/Katavader/Level_5_SS_NEW.webp',
+      '/images/Katavader/Level_16_SS.webp',
+      '/images/Katavader/Level_18_SS.webp',
+      '/images/Katavader/Potion_Temple_SS_2.webp',
+      '/images/Katavader/Training_Dummy_SS.webp',
+      '/images/Katavader/Level_11_SS_2.webp',
+      '/images/Katavader/Shrine_Level_Up_SS.webp'
     ],
     /** [GLOBAL] Full Markdown Content */
     deep_dive_content: `
@@ -282,7 +282,7 @@ It went through multiple major iterations, each one refining the project and exp
 <figure>
   <div class="img-wrap" style="position:relative; width:100%;">
     <img
-      src="/images/Katavader/Blog/Unity_Earliest_Concept.png"
+      src="/images/Katavader/Blog/Unity_Earliest_Concept.webp"
       alt="Enemy combat mechanics"
       style="display:block; width:100%;"
     />
@@ -298,10 +298,10 @@ A contained prototype focused purely on combat encounters.
 
 <imagegrid 
   images='[
-    "/images/Katavader/Blog/Early1.png",
-    "/images/Katavader/Blog/Early2.png",
-    "/images/Katavader/Blog/Early3.png",
-    "/images/Katavader/Blog/Early4.png"
+    "/images/Katavader/Blog/Early1.webp",
+    "/images/Katavader/Blog/Early2.webp",
+    "/images/Katavader/Blog/Early3.webp",
+    "/images/Katavader/Blog/Early4.webp"
   ]'
   cols="2"
   caption="Initial arena prototype designed to isolate and test core combat systems"
@@ -312,16 +312,16 @@ The game expanded from isolated encounters into a connected world structure. Mul
 
 <imagegrid 
   images='[
-    "/images/Katavader/Blog/Mid1.jpg",
-    "/images/Katavader/Blog/Mid2.jpg",
-    "/images/Katavader/Blog/Mid3.jpg",
-    "/images/Katavader/Blog/Mid4.jpg",
-    "/images/Katavader/Blog/Mid5.jpg",
-    "/images/Katavader/Blog/Mid6.jpg",
-    "/images/Katavader/Blog/Mid7.jpg",
-    "/images/Katavader/Blog/Mid8.jpg",
-    "/images/Katavader/Blog/Mid9.jpg",
-    "/images/Katavader/Blog/Mid10.jpg"
+    "/images/Katavader/Blog/Mid1.webp",
+    "/images/Katavader/Blog/Mid2.webp",
+    "/images/Katavader/Blog/Mid3.webp",
+    "/images/Katavader/Blog/Mid4.webp",
+    "/images/Katavader/Blog/Mid5.webp",
+    "/images/Katavader/Blog/Mid6.webp",
+    "/images/Katavader/Blog/Mid7.webp",
+    "/images/Katavader/Blog/Mid8.webp",
+    "/images/Katavader/Blog/Mid9.webp",
+    "/images/Katavader/Blog/Mid10.webp"
   ]'
   cols="2"
   caption="Open area level design focused on branching paths that reconnect into a central route"
@@ -356,12 +356,12 @@ Scope was deliberately reduced, allowing the project to refocus on its strongest
 
 <imagegrid 
   images='[
-    "/images/Katavader/Blog/Late1.jpg",
-    "/images/Katavader/Blog/Late2.jpg",
-    "/images/Katavader/Blog/Late3.jpg",
-    "/images/Katavader/Blog/Late4.jpg",
-    "/images/Katavader/Blog/Late5.jpg",
-    "/images/Katavader/Blog/Late6.jpg"
+    "/images/Katavader/Blog/Late1.webp",
+    "/images/Katavader/Blog/Late2.webp",
+    "/images/Katavader/Blog/Late3.webp",
+    "/images/Katavader/Blog/Late4.webp",
+    "/images/Katavader/Blog/Late5.webp",
+    "/images/Katavader/Blog/Late6.webp"
   ]'
   cols="2"
   caption="Top-down layouts of the final levels, illustrating structure and exploration flow between encounters"
@@ -395,8 +395,8 @@ This structure allowed behaviors to remain predictable, while still supporting v
 
 <imagegrid 
   images='[
-    "/images/Katavader/Blog/AI1.png",
-    "/images/Katavader/Blog/AI2.png"
+    "/images/Katavader/Blog/AI1.webp",
+    "/images/Katavader/Blog/AI2.webp"
   ]'
   cols="2"
   caption="Node-based behavior system structuring enemy AI logic and state transitions"
@@ -538,7 +538,7 @@ It’s where everything I’ve learned begins to compound.**
 <figure>
   <div class="img-wrap" style="position:relative; width:100%;">
     <img
-      src="/images/Katavader/Blog/LF.png"
+      src="/images/Katavader/Blog/LF.webp"
       alt="Enemy combat mechanics"
       style="display:block; width:100%;"
     />
