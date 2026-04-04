@@ -187,7 +187,7 @@ body.sidebar-open .scroll-indicators {
     rgba(255, 255, 255, 0.03),
     transparent
   );
-  animation: img-pulse 10s infinite;
+  animation: img-pulse 8s infinite;
 }
 
 @keyframes img-pulse {
