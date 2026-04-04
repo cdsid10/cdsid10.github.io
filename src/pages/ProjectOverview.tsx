@@ -413,7 +413,9 @@ export default function ProjectOverview() {
 
     touchTimeoutRef.current = setTimeout(() => {
       if (nextProject) {
-        if (nextProject.isCollection) {
+        if (nextProject.customInternalLink) {
+          navigate(nextProject.customInternalLink);
+        } else if (nextProject.isCollection) {
           navigate('/', { state: { scrollToProject: nextProject.id } });
         } else {
           navigate(`/project/${nextProject.id}`);
@@ -698,7 +700,9 @@ export default function ProjectOverview() {
           onClick={(e) => {
              // Handle programmatic navigation
              e.preventDefault();
-             if (nextProject.isCollection) {
+             if (nextProject.customInternalLink) {
+               navigate(nextProject.customInternalLink);
+             } else if (nextProject.isCollection) {
                navigate('/', { state: { scrollToProject: nextProject.id } });
              } else {
                navigate(`/project/${nextProject.id}`);

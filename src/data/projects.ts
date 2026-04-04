@@ -79,6 +79,9 @@ export interface Project {
   mobileLayout?: 'grid' | 'carousel';
   /** [GLOBAL] Array of sub-projects if this is a collection */
   collectionItems?: CollectionItem[];
+
+  /** [GLOBAL] Specific internal page to navigate to if isExternalOnly is false */
+  customInternalLink?: string;
 }
 
 // ─── TECHNICAL DEFINITIONS ───────────────────────────────────────────────────
@@ -634,9 +637,8 @@ Designed and refined the limb-based interaction system, focusing on responsive i
     id: 'mobile_releases',
     title: 'Mobile Releases',
     category: 'featured-works',
-    isExternalOnly: true,
-    isCollection: true,
-    mobileLayout: 'carousel', // Change to 'grid' to test the 2x2 layout
+    isExternalOnly: false,
+    customInternalLink: '/mobile-works',
     thumbnail_16_9: '/images/Football_Academy/1.jpg',
     thumbnail_mobile: '/images/Football_Academy/1.jpg',
     accentColor: '#599ad8', //'#59A5D8'
@@ -645,53 +647,79 @@ Designed and refined the limb-based interaction system, focusing on responsive i
     tech: ['Unity', 'C#'],
     summary: 'A collection of smaller mobile games, and experimental works published by others.',
     keyFeatures: [],
-    collectionItems: [
-      {
-        id: 'football_academy',
-        title: 'Football Academy',
-        thumbnail_16_9: '/images/Football_Academy/1.jpg',
-        thumbnail_mobile: '/images/Football_Academy/1.jpg',
-        accentColor: '#599ad8', //'#59A5D8'
-        year: '2023',
-        roles: ['Junior Developer - Rawky Games'],
-        link: 'https://appmagic.rocks/google-play/soccer-academy/com.RawkyStudios.SoccerAcademy',
-        storefronts: [{ type: 'playstore', url: 'https://appmagic.rocks/google-play/soccer-academy/com.RawkyStudios.SoccerAcademy', label: 'Playstore' }]
-      },
-      {
-        id: 'musicalDIY',
-        title: 'Musical Instruments DIY',
-        thumbnail_16_9: '/images/Musical_DIY/1.jpg',
-        thumbnail_mobile: '/images/Musical_DIY/1.jpg',
-        accentColor: '#4C8F88',
-        year: '2023',
-        roles: ['Junior Developer - Rawky Games'],
-        link: 'https://appmagic.rocks/iphone/musical-instruments-diy/6443856611',
-        storefronts: [{ type: 'playstore', url: 'https://appmagic.rocks/iphone/musical-instruments-diy/6443856611', label: 'Playstore' }]
-      },
-      {
-        id: 'laser',
-        title: 'Largest Laser Gun',
-        thumbnail_16_9: '/images/Largest_Laser/1.jpg',
-        thumbnail_mobile: '/images/Largest_Laser/1.jpg',
-        accentColor: '#5A3D5C',
-        year: '2023',
-        roles: ['Junior Developer - Rawky Games'],
-        link: 'https://appmagic.rocks/google-play/largest-laser-gun/com.rawkystudios.lasergun',
-        storefronts: [{ type: 'playstore', url: 'https://appmagic.rocks/google-play/largest-laser-gun/com.rawkystudios.lasergun', label: 'Playstore' }]
-      },
-      {
-        id: 'spiral_clicker',
-        title: 'Spiral Clicker 3D',
-        thumbnail_16_9: '/images/Spiral_Clicker/1.jpg',
-        thumbnail_mobile: '/images/Spiral_Clicker/1.jpg',
-        accentColor: '#7A84D9',
-        year: '2023',
-        roles: ['Junior Developer - Rawky Games'],
-        link: 'https://appmagic.rocks/google-play/spiral-clicker/com.rawkystudios.spiralclicker',
-        storefronts: [{ type: 'playstore', url: 'https://appmagic.rocks/google-play/spiral-clicker/com.rawkystudios.spiralclicker', label: 'Playstore' }]
-      }
-    ],
     deep_dive_content: ''
+  }
+];
+
+/**
+ * Mobile Projects Array
+ * [GLOBAL]
+ * Secondary works displayed in a grid on the "/mobile-works" page.
+ */
+export const mobileProjects: Project[] = [
+  {
+    id: 'football_academy',
+    title: 'Football Academy',
+    category: 'other-works',
+    isExternalOnly: true,
+    thumbnail_16_9: '/images/Football_Academy/1.jpg',
+    thumbnail_mobile: '/images/Football_Academy/1.jpg',
+    accentColor: '#599ad8',
+    year: '2023',
+    roles: ['Junior Developer - Rawky Games'],
+    tech: ['Unity', 'C#'],
+    summary: '',
+    keyFeatures: [],
+    link: 'https://appmagic.rocks/google-play/soccer-academy/com.RawkyStudios.SoccerAcademy',
+    deep_dive_content: '',
+  },
+  {
+    id: 'musicalDIY',
+    title: 'Musical Instruments DIY',
+    category: 'other-works',
+    isExternalOnly: true,
+    thumbnail_16_9: '/images/Musical_DIY/1.jpg',
+    thumbnail_mobile: '/images/Musical_DIY/1.jpg',
+    accentColor: '#4C8F88',
+    year: '2023',
+    roles: ['Junior Developer - Rawky Games'],
+    tech: ['Unity', 'C#'],
+    summary: '',
+    keyFeatures: [],
+    link: 'https://appmagic.rocks/iphone/musical-instruments-diy/6443856611',
+    deep_dive_content: '',
+  },
+  {
+    id: 'laser',
+    title: 'Largest Laser Gun',
+    category: 'other-works',
+    isExternalOnly: true,
+    thumbnail_16_9: '/images/Largest_Laser/1.jpg',
+    thumbnail_mobile: '/images/Largest_Laser/1.jpg',
+    accentColor: '#5A3D5C',
+    year: '2023',
+    roles: ['Junior Developer - Rawky Games'],
+    tech: ['Unity', 'C#'],
+    summary: '',
+    keyFeatures: [],
+    link: 'https://appmagic.rocks/google-play/largest-laser-gun/com.rawkystudios.lasergun',
+    deep_dive_content: '',
+  },
+  {
+    id: 'spiral_clicker',
+    title: 'Spiral Clicker 3D',
+    category: 'other-works',
+    isExternalOnly: true,
+    thumbnail_16_9: '/images/Spiral_Clicker/1.jpg',
+    thumbnail_mobile: '/images/Spiral_Clicker/1.jpg',
+    accentColor: '#7A84D9',
+    year: '2023',
+    roles: ['Junior Developer - Rawky Games'],
+    tech: ['Unity', 'C#'],
+    summary: '',
+    keyFeatures: [],
+    link: 'https://appmagic.rocks/google-play/spiral-clicker/com.rawkystudios.spiralclicker',
+    deep_dive_content: '',
   }
 ];
 

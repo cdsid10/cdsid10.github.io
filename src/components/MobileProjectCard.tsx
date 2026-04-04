@@ -92,7 +92,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
     setIsEffectActive(true);
 
     navTimeoutRef.current = setTimeout(() => {
-      navigate(`/project/${project.id}`);
+      navigate(project.customInternalLink || `/project/${project.id}`);
       navTimeoutRef.current = null;
     }, CONFIG.BLOOM_NAV_DELAY);
   };
@@ -106,7 +106,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
       rel: "noopener noreferrer"
     }
     : {
-      to: `/project/${project.id}`
+      to: project.customInternalLink || `/project/${project.id}`
     };
 
   const Component = (isExternal ? 'a' : Link) as any;

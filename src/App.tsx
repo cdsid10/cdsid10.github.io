@@ -6,6 +6,7 @@ import ProjectOverview from './pages/ProjectOverview';
 import About from './pages/About';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
+import MobileWorks from './pages/MobileWorks';
 import { AnimatePresence } from 'motion/react';
 
 function AnimatedRoutes() {
@@ -18,6 +19,7 @@ function AnimatedRoutes() {
         <Route path="about" element={<About />} />
         <Route path="resume" element={<Resume />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="mobile-works" element={<MobileWorks />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

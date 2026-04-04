@@ -219,19 +219,9 @@ export default function Sidebar() {
                 >
                   {item.title}
                 </a>
-              ) : (location.pathname === '/' || item.isCollection) ? (
-                <button
-                  onClick={() => {
-                    navigate('/', { state: { scrollToProject: item.id } });
-                    if (window.innerWidth < 1024) setIsOpen(false);
-                  }}
-                  className={cn("w-full text-left", getNavItemClasses(location.pathname === '/' && activeProjectId === item.id, item.id))}
-                >
-                  {item.title}
-                </button>
               ) : (
                 <NavLink
-                  to={`/project/${item.id}`}
+                  to={item.customInternalLink || `/project/${item.id}`}
                   className={({ isActive }) => getNavItemClasses(isActive, item.id)}
                 >
                   {item.title}

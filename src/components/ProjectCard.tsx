@@ -212,7 +212,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
     setIsEffectActive(true);
 
     navTimeoutRef.current = setTimeout(() => {
-      navigate(`/project/${project.id}`);
+      navigate(project.customInternalLink || `/project/${project.id}`);
       navTimeoutRef.current = null;
     }, CONFIG.BLOOM_NAV_DELAY);
   };
@@ -244,7 +244,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
     }
     : {
       as: Link,
-      to: `/project/${project.id}`
+      to: project.customInternalLink || `/project/${project.id}`
     };
 
   const Component = isExternal ? 'a' : Link;
