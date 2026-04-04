@@ -121,7 +121,7 @@ export const projects: Project[] = [
     thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile.webp',
     accentColor: '#7A1F2B', // [DESKTOP] Triggered on ProjectCard hover
     year: '2026',
-    roles: ['Game Designer', 'Technical Designer'],
+    roles: ['Technical Game Designer'],
     tech: ['Unity', 'C#'],
     systems: ['State Machines', 'Behaviour Trees', 'Save System'],
     summary: 'A combat-focused action RPG where every encounter demands a decision. Players read enemy behavior, react with precision, and choose the correct response, turning combat into a constant negotiation between timing, risk, and control.',

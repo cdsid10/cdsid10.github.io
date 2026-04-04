@@ -732,26 +732,26 @@ export default function ProjectOverview() {
           >
             <motion.div
               style={{ x: contentTranslateX, y: contentTranslateY }}
-              animate={isTouchDevice && isTouching ? { scale: 0.92 } : { scale: 1 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-              className="flex flex-col items-center justify-center group-active:scale-[0.92] transition-transform duration-150"
+              className="flex flex-col items-center justify-center w-full"
             >
-              <div
-                className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
-                style={{ gap: 'var(--eyebrow-gap)' }}
-              >
-                <span className="eyebrow">Featured Work</span>
-                <span className="eyebrow-dot" />
-                <span className="eyebrow">0{nextProjectIndex + 1}</span>
-              </div>
-              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-[1.02] transition-transform duration-300">
-                {nextProject.title}
-              </h2>
-              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25 group-active:bg-white/20 group-active:border-white/60">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <polyline points="19 12 12 19 5 12"></polyline>
-                </svg>
+              <div className="flex flex-col items-center justify-center group-active:scale-[0.95] transition-transform duration-150 w-full">
+                <div
+                  className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
+                  style={{ gap: 'var(--eyebrow-gap)' }}
+                >
+                  <span className="eyebrow">Featured Work</span>
+                  <span className="eyebrow-dot" />
+                  <span className="eyebrow">0{nextProjectIndex + 1}</span>
+                </div>
+                <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105 transition-transform duration-300">
+                  {nextProject.title}
+                </h2>
+                <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25 group-active:bg-white/20 group-active:border-white/60">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                </div>
               </div>
             </motion.div>
           </div>
