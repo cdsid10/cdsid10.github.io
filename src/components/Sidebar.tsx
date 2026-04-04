@@ -191,8 +191,8 @@ export default function Sidebar() {
     const shouldHighlight = isActive || isHomeActive;
 
     return cn(
-      "block py-1 text-sm font-display tracking-[1px] lg:transition-all lg:duration-300",
-      shouldHighlight ? "text-ink opacity-100" : "text-ink/50 hover:text-ink lg:transition-colors"
+      "block py-1 text-sm font-display tracking-[1px] transition-all duration-200",
+      shouldHighlight ? "text-ink opacity-100" : "text-ink/50 hover:text-ink transition-colors"
     );
   };
 
@@ -242,7 +242,7 @@ export default function Sidebar() {
         Contains the brand logo (slot machine) and the menu toggle.
       */}
       <header className={cn(
-        "lg:hidden fixed top-0 left-0 right-0 h-16 bg-paper z-[60] flex items-center justify-between px-8 border-b border-ink/5 transition-shadow duration-500 lg:transition-all lg:duration-300",
+        "lg:hidden fixed top-0 left-0 right-0 h-16 bg-paper z-[60] flex items-center justify-between px-8 border-b border-ink/5 transition-all duration-200",
         !isOpen && "shadow-[0_4px_20px_rgba(0,0,0,0.10)]"
       )}>
         <NavLink to="/" onClick={handleHomeClick} className="flex flex-col h-full justify-center relative">
@@ -290,7 +290,7 @@ export default function Sidebar() {
         className={cn(
           "fixed top-0 left-0 h-full bg-paper z-[55] transition-transform duration-500",
           "w-[260px] lg:w-[300px] border-r border-ink/5 pt-20 lg:pt-12 px-8 lg:px-10 overflow-y-auto flex flex-col",
-          "lg:translate-x-0 lg:transition-colors lg:duration-300 lg:shadow-[4px_0_24px_rgba(0,0,0,0.05)]",
+          "lg:translate-x-0 transition-colors duration-200 lg:shadow-[4px_0_24px_rgba(0,0,0,0.05)]",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >

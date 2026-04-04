@@ -8,7 +8,7 @@ const CONFIG = {
   BLOOM_NAV_DELAY: 575,
   TAP_ZOOM: 1.025,
   TAP_DURATION: 0.5,
-  TRANSITION_MOBILE: 500,
+  TRANSITION_MOBILE: 200,
   ASPECT_RATIO: 'aspect-square',
   MOBILE_DIM_DELAY_MS: 2000,
 };
@@ -274,7 +274,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
           </h2>
 
           <div className={cn(
-            "flex flex-col w-full text-[11px] sm:text-[12px] tracking-[1.125px] uppercase",
+            "flex flex-col w-full text-[11px] sm:text-[12px] tracking-[1.125px] uppercase transition-colors",
             isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white/70` : "text-muted"
           )}>
             <div className="flex flex-col sm:flex-row gap-0 sm:gap-2 text-left w-full leading-relaxed overflow-hidden">

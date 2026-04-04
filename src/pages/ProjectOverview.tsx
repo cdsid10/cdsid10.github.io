@@ -179,8 +179,7 @@ function InteractiveTag({
           [GLOBAL] Base rendering and static aesthetic styles. 
           [DESKTOP] Hover classes conditionally applied based on `description` availability.
         */
-        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] lg:transition-colors ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper' : ''
-          } ${isActive ? 'bg-ink text-paper' : ''}`}
+        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] transition-colors ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper' : ''} ${isActive ? 'bg-ink text-paper' : ''}`}
       >
         {label}
       </span>
@@ -191,9 +190,9 @@ function InteractiveTag({
             [DESKTOP] Driven by `lg:group-hover/tooltip:...` transitioning visibility on hover.
             [MOBILE] Controlled dynamically via `isActive`, ignoring hover completely.
           */
-          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed lg:transition-all lg:duration-300 z-50 pointer-events-none transition-all duration-300 ${isActive
+          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed transition-all duration-200 z-50 pointer-events-none ${isActive
             ? 'opacity-100 visible translate-y-0'
-            : `opacity-0 invisible translate-y-2 lg:group-hover/tooltip:opacity-100 lg:group-hover/tooltip:visible lg:group-hover/tooltip:translate-y-0`
+            : `opacity-0 invisible translate-y-2 group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-hover/tooltip:translate-y-0`
             }`}
         >
           {description}
@@ -586,7 +585,7 @@ export default function ProjectOverview() {
                     href={typeof project.source === 'string' ? project.source : project.source.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-60 lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-ink/20 text-ink text-sm font-display font-medium uppercase tracking-[2px] hover:bg-ink/5 lg:transition-colors"
+                    className="flex w-60 lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-ink/20 text-ink text-sm font-display font-medium uppercase tracking-[2px] hover:bg-ink/5 transition-colors"
                   >
                     {typeof project.source === 'object' ? project.source.label : 'Repo on Github'}
                     {(typeof project.source === 'string' ? project.source : project.source.url).includes('github.com') ? (
@@ -610,7 +609,7 @@ export default function ProjectOverview() {
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
               [MOBILE] Auto 100% width fallback internally stacking arrays vertically.
             */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2 lg:transition-all">
+            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2 transition-all">
               <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Roles</h3>
@@ -694,7 +693,7 @@ export default function ProjectOverview() {
       */}
       <motion.div
         animate={isTouchDevice && isTouching ? { scale: 1 } : { scale: 1 }}
-        transition={{ duration: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
       >
         <button
           onClick={(e) => {
@@ -735,7 +734,7 @@ export default function ProjectOverview() {
               className="flex flex-col items-center justify-center"
             >
               <div
-                className={`flex items-center justify-center mb-4 lg:mb-6 transition-colors duration-200 group-hover:duration-300 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
+                className={`flex items-center justify-center mb-4 lg:mb-6 transition-colors duration-200 group-hover:duration-200 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
                 style={{ gap: 'var(--eyebrow-gap)' }}
               >
                 <span className="eyebrow">Featured Work</span>

@@ -33,15 +33,15 @@
   }
 
   body {
-    @apply bg-paper text-ink font-sans antialiased lg:transition-colors lg:duration-300;
+    @apply bg-paper text-ink font-sans antialiased transition-colors duration-200;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold tracking-[2px];
+    @apply font-display font-bold tracking-[2px] transition-colors duration-200;
   }
 
   p {
-    @apply leading-[1.6em] font-light;
+    @apply leading-[1.6em] font-light transition-colors duration-200;
   }
 
   ::selection {

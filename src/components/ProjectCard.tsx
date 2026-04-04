@@ -17,8 +17,8 @@ const CONFIG = {
   MOBILE_BREAKPOINT: 1024, // [GLOBAL] Screen width threshold for device-specific logic
   TAP_ZOOM: 1.025,          // [MOBILE] Scale intensity when tapping a card
   TAP_DURATION: 0.5,       // [MOBILE] Duration of the zoom animation (Sharpened for feedback)
-  TRANSITION_DESKTOP: 325, // [DESKTOP] Speed of text color transitions (Balanced cinematic feel)
-  TRANSITION_MOBILE: 500,  // [MOBILE] Speed of the "bloom" phase transitions
+  TRANSITION_DESKTOP: 200, // [DESKTOP] Speed of text color transitions
+  TRANSITION_MOBILE: 200,  // [MOBILE] Speed of the "bloom" phase transitions
   SPRING_CONFIG: { damping: 20, stiffness: 100 },
   STRENGTH_CONFIG: { damping: 25, stiffness: 60 }
 };
@@ -323,7 +323,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
 
             {/* Role and Year List */}
             <div className={cn(
-              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase lg:transition-colors",
+              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase transition-colors",
               isEffectActive
                 ? (windowWidth < CONFIG.MOBILE_BREAKPOINT
                   ? `duration-[${CONFIG.TRANSITION_MOBILE}ms]`

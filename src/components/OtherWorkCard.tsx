@@ -45,7 +45,7 @@ export default function OtherWorkCard({ project, index, priority = false }: Othe
       {/* Info Row */}
       <div className="pt-4 flex flex-col gap-3">
         <div>
-          <h3 className="text-sm lg:text-lg font-display tracking-[1.25px] text-ink mb-0 transition-colors duration-300">
+          <h3 className="text-sm lg:text-lg font-display tracking-[1.25px] text-ink mb-0 transition-colors duration-200">
             {title}
           </h3>
           <div className="flex items-center gap-2 text-[10px] lg:text-[12px] tracking-[1px] uppercase text-muted font-normal">

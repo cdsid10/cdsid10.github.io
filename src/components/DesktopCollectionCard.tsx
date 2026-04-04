@@ -7,7 +7,7 @@ import { cn } from '../lib/utils';
 const CONFIG = {
   HOVER_DELAY: 50,
   PARALLAX_RANGE: 15,
-  TRANSITION_DESKTOP: 325,
+  TRANSITION_DESKTOP: 200,
   SPRING_CONFIG: { damping: 20, stiffness: 100 },
   STRENGTH_CONFIG: { damping: 25, stiffness: 60 },
   DIM_DELAY_MS: 2000
@@ -277,7 +277,7 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
             </h2>
 
             <div className={cn(
-              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase lg:transition-colors",
+              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase transition-colors",
               isEffectActive
                 ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms] text-white/70`
                 : "text-muted"

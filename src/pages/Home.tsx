@@ -420,7 +420,7 @@ function DesktopHome() {
         [MOBILE] forcefully injects harsher darkness mixing metrics (98.5%) prioritizing base contrast levels exclusively.
       */}
       <div
-        className="fixed inset-0 lg:left-[300px] pointer-events-none z-0 lg:transition-colors"
+        className="fixed inset-0 lg:left-[300px] pointer-events-none z-0 transition-colors"
         style={{
           backgroundColor: isHoveringActiveCard && projects[activeSection]
             ? (() => {
@@ -468,13 +468,13 @@ function DesktopHome() {
                   Uses shared .eyebrow + .eyebrow-dot tokens from index.css for a single source of truth.
                   [DESKTOP] transitions text-white/text-muted via lg:transition-colors naturally relying on bloom overlays.
                 */}
-                <span className={`eyebrow lg:transition-colors lg:duration-350 ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow transition-colors duration-200 ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`}>
                   Featured Work
                 </span>
-                <span className={`eyebrow-dot lg:transition-colors lg:duration-350 ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow-dot transition-colors duration-200 ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`} />
-                <span className={`eyebrow lg:transition-colors lg:duration-350 ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow transition-colors duration-200 ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`}>
                   0{index + 1}
                 </span>

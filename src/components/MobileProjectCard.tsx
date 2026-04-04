@@ -13,7 +13,7 @@ const CONFIG = {
   BLOOM_NAV_DELAY: 575,    // [MOBILE] Delay for the "premium bloom" transition on touch
   TAP_ZOOM: 1.025,         // [MOBILE] Scale intensity when tapping a card
   TAP_DURATION: 0.5,       // [MOBILE] Duration of the zoom animation
-  TRANSITION_MOBILE: 500,  // [MOBILE] Speed of the "bloom" phase transitions
+  TRANSITION_MOBILE: 200,  // [MOBILE] Speed of the "bloom" phase transitions
 
   // ASPECT RATIO TOGGLE: Change this to test different vertical layouts 
   // Good options based on other portfolios: 

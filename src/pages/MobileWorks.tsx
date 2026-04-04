@@ -45,15 +45,15 @@ export default function MobileWorks() {
       >
         {/* Eyebrow label */}
         <div className="flex items-center mb-5" style={{ gap: 'var(--eyebrow-gap)' }}>
-          <span className="eyebrow text-muted">Collection</span>
+          <span className="eyebrow text-muted">Mobile Releases</span>
           <span className="eyebrow-dot text-muted" />
           <span className="eyebrow text-muted">{mobileProjects.length} Projects</span>
         </div>
 
-        {/* Main title */}
+        {/* Main title
         <h1 className="text-3xl lg:text-5xl tracking-[1px] font-display mb-6">
           Mobile Releases
-        </h1>
+        </h1> */}
 
         {/* Sub-descriptor */}
         <p className="text-[17px] lg:text-xl text-ink/55 font-light max-w-auto leading-relaxed">

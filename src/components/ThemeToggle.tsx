@@ -11,7 +11,7 @@ import { cn } from '../lib/utils';
 const THEME_CONFIG = {
   STORAGE_KEY: 'theme',
   DARK_CLASS: 'dark',
-  TRANSITION_DURATION: 'duration-500', // Speed of icon rotation/fade
+  TRANSITION_DURATION: 'duration-300', // Speed of icon rotation/fade
 };
 
 interface ThemeToggleProps {
