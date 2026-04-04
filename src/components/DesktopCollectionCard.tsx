@@ -203,7 +203,7 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
                     src={item.thumbnail_16_9}
                     alt={item.title}
                     loading={priority ? "eager" : "lazy"}
-                    {...(priority && index === 0 ? { fetchpriority: "high" } : {})}
+                    {...(priority && index === 0 ? { fetchpriority: "high" } as any : {})}
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   {/* Subtle gradient for indicating it's a card */}

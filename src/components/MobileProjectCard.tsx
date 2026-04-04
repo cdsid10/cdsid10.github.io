@@ -142,7 +142,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             loading={priority ? "eager" : "lazy"}
-            {...(priority ? { fetchpriority: "high" } : {})}
+            {...(priority ? { fetchpriority: "high" } as any : {})}
             className="w-full h-full object-cover pointer-events-none"
           />
         </div>

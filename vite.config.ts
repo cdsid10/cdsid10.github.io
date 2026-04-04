@@ -10,11 +10,11 @@ export default defineConfig({
     react(), 
     tailwindcss(),
     ViteImageOptimizer({
-      png: { quality: 85 },
-      jpeg: { quality: 85 },
-      jpg: { quality: 85 },
-      webp: { quality: 85 },
-      avif: { quality: 85 },
+      png: { quality: 80 },
+      jpeg: { quality: 80 },
+      jpg: { quality: 80 },
+      webp: { quality: 80 },
+      avif: { quality: 80 },
       svg: {
         plugins: [
           'removeViewBox',

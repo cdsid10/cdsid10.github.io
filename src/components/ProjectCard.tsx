@@ -301,7 +301,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
               y: translateY
             }}
             loading={priority ? "eager" : "lazy"}
-            {...(priority ? { fetchpriority: "high" } : {})}
+            {...(priority ? { fetchpriority: "high" } as any : {})}
             className="w-full h-full object-cover pointer-events-none"
           />
         </div>

@@ -488,7 +488,7 @@ function DesktopHome() {
                   onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
                   isActive={index === activeSection}
-                  priority={index === 0}
+                  priority={index < 2}
                 />
               ) : (
                 <ProjectCard
@@ -496,7 +496,7 @@ function DesktopHome() {
                   onHoverStart={() => handleHoverStart(index)}
                   onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
-                  priority={index === 0}
+                  priority={index < 2}
                 />
               )}
             </motion.div>

@@ -33,7 +33,7 @@ export default function OtherWorkCard({ project, index, priority = false }: Othe
           alt={title}
           className="w-full h-full object-cover"
           loading={priority ? "eager" : "lazy"}
-          {...(priority ? { fetchpriority: "high" } : {})}
+          {...(priority ? { fetchpriority: "high" } as any : {})}
           animate={{
             scale: isHovered ? 1.06 : 1,
             filter: (isHovered || isTouchDevice) ? "grayscale(0%)" : "grayscale(0%)"

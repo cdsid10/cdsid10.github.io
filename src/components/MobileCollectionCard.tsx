@@ -205,7 +205,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
                   src={item.thumbnail_mobile || item.thumbnail_16_9}
                   alt={item.title}
                   loading={priority ? "eager" : "lazy"}
-                  {...(priority && index === 0 ? { fetchpriority: "high" } : {})}
+                  {...(priority && index === 0 ? { fetchpriority: "high" } as any : {})}
                   className="w-full h-full object-cover pointer-events-none"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
