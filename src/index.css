@@ -12,6 +12,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --paper: #FAFAFA;
     --ink: #1A1A1A;
     --muted: #888888;
@@ -19,6 +20,7 @@
 
   /* Explicit dark mode variables */
   html.dark {
+    color-scheme: dark;
     --paper: #0A0A0A;
     --ink: #F5F5F5;
     --muted: #A1A1A1;

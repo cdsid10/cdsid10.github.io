@@ -61,20 +61,16 @@ export default function Layout() {
             exit={{ opacity: 0 }}
             transition={{ duration: CONFIG.TRANSITION_DURATION, ease: 'easeOut' }}
             className={cn(
-              "absolute inset-0 w-full h-full overflow-y-auto [scrollbar-gutter:stable]",
+              "absolute w-full overflow-y-auto [scrollbar-gutter:stable]",
 
               /**
                * [MOBILE] Header Offset
-               * On mobile, non-home pages need top padding to sit below the fixed mobile header.
+               * Shift the physical scroll container below the header (h-16) on mobile
+               * to prevent iOS native scrollbars from drawing beneath the fixed header.
                */
-              !isHome && `${CONFIG.MOBILE_NAV_HEIGHT} lg:pt-0`,
-
-              /**
-               * [GLOBAL] Scroll Behavior
-               * Home page uses CSS Snap Points for a high-end "portfolio gallery" feel.
-               * [MOBILE] hide-scrollbar - Keeps the focus on the visuals for small screens.
-               */
-              isHome && "snap-y snap-mandatory hide-scrollbar"
+              !isHome 
+                ? "top-16 h-[calc(100%-4rem)] pt-4 lg:top-0 lg:h-full lg:pt-0" 
+                : "inset-0 h-full snap-y snap-mandatory hide-scrollbar"
             )}
           >
             {currentOutlet}
