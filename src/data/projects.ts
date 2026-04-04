@@ -130,7 +130,7 @@ export const projects: Project[] = [
     storefronts: [
       { type: 'steam', url: 'https://store.steampowered.com/app/3999010/Katavader/', label: 'View on Steam' },
     ],
-    source: '#',
+    source: { url: "https://cdsid10.itch.io/samurai-combat-playtest", label: "Early Prototype" },
     gallery: [
       '/images/Katavader/Level_5_SS_NEW.webp',
       '/images/Katavader/Level_16_SS.webp',
@@ -283,7 +283,7 @@ It went through multiple major iterations, each one refining the project and exp
   <div class="img-wrap" style="position:relative; width:100%;">
     <img
       src="/images/Katavader/Blog/Unity_Earliest_Concept.webp"
-      alt="Enemy combat mechanics"
+      alt="Earliest In Engine Concept Art Scene"
       style="display:block; width:100%;"
     />
   </div>
@@ -354,6 +354,20 @@ The game expanded from isolated encounters into a connected world structure. Mul
 **Final Version - Boss Rush with Exploration Elements**  
 Scope was deliberately reduced, allowing the project to refocus on its strongest element: combat. The game evolved into a boss-driven experience, with light exploration supporting progression between encounters.
 
+<figure>
+  <div class="img-wrap" style="position:relative; width:100%;">
+    <img
+      src="/images/Katavader/Blog/Unity_Final_Concept.webp"
+      alt="Final Version Scene"
+      style="display:block; width:100%;"
+    />
+  </div>
+  <figcaption class="caption">
+    Final Version Scene
+  </figcaption>
+</figure>
+</br>
+
 <imagegrid 
   images='[
     "/images/Katavader/Blog/Late1.webp",
@@ -368,7 +382,7 @@ Scope was deliberately reduced, allowing the project to refocus on its strongest
 />
 </br>
 
-This process exposed a major weakness in my workflow:
+But, this process exposed a major weakness in my workflow:
 
 **I was designing while building, instead of designing before building.**
 
@@ -423,6 +437,7 @@ This structure allowed behaviors to remain predictable, while still supporting v
     Early enemy AI behavior demonstrating initial combat interaction with the player
   </figcaption>
 </figure>
+</br>
 
 ### Save System: From PlayerPrefs to JSON
 
@@ -539,7 +554,7 @@ It’s where everything I’ve learned begins to compound.**
   <div class="img-wrap" style="position:relative; width:100%;">
     <img
       src="/images/Katavader/Blog/LF.webp"
-      alt="Enemy combat mechanics"
+      alt="Thank you for reading!"
       style="display:block; width:100%;"
     />
   </div>

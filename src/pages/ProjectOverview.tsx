@@ -46,6 +46,7 @@ function MarkdownImage(props: any) {
       />
       <ImageGallery
         images={[props.src].filter(Boolean)}
+        alt={props.alt}
         modalOnly={true}
         isOpen={isOpen}
         startIndex={0}
@@ -525,8 +526,8 @@ export default function ProjectOverview() {
         [DESKTOP] specifically overrides padding for wider screen aspect ratio layout horizontally.
       */}
       <div className="px-6 lg:px-20 pt-8 lg:pt-14 lg:w-[80vw] max-w-[1560px] mx-auto">
-        <div className="relative aspect-16-9 w-full overflow-hidden bg-[#0A0A0A] shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]">
-          <ImageGallery images={displayImages} />
+        <div className="relative aspect-16-9 w-full overflow-hidden bg-[#0A0A0A] shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20_0_rgba(0,0,0,0.05)]">
+          <ImageGallery images={displayImages} alt={project.title} />
         </div>
       </div>
 

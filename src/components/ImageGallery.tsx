@@ -19,6 +19,7 @@ const CONFIG = {
 
 interface ImageGalleryProps {
   images: string[];
+  alt?: string;
   modalOnly?: boolean;
   isOpen?: boolean;
   onClose?: () => void;
@@ -27,6 +28,7 @@ interface ImageGalleryProps {
 
 export default function ImageGallery({ 
   images,
+  alt,
   modalOnly = false,
   isOpen = false,
   onClose,
@@ -267,6 +269,7 @@ export default function ImageGallery({
             scale: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 0.98 : 1
           }}
           className={`absolute inset-0 ${isModal ? 'w-[90%] h-[90%] m-auto object-contain' : 'w-full h-full object-cover'}`}
+          alt={alt || "Project Gallery Image"}
           referrerPolicy="no-referrer"
         />
       </AnimatePresence>

@@ -38,6 +38,7 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
             <img
               key={i}
               src={src}
+              alt={caption || ''}
               onClick={() => openGallery(i)}
               loading="lazy"
               decoding="async"
@@ -64,6 +65,7 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
 
       <ImageGallery 
         images={images} 
+        alt={caption}
         modalOnly={true} 
         isOpen={isGalleryOpen} 
         startIndex={activeImageIndex} 
