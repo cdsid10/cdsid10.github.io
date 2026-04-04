@@ -190,6 +190,12 @@ body.sidebar-open .scroll-indicators {
   animation: img-pulse 8s infinite;
 }
 
+/* RESTART the shine immediately on Hover (Desktop) or Tap (Mobile) */
+.group:hover .img-placeholder::after,
+.group:active .img-placeholder::after {
+  animation: img-pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 @keyframes img-pulse {
   0% { transform: translateX(-100%); }
   20% { transform: translateX(100%); }
