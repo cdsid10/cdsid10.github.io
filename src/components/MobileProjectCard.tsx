@@ -29,10 +29,9 @@ interface MobileProjectCardProps {
   onHoverStart: () => void;
   onHoverEnd: () => void;
   isHovered: boolean;
-  priority?: boolean;
 }
 
-export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, isHovered, priority = false }: MobileProjectCardProps) {
+export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, isHovered }: MobileProjectCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
 
   const containerRef = useRef<HTMLAnchorElement>(null);
@@ -141,8 +140,6 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
               scale: isEffectActive ? 1.05 : 1
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            loading={priority ? "eager" : "lazy"}
-            {...(priority ? { fetchpriority: "high" } as any : {})}
             className="w-full h-full object-cover pointer-events-none"
           />
         </div>

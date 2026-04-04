@@ -7,10 +7,9 @@ import { Project } from '../data/projects';
 interface OtherWorkCardProps {
   project: Project;
   index: number;
-  priority?: boolean;
 }
 
-export default function OtherWorkCard({ project, index, priority = false }: OtherWorkCardProps) {
+export default function OtherWorkCard({ project, index }: OtherWorkCardProps) {
   const { title, year, thumbnail_16_9, accentColor, link, source: github, isExternalOnly, id, roles } = project;
   const [isHovered, setIsHovered] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -32,8 +31,6 @@ export default function OtherWorkCard({ project, index, priority = false }: Othe
           src={thumbnail_16_9}
           alt={title}
           className="w-full h-full object-cover"
-          loading={priority ? "eager" : "lazy"}
-          {...(priority ? { fetchpriority: "high" } as any : {})}
           animate={{
             scale: isHovered ? 1.06 : 1,
             filter: (isHovered || isTouchDevice) ? "grayscale(0%)" : "grayscale(0%)"

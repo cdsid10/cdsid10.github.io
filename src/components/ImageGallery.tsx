@@ -265,8 +265,6 @@ export default function ImageGallery({
             filter: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 'blur(6px)' : 'blur(6px)',
             scale: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 0.98 : 1
           }}
-          loading={isModal === false && currentIndex === 0 ? "eager" : "lazy"}
-          {...(isModal === false && currentIndex === 0 ? { fetchpriority: "high" } : {})}
           className={`absolute inset-0 ${isModal ? 'w-[90%] h-[90%] m-auto object-contain' : 'w-full h-full object-cover'}`}
           referrerPolicy="no-referrer"
         />

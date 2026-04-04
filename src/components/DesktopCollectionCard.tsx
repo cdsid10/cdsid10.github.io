@@ -19,10 +19,9 @@ interface DesktopCollectionCardProps {
   onHoverEnd: () => void;
   isHovered: boolean;
   isActive: boolean;
-  priority?: boolean;
 }
 
-export default function DesktopCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive, priority = false }: DesktopCollectionCardProps) {
+export default function DesktopCollectionCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: DesktopCollectionCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
@@ -202,8 +201,6 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
                   <img
                     src={item.thumbnail_16_9}
                     alt={item.title}
-                    loading={priority ? "eager" : "lazy"}
-                    {...(priority && index === 0 ? { fetchpriority: "high" } as any : {})}
                     className="w-full h-full object-cover pointer-events-none"
                   />
                   {/* Subtle gradient for indicating it's a card */}

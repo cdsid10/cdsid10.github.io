@@ -72,7 +72,7 @@ export default function OtherWorks() {
       >
         {otherProjects.map((project, index) => (
           <motion.div key={project.id} variants={itemVariants}>
-            <OtherWorkCard project={project} index={index} priority={index < 4} />
+            <OtherWorkCard project={project} index={index} />
           </motion.div>
         ))}
       </motion.div>
