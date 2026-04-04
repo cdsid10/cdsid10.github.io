@@ -40,7 +40,7 @@
     @apply font-display font-bold tracking-[2px];
   }
 
-  p, span, label, small {
+  p, label, small {
     @apply leading-[1.6em] font-light;
   }
 
