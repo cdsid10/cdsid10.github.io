@@ -324,6 +324,7 @@ export default function MobileHome() {
                   onHoverStart={() => handleHoverStart(index)}
                   onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}
+                  isActive={index === activeSection}
                 />
               )}
             </motion.div>

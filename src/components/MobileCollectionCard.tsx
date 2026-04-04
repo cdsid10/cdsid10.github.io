@@ -32,16 +32,6 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
   const resetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isIndicatorDimmed, setIsIndicatorDimmed] = useState(false);
-  const [showShine, setShowShine] = useState(false);
-
-  // Trigger "Shine" animation when project becomes active/hovered
-  useEffect(() => {
-    if (isHovered) {
-      setShowShine(true);
-      const timer = setTimeout(() => setShowShine(false), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [isHovered]);
 
   const items = project.collectionItems || [];
   const activeItem = items[activeItemIndex] || project;
@@ -197,8 +187,10 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
             CONFIG.ASPECT_RATIO
           )}
         >
-          {/* Shine Layer (Interaction/Scroll Trigger) */}
-          <div className={cn("shine-layer", showShine && "shine-animate")} />
+          {/* [GLOBAL] Master Shine - Triggers instantly on activation and repeats every 10s */}
+          {(isHovered || isActive) && (
+            <div key={`${project.id}-${isActive}`} className="shine-layer" />
+          )}
 
           {/* Snap Carousel */}
           <div

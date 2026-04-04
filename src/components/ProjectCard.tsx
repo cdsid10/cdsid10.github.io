@@ -28,9 +28,10 @@ interface ProjectCardProps {
   onHoverStart: () => void;
   onHoverEnd: () => void;
   isHovered: boolean;
+  isActive: boolean;
 }
 
-export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHovered }: ProjectCardProps) {
+export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: ProjectCardProps) {
   // [GLOBAL] State for responsiveness and navigation
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const [isEffectActive, setIsEffectActive] = useState(false);
@@ -40,16 +41,6 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
   const [isTouchDevice, setIsTouchDevice] = useState(
     typeof window !== 'undefined' ? window.matchMedia('(pointer: coarse)').matches : false
   );
-  const [showShine, setShowShine] = useState(false);
-
-  // Trigger "Shine" animation when project becomes active/hovered
-  useEffect(() => {
-    if (isHovered) {
-      setShowShine(true);
-      const timer = setTimeout(() => setShowShine(false), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [isHovered]);
 
   // [GLOBAL] Refs for interaction tracking
   const containerRef = useRef<HTMLAnchorElement>(null);
@@ -293,8 +284,10 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
              For now staying with 16:9 but allowing mobile-specific crops in future. */
           className="relative overflow-hidden aspect-16-9 img-placeholder shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20px_0_rgba(0,0,0,0.05)]"
         >
-          {/* Shine Layer (Interaction/Scroll Trigger) */}
-          <div className={cn("shine-layer", showShine && "shine-animate")} />
+          {/* [GLOBAL] Master Shine - Triggers instantly on activation and repeats every 10s */}
+          {(isHovered || isActive) && (
+            <div key={`${project.id}-${isActive}`} className="shine-layer" />
+          )}
 
           {/* [GLOBAL] Project Thumbnail with Parallax [DESKTOP] and Zoom [GLOBAL] */}
           <motion.img

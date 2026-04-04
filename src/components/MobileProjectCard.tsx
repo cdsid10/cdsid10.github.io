@@ -29,9 +29,10 @@ interface MobileProjectCardProps {
   onHoverStart: () => void;
   onHoverEnd: () => void;
   isHovered: boolean;
+  isActive: boolean;
 }
 
-export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, isHovered }: MobileProjectCardProps) {
+export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: MobileProjectCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
 
   const containerRef = useRef<HTMLAnchorElement>(null);
@@ -39,16 +40,6 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [showShine, setShowShine] = useState(false);
-
-  // Trigger "Shine" animation when project becomes active/hovered
-  useEffect(() => {
-    if (isHovered) {
-      setShowShine(true);
-      const timer = setTimeout(() => setShowShine(false), 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [isHovered]);
 
   // Cancel navigations ONLY when tab/page becomes visible again after being hidden
   useEffect(() => {
@@ -142,8 +133,10 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
             CONFIG.ASPECT_RATIO
           )}
         >
-          {/* Shine Layer (Interaction/Scroll Trigger) */}
-          <div className={cn("shine-layer", showShine && "shine-animate")} />
+          {/* [GLOBAL] Master Shine - Triggers instantly on activation and repeats every 10s */}
+          {(isHovered || isActive) && (
+            <div key={`${project.id}-${isActive}`} className="shine-layer" />
+          )}
 
           <motion.img
             src={project.thumbnail_mobile || project.thumbnail_16_9}

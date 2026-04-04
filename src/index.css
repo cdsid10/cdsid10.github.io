@@ -170,55 +170,38 @@ body.sidebar-open .scroll-indicators {
   scroll-snap-stop: always;
 }
 
-/* Image Performance: Placeholder Pulse */
+/* Image Performance: Placeholder Background */
 .img-placeholder {
   background-color: #0f0f0f;
   position: relative;
   overflow: hidden;
 }
 
-.img-placeholder::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.03),
-    transparent
-  );
-  animation: img-pulse 8s infinite;
+/* Master Shine Animation (2s movement + 8s wait = 10s total cycle) */
+@keyframes master-shine {
+  0% { 
+    transform: translateX(-100%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
+  }
+  5% {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  }
+  20% { 
+    transform: translateX(100%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  }
+  21%, 100% { 
+    transform: translateX(100%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
+  }
 }
 
-@keyframes img-pulse {
-  0% { transform: translateX(-100%); }
-  20% { transform: translateX(100%); }
-  100% { transform: translateX(100%); }
-}
-
-/* Interaction Shine Layer */
 .shine-layer {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 5;
   overflow: hidden;
-}
-
-@keyframes shine-once {
-  0% { 
-    transform: translateX(-100%) skewX(-20deg);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
-  }
-  20% {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
-  }
-  100% { 
-    transform: translateX(100%) skewX(-20deg);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0), transparent);
-  }
-}
-
-.shine-animate {
-  animation: shine-once 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 1;
+  animation: master-shine 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
