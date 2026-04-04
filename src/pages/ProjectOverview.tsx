@@ -132,7 +132,7 @@ function StorefrontButton({ store }: { store: any }) {
         [MOBILE] Default px-7 py-4.5 padding sizing.
         [DESKTOP] Replaces padding to lg:px-6 lg:py-4 sizing.
       */
-      className="flex w-60 lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-transparent bg-ink text-paper text-sm font-display font-medium uppercase tracking-[2px] transition-transform hover:scale-105"
+      className="flex w-full lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-transparent bg-ink text-paper text-sm font-display font-medium uppercase tracking-[2px] transition-transform hover:scale-105 whitespace-nowrap"
     >
       {store.label || store.type}
       <StorefrontIcon type={store.type} />
@@ -146,7 +146,7 @@ function StorefrontButton({ store }: { store: any }) {
  */
 function StaticTag({ label }: { label: string | number }) {
   return (
-    <div className="w-fit text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px]">
+    <div className="w-fit text-[11px] leading-[1.4em] lg:leading-none lg:text-[10px] lg:px-2 lg:py-1 lg:border lg:border-ink/10 uppercase tracking-[1px] text-ink/85 lg:text-ink">
       {label}
     </div>
   );
@@ -181,8 +181,9 @@ function InteractiveTag({
         /* 
           [GLOBAL] Base rendering and static aesthetic styles. 
           [DESKTOP] Hover classes conditionally applied based on `description` availability.
+          [MOBILE] Switches to an inline text-link style with an underline for interactivity.
         */
-        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper hover:transition-colors hover:duration-200' : ''} ${isActive ? 'bg-ink text-paper' : ''}`}
+        className={`block text-[11px] leading-[1.4em] lg:leading-none lg:text-[10px] lg:px-2 lg:py-1 lg:border lg:border-ink/10 uppercase tracking-[1px] transition-colors duration-200 ${description ? 'cursor-help lg:border-ink/30 lg:hover:bg-ink lg:hover:text-paper underline decoration-ink/40 underline-offset-4 lg:no-underline' : ''} ${isActive ? 'text-ink lg:bg-ink lg:text-paper decoration-ink' : 'text-ink/85 lg:text-ink'}`}
       >
         {label}
       </span>
@@ -191,12 +192,9 @@ function InteractiveTag({
           /* 
             [GLOBAL] Positioning and dimension limits (absolute bottom-full).
             [DESKTOP] Driven by `lg:group-hover/tooltip:...` transitioning visibility on hover.
-            [MOBILE] Controlled dynamically via `isActive`, ignoring hover completely.
+            [MOBILE] Positioned safely, tooltip triggers dynamically on tap ignoring hover.
           */
-          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none ${isActive
-            ? 'opacity-100 visible translate-y-0'
-            : `opacity-0 invisible translate-y-2 group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-hover/tooltip:translate-y-0`
-            }`}
+          className={`absolute bottom-full lg:-left-2 -left-1 mb-2 w-[55vw] min-w-[180px] max-w-[220px] lg:w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none transition-all duration-200 ${isActive ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 lg:group-hover/tooltip:opacity-100 lg:group-hover/tooltip:visible lg:group-hover/tooltip:translate-y-0'}`}
         >
           {description}
           <div className="absolute top-full left-4 w-2 h-2 bg-ink rotate-45 -translate-y-1" />
@@ -562,7 +560,7 @@ export default function ProjectOverview() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-ink text-paper text-sm font-display font-medium uppercase tracking-[2px] hover:scale-105"
+                    className="flex w-full lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-8 py-4 bg-ink text-paper text-sm font-display font-medium uppercase tracking-[2px] hover:scale-105 whitespace-nowrap"
                   >
                     Visit Website
                     <StorefrontIcon type="default" />
@@ -588,7 +586,7 @@ export default function ProjectOverview() {
                     href={typeof project.source === 'string' ? project.source : project.source.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-60 lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-ink/20 text-ink text-sm font-display font-medium uppercase tracking-[2px] hover:bg-ink/5"
+                    className="flex w-full lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-ink/20 text-ink text-sm font-display font-medium uppercase tracking-[2px] hover:bg-ink/5 whitespace-nowrap"
                   >
                     {typeof project.source === 'object' ? project.source.label : 'Repo on Github'}
                     {(typeof project.source === 'string' ? project.source : project.source.url).includes('github.com') ? (
@@ -610,13 +608,13 @@ export default function ProjectOverview() {
             {/* 
               [GLOBAL] Metadata layout block
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
-              [MOBILE] Auto 100% width fallback internally stacking arrays vertically.
+              [MOBILE] Uses a tight 2-column grid to save vertical space with text-based lists.
             */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2">
+            <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-4 gap-y-8 lg:gap-y-4 pt-4 lg:pt-2">
               <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
-                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Roles</h3>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Roles</h3>
+                <div className="flex flex-col lg:flex-row lg:flex-wrap gap-1.5 lg:gap-2 mt-2 lg:mt-0">
                   {project.roles.map(role => (
                     <StaticTag key={role} label={role} />
                   ))}
@@ -625,17 +623,19 @@ export default function ProjectOverview() {
 
               <div className="w-full">
                 {/* [GLOBAL] Year array mapping directly into simplified StaticTags */}
-                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Year</h3>
-                <StaticTag label={project.year} />
+                <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Year</h3>
+                <div className="flex flex-col lg:flex-row lg:flex-wrap gap-1.5 lg:gap-2 mt-2 lg:mt-0">
+                  <StaticTag label={project.year} />
+                </div>
               </div>
 
-              <div className="w-full">
+              <div className="w-full relative z-20">
                 {/* 
                   [GLOBAL] Tech block handles iteration over specific software arrays.
                   Calls InteractiveTag for localized definitions.
                 */}
-                <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Tech</h3>
-                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Tech</h3>
+                <div className="flex flex-col lg:flex-row lg:flex-wrap gap-2 lg:gap-2 mt-2 lg:mt-0">
                   {project.tech.map(techItem => (
                     <InteractiveTag
                       key={techItem}
@@ -654,9 +654,9 @@ export default function ProjectOverview() {
                 Maps similar structures specifically bound to `systems` namespaces.
               */}
               {project.systems && project.systems.length > 0 && (
-                <div className="col-span-2 lg:col-span-1">
-                  <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Systems</h3>
-                  <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
+                <div className="w-full relative z-10">
+                  <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Systems</h3>
+                  <div className="flex flex-col lg:flex-row lg:flex-wrap gap-2 lg:gap-2 mt-2 lg:mt-0">
                     {project.systems.map(systemItem => (
                       <InteractiveTag
                         key={systemItem}

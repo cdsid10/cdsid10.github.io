@@ -139,7 +139,7 @@ export default function MobileWorks() {
       <motion.div
         animate={isTouching ? { scale: 0.985 } : { scale: 1 }}
         transition={{ duration: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="mt-12 lg:mt-20 w-full"
+        className="mt-0 lg:mt-0 w-full"
       >
         <button
           onClick={(e) => {
