@@ -689,15 +689,7 @@ export default function ProjectOverview() {
         </div>
       </div>
 
-      {/* 
-        [GLOBAL]
-        This logic wraps the core "Next Project" transition pipeline routing user progression globally.
-        [MOBILE] triggers Framer whileTap scaling physically compressing boundaries instantly before redirect.
-      */}
-      <motion.div
-        animate={isTouchDevice && isTouching ? { scale: 1 } : { scale: 1 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      >
+      <motion.div>
         <button
           onClick={(e) => {
              // Handle programmatic navigation
@@ -733,7 +725,9 @@ export default function ProjectOverview() {
           >
             <motion.div
               style={{ x: contentTranslateX, y: contentTranslateY }}
-              className="flex flex-col items-center justify-center"
+              animate={isTouchDevice && isTouching ? { scale: 0.92 } : { scale: 1 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+              className="flex flex-col items-center justify-center group-active:scale-[0.92] transition-transform duration-150"
             >
               <div
                 className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
@@ -743,10 +737,10 @@ export default function ProjectOverview() {
                 <span className="eyebrow-dot" />
                 <span className="eyebrow">0{nextProjectIndex + 1}</span>
               </div>
-              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105">
+              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-[1.02] transition-transform duration-300">
                 {nextProject.title}
               </h2>
-              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25">
+              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25 group-active:bg-white/20 group-active:border-white/60">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <polyline points="19 12 12 19 5 12"></polyline>
