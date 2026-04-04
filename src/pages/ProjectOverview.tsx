@@ -181,7 +181,7 @@ function InteractiveTag({
           [GLOBAL] Base rendering and static aesthetic styles. 
           [DESKTOP] Hover classes conditionally applied based on `description` availability.
         */
-        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] transition-colors duration-75 ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper' : ''} ${isActive ? 'bg-ink text-paper' : ''}`}
+        className={`block text-[10px] px-2 py-1 border border-ink/10 uppercase tracking-[1px] ${description ? 'cursor-help border-ink/30 hover:bg-ink hover:text-paper hover:transition-colors hover:duration-200' : ''} ${isActive ? 'bg-ink text-paper' : ''}`}
       >
         {label}
       </span>
@@ -192,7 +192,7 @@ function InteractiveTag({
             [DESKTOP] Driven by `lg:group-hover/tooltip:...` transitioning visibility on hover.
             [MOBILE] Controlled dynamically via `isActive`, ignoring hover completely.
           */
-          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed transition-all duration-100 z-50 pointer-events-none ${isActive
+          className={`absolute bottom-full left-0 mb-2 w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none ${isActive
             ? 'opacity-100 visible translate-y-0'
             : `opacity-0 invisible translate-y-2 group-hover/tooltip:opacity-100 group-hover/tooltip:visible group-hover/tooltip:translate-y-0`
             }`}
@@ -561,7 +561,7 @@ export default function ProjectOverview() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-ink text-paper text-sm font-display font-medium uppercase tracking-[2px] transition-transform hover:scale-105"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-ink text-paper text-sm font-display font-medium uppercase tracking-[2px] hover:scale-105"
                   >
                     Visit Website
                     <StorefrontIcon type="default" />
@@ -587,7 +587,7 @@ export default function ProjectOverview() {
                     href={typeof project.source === 'string' ? project.source : project.source.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-60 lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-ink/20 text-ink text-sm font-display font-medium uppercase tracking-[2px] hover:bg-ink/5 transition-colors"
+                    className="flex w-60 lg:inline-flex lg:w-auto items-center justify-center lg:justify-start gap-3 px-6 py-4 border border-ink/20 text-ink text-sm font-display font-medium uppercase tracking-[2px] hover:bg-ink/5"
                   >
                     {typeof project.source === 'object' ? project.source.label : 'Repo on Github'}
                     {(typeof project.source === 'string' ? project.source : project.source.url).includes('github.com') ? (
@@ -611,7 +611,7 @@ export default function ProjectOverview() {
               [DESKTOP] Enforces proportional 1/3 layout space allocating specifically. 
               [MOBILE] Auto 100% width fallback internally stacking arrays vertically.
             */}
-            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2 transition-all">
+            <div className="w-full lg:w-1/3 flex flex-col gap-6 lg:gap-4 pt-2">
               <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
                 <h3 className="text-[10px] tracking-[1px] text-muted uppercase mb-1.5">Roles</h3>
@@ -724,11 +724,10 @@ export default function ProjectOverview() {
         >
           <div
             ref={bannerRef}
-            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center transition-colors duration-75 group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
+            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
             style={isTouchDevice && isTouching ? {
               backgroundColor: nextProject.accentColor,
               color: 'white',
-              transition: 'background-color 0.2s ease-out, color 0.2s ease-out',
             } : undefined}
           >
             <motion.div
@@ -736,17 +735,17 @@ export default function ProjectOverview() {
               className="flex flex-col items-center justify-center"
             >
               <div
-                className={`flex items-center justify-center mb-4 lg:mb-6 transition-colors duration-75 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
+                className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouchDevice && isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
                 style={{ gap: 'var(--eyebrow-gap)' }}
               >
                 <span className="eyebrow">Featured Work</span>
                 <span className="eyebrow-dot" />
                 <span className="eyebrow">0{nextProjectIndex + 1}</span>
               </div>
-              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 transition-transform duration-100 group-hover:duration-200 ease-out group-hover:scale-105">
+              <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105">
                 {nextProject.title}
               </h2>
-              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 transition-all duration-75 group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25">
+              <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <polyline points="19 12 12 19 5 12"></polyline>

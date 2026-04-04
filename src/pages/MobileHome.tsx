@@ -301,11 +301,11 @@ export default function MobileHome() {
               className="w-full relative mx-auto flex flex-col justify-center px-2 pt-8"
             >
               <div className="mb-4 flex items-center justify-center gap-1.5">
-                <span className={`eyebrow transition-colors duration-75 ${isActiveComponent ? 'text-white' : 'text-muted'}`}>
+                <span className={`eyebrow ${isActiveComponent ? 'text-white' : 'text-muted'}`}>
                   Featured Work
                 </span>
-                <span className={`eyebrow-dot transition-colors duration-75 ${isActiveComponent ? 'text-white' : 'text-muted'}`} />
-                <span className={`eyebrow transition-colors duration-75 ${isActiveComponent ? 'text-white' : 'text-muted'}`}>
+                <span className={`eyebrow-dot ${isActiveComponent ? 'text-white' : 'text-muted'}`} />
+                <span className={`eyebrow ${isActiveComponent ? 'text-white' : 'text-muted'}`}>
                   0{index + 1}
                 </span>
               </div>

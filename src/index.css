@@ -33,15 +33,15 @@
   }
 
   body {
-    @apply bg-paper text-ink font-sans antialiased transition-colors duration-75;
+    @apply bg-paper text-ink font-sans antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold tracking-[2px] transition-colors duration-75;
+    @apply font-display font-bold tracking-[2px];
   }
 
   p, span, label, small {
-    @apply leading-[1.6em] font-light transition-colors duration-75;
+    @apply leading-[1.6em] font-light;
   }
 
   ::selection {

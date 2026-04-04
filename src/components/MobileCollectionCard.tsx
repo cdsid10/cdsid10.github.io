@@ -221,7 +221,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
           <div className="absolute inset-0 flex justify-between pointer-events-none z-20">
             <button
               className={cn(
-                "h-full w-[15%] flex items-center justify-start pl-4 text-white pointer-events-auto transition-all duration-75 group/nav",
+                "h-full w-[15%] flex items-center justify-start pl-4 text-white pointer-events-auto transition-all group/nav",
                 activeItemIndex > 0 
                   ? (isIndicatorDimmed ? "opacity-25" : "opacity-100") 
                   : "opacity-0 pointer-events-none"
@@ -236,7 +236,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
             </button>
             <button
               className={cn(
-                "h-full w-[20%] flex items-center justify-end pr-4 text-white pointer-events-auto transition-all duration-75 group/nav",
+                "h-full w-[20%] flex items-center justify-end pr-4 text-white pointer-events-auto transition-all group/nav",
                 activeItemIndex < items.length - 1 
                   ? (isIndicatorDimmed ? "opacity-25" : "opacity-100") 
                   : "opacity-0 pointer-events-none"
@@ -259,7 +259,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
               <div
                 key={index}
                 className={cn(
-                  "h-1.5 rounded-full transition-all duration-75 pointer-events-auto cursor-pointer",
+                  "h-1.5 rounded-full transition-all pointer-events-auto cursor-pointer",
                   index === activeItemIndex ? "bg-white w-5" : "bg-white/40 w-1.5"
                 )}
                 onClick={(e) => { e.stopPropagation(); scrollTo(index); }}
@@ -272,7 +272,7 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
         <div className="mt-4 flex flex-col items-start w-full">
           <h2 className={cn(
             "text-[22px] sm:text-2xl tracking-[1px] mb-1 transition-colors font-bold text-left",
-            isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white` : "duration-75 text-ink"
+            isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white` : "text-ink"
           )}>
             {activeItem.title}
           </h2>

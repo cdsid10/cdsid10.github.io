@@ -316,12 +316,12 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
           <div className="flex flex-col w-full sm:w-auto">
             {/* Project Title: Switches from ink to white on hover */}
             <h2 className={cn(
-              "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 transition-colors font-bold",
+              "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 font-bold",
               isEffectActive
                 ? (windowWidth < CONFIG.MOBILE_BREAKPOINT
                   ? `duration-[${CONFIG.TRANSITION_MOBILE}ms]`
                   : `duration-[${CONFIG.TRANSITION_DESKTOP}ms]`) + " text-white"
-                : "duration-75 text-ink"
+                : "text-ink"
             )}>
               {project.title}
             </h2>
@@ -373,7 +373,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
               "text-[11px] tracking-[1px] uppercase transition-all",
               isTouchDevice ? "hidden" : "block",
               isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink',
-              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : 'duration-75'
+              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : ''
             )}>
               View Project
             </span>

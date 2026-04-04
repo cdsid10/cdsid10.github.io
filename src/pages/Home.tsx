@@ -468,13 +468,13 @@ function DesktopHome() {
                   Uses shared .eyebrow + .eyebrow-dot tokens from index.css for a single source of truth.
                   [DESKTOP] transitions text-white/text-muted via lg:transition-colors naturally relying on bloom overlays.
                 */}
-                <span className={`eyebrow transition-colors duration-75 ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`}>
                   Featured Work
                 </span>
-                <span className={`eyebrow-dot transition-colors duration-75 ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow-dot ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`} />
-                <span className={`eyebrow transition-colors duration-75 ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`}>
                   0{index + 1}
                 </span>

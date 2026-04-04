@@ -31,7 +31,7 @@ export default function Layout() {
      * Uses '100dvh' (Dynamic Viewport Height) to ensure the layout fills the screen 
      * perfectly on mobile devices, accounting for browser address bars.
      */
-    <div className="flex h-[100dvh] overflow-hidden bg-paper transition-colors duration-75">
+    <div className="flex h-[100dvh] overflow-hidden bg-paper">
 
       {/* [GLOBAL] Navigation Sidebar */}
       <Sidebar />
