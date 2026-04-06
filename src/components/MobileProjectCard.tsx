@@ -157,7 +157,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
 
           {/* Title */}
           <h3 className={cn(
-            "text-[18px] font-medium transition-colors",
+            "text-[20px] font-bold tracking-[0.5px] transition-colors",
             isEffectActive ? "text-white" : "text-ink"
           )}>
             {project.title}
