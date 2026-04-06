@@ -460,7 +460,7 @@ function DesktopHome() {
                 [DESKTOP] lg:w-[80vw] lg:top-0 resolves offsets scaling width completely horizontally.
                 [IPAD] Applies a specific negative top margin to optically center the hero section.
               */
-              className={`w-full lg:w-[80vw] max-w-[1560px] px-6 lg:px-12 relative mx-auto ${isTouchDevice ? '-top-12 lg:-top-14' : '-top-6 lg:top-0'}`}
+              className="w-full lg:w-[80vw] max-w-[1560px] px-6 lg:px-12 relative mx-auto"
             >
               <div className="mb-8 lg:mb-12 flex items-center" style={{ gap: 'var(--eyebrow-gap)' }}>
                 {/* 
