@@ -170,10 +170,10 @@ By tying all of this to a strict stamina system, combat becomes less about execu
 
 Each encounter enforces a clear set of rules on the player:
 
-- **Standard attacks** allow multiple responses - parry, dodge, or block  
-- <span style="color:#CC2D48; font-weight:350;">**Unblockable**</span> attacks must be dodged  
-- <span style="color:#3478CC; font-weight:350;">**Undodgeable**</span> attacks must be blocked  
-- <span style="color:#FFAF00; font-weight:350;">**Heavy**</span> attacks punish passive defense through stamina drain  
+- **Standard** attacks allow multiple responses - parry, dodge, or block
+- <span style="color:#CC2D48; font-weight:350;">**Heavy**</span> attacks cannot be blocked - must be dodged
+- <span style="color:#3478CC; font-weight:350;">**Anchor**</span> attacks cannot be dodged - must be blocked
+- <span style="color:#FFAF00; font-weight:350;">**Drain**</span> attacks punish passive play - blocking quickly depletes stamina, pushing players to act decisively 
 
 While every attack can be parried, some carry significantly higher risk, demanding tighter timing and punishing failure more severely.
 
@@ -494,10 +494,10 @@ Consistency proved far more valuable than bursts of effort.
 ## What I Learned
 
 ### 1. Plan Before You Build
-Even rough planning — diagrams, notes, or simple documentation — can prevent days of rework.
+Even rough planning - diagrams, notes, or simple documentation - can prevent days of rework.
 
 ### 2. Scope is a Design Tool
-Cutting features is not failure — it is **focus**. </br>
+Cutting features is not failure - it is **focus**. </br>
 Knowing what the game is ***not*** is just as important as defining what it is.
 
 ### 3. Build Modular Systems
