@@ -176,7 +176,7 @@ function InteractiveTag({
 
   return (
     <div
-      className="relative group/tooltip w-fit"
+      className={`relative group/tooltip w-fit ${isActive ? 'z-30' : 'z-0 lg:hover:z-30'}`}
       onClick={(e) => onToggle(e, tooltipId, !!description)}
     >
       <span
@@ -185,7 +185,7 @@ function InteractiveTag({
           [DESKTOP] Hover classes conditionally applied based on `description` availability.
           [MOBILE] Switches to an inline text-link style with an underline for interactivity.
         */
-        className={`block text-[11px] leading-[1.4em] lg:leading-none lg:text-[10px] lg:px-2 lg:py-1 lg:border lg:border-ink/10 uppercase tracking-[1px] transition-colors duration-200 ${description ? 'cursor-help lg:border-ink/30 lg:hover:bg-ink lg:hover:text-paper underline decoration-ink/40 underline-offset-4 lg:no-underline' : ''} ${isActive ? 'text-ink lg:bg-ink lg:text-paper decoration-ink' : 'text-ink/85 lg:text-ink'}`}
+        className={`block text-[11px] leading-[1.4em] lg:leading-none lg:text-[10px] lg:px-2 lg:py-1 lg:border lg:border-ink/10 uppercase tracking-[1px] ${description ? 'cursor-help lg:border-ink/30 lg:hover:bg-ink lg:hover:text-paper underline decoration-ink/40 underline-offset-4 lg:no-underline' : ''} ${isActive ? 'text-ink lg:bg-ink lg:text-paper decoration-ink' : 'text-ink/85 lg:text-ink'}`}
       >
         {label}
       </span>
@@ -196,14 +196,14 @@ function InteractiveTag({
             [DESKTOP] Driven by `lg:group-hover/tooltip:...` transitioning visibility on hover.
             [MOBILE] Positioned safely, tooltip triggers dynamically on tap ignoring hover.
           */
-          className={`absolute bottom-full mb-2 w-[55vw] min-w-[180px] max-w-[220px] lg:w-48 p-3 bg-ink text-paper text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none transition-all duration-200 ${
+          className={`absolute bottom-full mb-2 w-[55vw] min-w-[180px] max-w-[220px] lg:w-48 p-3 bg-paper-elevated shadow-lg border border-ink/5 text-ink text-[10px] tracking-[1px] uppercase leading-relaxed z-50 pointer-events-none transition-[opacity,transform] duration-200 ${
             alignRight 
               ? 'right-0 lg:left-0 lg:right-auto' 
               : '-left-1 lg:-left-2'
           } ${isActive ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 lg:group-hover/tooltip:opacity-100 lg:group-hover/tooltip:visible lg:group-hover/tooltip:translate-y-0'}`}
         >
           {description}
-          <div className={`absolute top-full w-2 h-2 bg-ink rotate-45 -translate-y-1 ${alignRight ? 'right-4 lg:left-4 lg:right-auto' : 'left-4'}`} />
+          <div className={`absolute top-full w-2 h-2 bg-paper-elevated border-b border-r border-ink/5 rotate-45 -translate-y-[5px] ${alignRight ? 'right-4 lg:left-4 lg:right-auto' : 'left-4'}`} />
         </div>
       )}
     </div>
@@ -635,7 +635,7 @@ export default function ProjectOverview() {
                 </div>
               </div>
 
-              <div className="w-full relative z-20">
+              <div className="w-full relative">
                 {/* 
                   [GLOBAL] Tech block handles iteration over specific software arrays.
                   Calls InteractiveTag for localized definitions.
@@ -660,7 +660,7 @@ export default function ProjectOverview() {
                 Maps similar structures specifically bound to `systems` namespaces.
               */}
               {project.systems && project.systems.length > 0 && (
-                <div className="w-full relative z-10">
+                <div className="w-full relative">
                   <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Systems</h3>
                   <div className="flex flex-col lg:flex-row lg:flex-wrap gap-2 lg:gap-2 mt-2 lg:mt-0">
                     {project.systems.map(systemItem => (
@@ -746,7 +746,7 @@ export default function ProjectOverview() {
                 <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105 transition-transform duration-300">
                   {nextProject.title}
                 </h2>
-                <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25 group-active:bg-white/20 group-active:border-white/60">
+                <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 lg:group-hover:border-white/40 lg:group-hover:bg-white/10 lg:group-hover:transition-all lg:group-hover:duration-200 ease-out transform lg:group-hover:translate-y-1.25 lg:group-active:bg-white/20 lg:group-active:border-white/60">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <polyline points="19 12 12 19 5 12"></polyline>

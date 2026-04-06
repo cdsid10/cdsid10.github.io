@@ -242,7 +242,7 @@ export default function Sidebar() {
         Contains the brand logo (slot machine) and the menu toggle.
       */}
       <header className={cn(
-        "lg:hidden fixed top-0 left-0 right-0 h-16 bg-paper z-[60] flex items-center justify-between px-8 border-b border-ink/5",
+        "lg:hidden fixed top-0 left-0 right-0 h-16 bg-paper-elevated z-[60] flex items-center justify-between px-8 border-b border-ink/5",
         !isOpen && "shadow-[0_4px_20px_rgba(0,0,0,0.10)]"
       )}>
         <NavLink to="/" onClick={handleHomeClick} className="flex flex-col h-full justify-center relative">
@@ -288,7 +288,7 @@ export default function Sidebar() {
       <aside
         ref={sidebarRef}
         className={cn(
-          "fixed top-0 left-0 h-full bg-paper z-[55] transition-transform duration-500",
+          "fixed top-0 left-0 h-full bg-paper-elevated z-[55] transition-transform duration-500",
           "w-[260px] lg:w-[300px] border-r border-ink/5 pt-20 lg:pt-12 px-8 lg:px-10 overflow-y-auto flex flex-col",
           "lg:translate-x-0 lg:shadow-[4px_0_24px_rgba(0,0,0,0.05)]",
           isOpen ? "translate-x-0" : "-translate-x-full"

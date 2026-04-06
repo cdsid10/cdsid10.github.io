@@ -21,6 +21,8 @@ export default function MobileWorks() {
   
   // [GLOBAL] Touch & Parallax State Logic
   const [isTouching, setIsTouching] = useState(false);
+  const touchStartRef = useRef<{ x: number, y: number } | null>(null);
+  const touchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, SPRING_CONFIG);
@@ -51,21 +53,53 @@ export default function MobileWorks() {
     mouseY.set(0);
   };
 
-  const handleTouchStart = () => setIsTouching(true);
-  const handleTouchMove = () => setIsTouching(false);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+  
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartRef.current) return;
+    const touch = e.touches[0];
+    const dx = Math.abs(touch.clientX - touchStartRef.current.x);
+    const dy = Math.abs(touch.clientY - touchStartRef.current.y);
+
+    if (dx > 10 || dy > 10) {
+      setIsTouching(false);
+      touchStartRef.current = null;
+      if (touchTimeoutRef.current) {
+        clearTimeout(touchTimeoutRef.current);
+        touchTimeoutRef.current = null;
+      }
+    }
+  };
+  
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (!isTouching) return;
-    e.preventDefault();
-    setTimeout(() => {
-      if (nextProject.customInternalLink) {
-        navigate(nextProject.customInternalLink);
-      } else if (nextProject.isCollection) {
-        navigate('/', { state: { scrollToProject: nextProject.id } });
-      } else {
-        navigate(`/project/${nextProject.id}`);
+    if (!touchStartRef.current) return;
+
+    if (touchTimeoutRef.current) {
+      e.preventDefault();
+      return;
+    }
+
+    setIsTouching(true);
+
+    touchTimeoutRef.current = setTimeout(() => {
+      if (nextProject) {
+        if (nextProject.customInternalLink) {
+          navigate(nextProject.customInternalLink);
+        } else if (nextProject.isCollection) {
+          navigate('/', { state: { scrollToProject: nextProject.id } });
+        } else {
+          navigate(`/project/${nextProject.id}`);
+        }
       }
       setIsTouching(false);
-    }, 150);
+      touchTimeoutRef.current = null;
+    }, 350);
+
+    e.preventDefault();
+    touchStartRef.current = null;
   };
 
   // [GLOBAL] Stagger animation container
@@ -180,7 +214,7 @@ export default function MobileWorks() {
                 <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105 transition-transform duration-300">
                   {nextProject.title}
                 </h2>
-                <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 group-hover:border-white/40 group-hover:bg-white/10 group-hover:transition-all group-hover:duration-200 ease-out transform group-hover:translate-y-1 lg:group-hover:translate-y-1.25 group-active:bg-white/20 group-active:border-white/60">
+                <div className="inline-flex items-center justify-center p-3.5 lg:p-5 rounded-full border border-ink/20 lg:group-hover:border-white/40 lg:group-hover:bg-white/10 lg:group-hover:transition-all lg:group-hover:duration-200 ease-out transform lg:group-hover:translate-y-1.25 lg:group-active:bg-white/20 lg:group-active:border-white/60">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <polyline points="19 12 12 19 5 12"></polyline>
