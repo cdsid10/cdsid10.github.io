@@ -448,7 +448,7 @@ function DesktopHome() {
               [GLOBAL] Structural container alignments mapping snap behaviors identically. 
               [DESKTOP] lg:px-20 adds necessary wide padding layout.
             */
-            className="project-section h-screen snap-start flex items-center justify-center px-6 lg:px-20 relative z-10"
+            className="project-section h-[100dvh] snap-start flex items-center justify-center px-6 lg:px-20 relative z-10"
           >
             <motion.div
               initial={{ opacity: 0 }}

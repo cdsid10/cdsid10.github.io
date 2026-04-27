@@ -29,6 +29,18 @@ export interface CollectionItem {
 }
 
 /**
+ * Project Document Interface
+ * [GLOBAL]
+ * Data structure for individual technical documentation files.
+ */
+export interface ProjectDoc {
+  title: string;
+  file: string;
+  description: string;
+  customPreview?: string;
+}
+
+/**
  * Project Interface
  * [GLOBAL]
  * Standardized structure for all project entries.
@@ -82,6 +94,9 @@ export interface Project {
 
   /** [GLOBAL] Specific internal page to navigate to if isExternalOnly is false */
   customInternalLink?: string;
+
+  /** [GLOBAL] Array of technical documentation files associated with the project */
+  docs?: ProjectDoc[];
 }
 
 // ─── TECHNICAL DEFINITIONS ───────────────────────────────────────────────────
@@ -131,6 +146,26 @@ export const projects: Project[] = [
       { type: 'steam', url: 'https://store.steampowered.com/app/3999010/Katavader/', label: 'View on Steam' },
     ],
     source: { url: "https://cdsid10.itch.io/samurai-combat-playtest", label: "Early Prototype" },
+    docs: [
+      {
+        title: "Core Gameplay Design",
+        file: "katavader_core_design.md",
+        description: "Decision-driven combat systems, mechanics, and core gameplay structure",
+        customPreview: "Katavader is a third-person boss-rush action RPG built around decision-driven combat. Encounters function as constrained problem spaces where players read enemy intent, manage resources, and commit to actions under pressure. Failure is deterministic and directly tied to player decisions."
+      },
+      {
+        title: "Combat Progression & Balance Design",
+        file: "katavader-combat-progression.md",
+        description: "Player scaling, boss scaling, and encounter pacing",
+        customPreview: "This document defines Katavader’s combat progression and pacing. It details how player damage scales across upgrades, how boss difficulty evolves, and how both systems interact to increase efficiency without reducing lethality."
+      },
+      {
+        title: "Enemy Design: The Gunslinger",
+        file: "katavader-gunslinger.md",
+        description: "Reactive AI, weapon systems, and pressure-based encounter design",
+        customPreview: "The Gunslinger is a pressure-driven boss built around context-based weapon switching and reactive decision-making. The encounter forces players to manage distance, adapt to dynamic weapon states, and time recovery carefully under constant threat."
+      }
+    ],
     gallery: [
       '/images/Katavader/Level_5_SS_NEW.webp',
       '/images/Katavader/Level_16_SS.webp',

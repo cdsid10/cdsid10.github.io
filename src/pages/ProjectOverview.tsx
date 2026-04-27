@@ -7,6 +7,7 @@ import rehypeRaw from 'rehype-raw';
 import { projects, techDefinitions } from '../data/projects';
 import ImageGallery from '../components/ImageGallery';
 import ImageGrid from "../components/ImageGrid";
+import TechnicalDocs from '../components/TechnicalDocs';
 
 /**
  * [GLOBAL]
@@ -523,13 +524,13 @@ export default function ProjectOverview() {
     : [mobileHero || project.thumbnail_16_9];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       {/* 
         [GLOBAL]
         This section handles rendering the top image gallery.
         [DESKTOP] specifically overrides padding for wider screen aspect ratio layout horizontally.
       */}
-      <div className="px-6 lg:px-20 pt-8 lg:pt-14 lg:w-[80vw] max-w-[1560px] mx-auto">
+      <div className="px-6 lg:px-20 pt-8 lg:pt-14 w-full max-w-[1560px] mx-auto">
         <div className="relative aspect-16-9 w-full overflow-hidden bg-[#0A0A0A] shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20_0_rgba(0,0,0,0.05)]">
           <ImageGallery images={displayImages} alt={project.title} />
         </div>
@@ -680,6 +681,13 @@ export default function ProjectOverview() {
           </div>
 
           <div className="w-full border-b border-ink/20 mb-16"></div>
+
+          {project.docs && project.docs.length > 0 && (
+            <>
+              <TechnicalDocs docs={project.docs} />
+              <div className="w-full border-b border-ink/20 mb-16"></div>
+            </>
+          )}
 
           {/* 
             [GLOBAL]

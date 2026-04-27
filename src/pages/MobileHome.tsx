@@ -238,7 +238,12 @@ export default function MobileHome() {
   // [MOBILE] Handle home-click events from the Sidebar/Header
   useEffect(() => {
     const handleScrollToTop = () => {
-      scrollToSection(0);
+      // Direct scroll reset — reliable on both reload and mid-session navigation
+      if (homeRef.current) {
+        homeRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      } else {
+        scrollToSection(0);
+      }
     };
 
     window.addEventListener('mobileScrollToTop', handleScrollToTop);
