@@ -232,7 +232,8 @@ export default function DocModal({ isOpen, onClose, title, content }: DocModalPr
               <h2 className="text-md lg:text-lg font-display font-semibold tracking-[1px] truncate pr-4 uppercase">
                 {title}
               </h2>
-              <button
+              <motion.button
+                whileTap={{ scale: 0.85 }}
                 onClick={onClose}
                 className="p-2 hover:bg-ink/5 rounded-full transition-colors shrink-0 cursor-pointer"
                 aria-label="Close document"
@@ -241,7 +242,7 @@ export default function DocModal({ isOpen, onClose, title, content }: DocModalPr
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
-              </button>
+              </motion.button>
             </div>
 
             {/* Markdown Body */}

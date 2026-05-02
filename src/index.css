@@ -23,10 +23,10 @@
   /* Explicit dark mode variables */
   html.dark {
     color-scheme: dark;
-    --paper: #0A0A0A;     /* Deep near-black */
-    --paper-elevated: #121212; /* Barely elevated, cuts the grey feel */
-    --ink: #D8D8D8;       /* Very soft, matte text to kill sharpness completely */
-    --muted: #818181;     /* Balanced muted tone */
+    --paper: #0F0F0F;     /* Deep near-black */
+    --paper-elevated: #181818; /* Barely elevated, cuts the grey feel */
+    --ink: #DDDDDD;       /* Very soft, matte text to kill sharpness completely */
+    --muted: #868686;     /* Balanced muted tone */
   }
 
   html, body {
@@ -213,3 +213,4 @@ body.sidebar-open .scroll-indicators {
   opacity: 1;
   animation: master-shine 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+

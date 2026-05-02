@@ -67,6 +67,25 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
     }
   }, [isActive]);
 
+  /**
+   * [GLOBAL] Initial Hover Check
+   * If the component mounts while the mouse is already positioned over it 
+   * (e.g., after navigation), native 'onMouseEnter' will not fire. 
+   * This logic manually triggers the hover state to ensure visual consistency.
+   */
+  useEffect(() => {
+    const checkHover = () => {
+      if (containerRef.current?.matches(':hover')) {
+        onHoverStart();
+      }
+    };
+
+    // Check immediately and after a short delay for browser synchronization
+    checkHover();
+    const timer = setTimeout(checkHover, 50);
+    return () => clearTimeout(timer);
+  }, [onHoverStart]);
+
   const resetInactivityTimer = () => {
     setIsIndicatorDimmed(false);
     if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);

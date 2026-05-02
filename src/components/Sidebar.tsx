@@ -40,6 +40,142 @@ const CONFIG = {
 };
 
 /**
+ * ScrambledText Component
+ * [GLOBAL]
+ * Creates a "shuffled characters" effect on hover and resolves character-by-character on click.
+ */
+/**
+ * ScrambledText Component
+ * [GLOBAL]
+ * Creates a "shuffled characters" effect on hover and resolves character-by-character on click or hover-out.
+ */
+const HIDDEN_WORDS = ['UNITY', 'UNREAL', 'C#', 'C++', 'AI', 'SCRIPT', 'BUILD', 'DEBUG', 'BYTE', 'INT', 'FLOAT', 'NULL', 'BOOL' ];
+
+/**
+ * ScrambledText Component
+ * [GLOBAL]
+ * Creates a "shuffled characters" effect based on the provided phase.
+ * Resolves character-by-character from the current scrambled state.
+ */
+const ScrambledText = ({
+  text,
+  phase,
+  isSlow = false,
+  onComplete
+}: {
+  text: string;
+  phase: 'IDLE' | 'SHUFFLING' | 'RESOLVING';
+  isSlow?: boolean;
+  onComplete?: () => void;
+}) => {
+  const [displayText, setDisplayText] = useState(text);
+  const lastScrambleRef = useRef(text);
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+?><";
+
+  // Helper to generate a scrambled string with word injection
+  const generateScramble = () => {
+    let charArray = text.split('').map((char) => {
+      if (char === ' ') return ' ';
+      return characters[Math.floor(Math.random() * characters.length)];
+    });
+
+    // [GLOBAL] Word Injection Logic
+    if (Math.random() > 0.3) {
+      const shuffledWords = [...HIDDEN_WORDS].sort(() => Math.random() - 0.5);
+      const occupied = new Set<number>();
+      
+      for (const word of shuffledWords) {
+        const validStarts: number[] = [];
+        for (let s = 0; s <= text.length - word.length; s++) {
+          let possible = true;
+          for (let i = -1; i <= word.length; i++) {
+            if (occupied.has(s + i)) {
+              possible = false;
+              break;
+            }
+          }
+          if (possible) validStarts.push(s);
+        }
+        
+        if (validStarts.length > 0 && Math.random() > 0.4) {
+          const start = validStarts[Math.floor(Math.random() * validStarts.length)];
+          for (let i = 0; i < word.length; i++) {
+            charArray[start + i] = word[i];
+            occupied.add(start + i);
+          }
+        }
+      }
+    }
+    return charArray.join('');
+  };
+
+  // Shuffle Logic
+  useEffect(() => {
+    if (phase !== 'SHUFFLING') return;
+
+    const interval = setInterval(() => {
+      const next = generateScramble();
+      setDisplayText(next);
+      lastScrambleRef.current = next;
+    }, 70);
+
+    return () => clearInterval(interval);
+  }, [phase, text]);
+
+  // Resolve Logic
+  const resolveSpeedRef = useRef(1 / 2);
+  const onCompleteRef = useRef(onComplete);
+
+  // Keep onCompleteRef updated without triggering effects
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    if (phase !== 'RESOLVING') {
+      if (phase === 'IDLE') setDisplayText(text);
+      return;
+    }
+
+    // [GLOBAL] Capture speed ONLY when resolution starts
+    // This prevents the animation from restarting if isSlow changes (e.g. name finishes slotting)
+    resolveSpeedRef.current = isSlow ? (1 / 3.2) : (1 / 2);
+
+    // [GLOBAL] Mobile/Direct Click Fix:
+    // If we start resolving from IDLE (touch devices) or if it's explicitly a touch device,
+    // generate a fresh unique scramble state for this tap.
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch || lastScrambleRef.current === text) {
+      lastScrambleRef.current = generateScramble();
+    }
+
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplayText(() =>
+        text.split('').map((char, i) => {
+          if (i < iteration) return text[i];
+          if (char === ' ') return ' ';
+          return lastScrambleRef.current[i] || characters[Math.floor(Math.random() * characters.length)];
+        }).join('')
+      );
+      
+      iteration += resolveSpeedRef.current;
+      
+      if (iteration > text.length) {
+        clearInterval(interval);
+        setDisplayText(text);
+        lastScrambleRef.current = text; // Reset ref so next click/tap generates a new scramble
+        onCompleteRef.current?.();
+      }
+    }, 25);
+
+    return () => clearInterval(interval);
+  }, [phase, text]); // Removed isSlow and onComplete to prevent mid-animation restarts
+
+  return <>{displayText}</>;
+};
+
+/**
  * SlotMachineText Component
  * [GLOBAL]
  * Creates a mechanical "rolling" text effect.
@@ -47,16 +183,21 @@ const CONFIG = {
  */
 const SlotMachineText = ({
   isPlaying,
+  scramblePhase,
+  isLocked,
   onComplete,
   className,
   direction = "down"
 }: {
   isPlaying: boolean;
+  scramblePhase: 'IDLE' | 'SHUFFLING' | 'RESOLVING';
+  isLocked: boolean;
   onComplete: () => void;
   className?: string;
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(CONFIG.SLOT_WORDS.length - 1);
+  const finalWord = CONFIG.SLOT_WORDS[CONFIG.SLOT_WORDS.length - 1];
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -93,7 +234,15 @@ const SlotMachineText = ({
           }
           className="block whitespace-nowrap leading-none"
         >
-          {CONFIG.SLOT_WORDS[currentIndex]}
+          {currentIndex === CONFIG.SLOT_WORDS.length - 1 && !isPlaying ? (
+            <ScrambledText 
+              text={finalWord} 
+              phase={(scramblePhase === 'RESOLVING' && isLocked) ? 'IDLE' : scramblePhase} 
+              isSlow={false} 
+            />
+          ) : (
+            CONFIG.SLOT_WORDS[currentIndex]
+          )}
         </motion.span>
       </AnimatePresence>
     </span>
@@ -105,6 +254,9 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false); // [MOBILE] Toggle for mobile drawer
   const [isPlayingSlot, setIsPlayingSlot] = useState(false); // [GLOBAL] Animation trigger
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null); // [GLOBAL] Tracks highlighted work
+  const [scramblePhase, setScramblePhase] = useState<'IDLE' | 'SHUFFLING' | 'RESOLVING'>('IDLE');
+  const [isLockedAfterClick, setIsLockedAfterClick] = useState(false);
+  const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sidebarRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -122,7 +274,11 @@ export default function Sidebar() {
    * Handles scroll-to-top when already home and triggers the brand animation.
    */
   const handleHomeClick = () => {
-    if (!isPlayingSlot) setIsPlayingSlot(true);
+    if (!isPlayingSlot) {
+      setIsPlayingSlot(true);
+      setScramblePhase('RESOLVING');
+      setIsLockedAfterClick(true);
+    }
 
     // [MOBILE] Ensure menu closes when navigating home
     setIsOpen(false);
@@ -135,6 +291,33 @@ export default function Sidebar() {
       // [DESKTOP] Reset the global Layout scroller
       document.querySelector('#scroll-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  };
+
+  /**
+   * [GLOBAL] Hover Handlers
+   * Adds delays to the scramble effect and resets interaction locks.
+   */
+  const handleHeaderMouseEnter = () => {
+    // [GLOBAL] Disable hover animations on touch devices to prevent "sticky" hover states
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    if (scramblePhase !== 'IDLE' || isPlayingSlot || isLockedAfterClick) return;
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      setScramblePhase('SHUFFLING');
+    }, 0);
+  };
+
+  const handleHeaderMouseLeave = () => {
+    // [GLOBAL] Disable hover animations on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    if (scramblePhase === 'SHUFFLING') {
+      setScramblePhase('RESOLVING');
+    }
+    setIsLockedAfterClick(false);
   };
 
   /**
@@ -245,10 +428,18 @@ export default function Sidebar() {
         "lg:hidden fixed top-0 left-0 right-0 h-16 bg-paper-elevated z-[60] flex items-center justify-between px-8 border-b border-ink/5",
         !isOpen && "shadow-[0_4px_20px_rgba(0,0,0,0.10)]"
       )}>
-        <NavLink to="/" onClick={handleHomeClick} className="flex flex-col h-full justify-center relative">
+        <NavLink
+          to="/"
+          onClick={handleHomeClick}
+          onMouseEnter={handleHeaderMouseEnter}
+          onMouseLeave={handleHeaderMouseLeave}
+          className="flex flex-col h-full justify-center relative"
+        >
           <motion.div layout className="flex flex-col items-start">
             <SlotMachineText
               isPlaying={isPlayingSlot}
+              scramblePhase={scramblePhase}
+              isLocked={isLockedAfterClick}
               onComplete={handleSlotComplete}
               className="font-display font-medium tracking-[0.75px] text-[16px] uppercase leading-none"
             />
@@ -262,14 +453,22 @@ export default function Sidebar() {
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="text-[12px] tracking-[0.75px] text-muted uppercase overflow-hidden"
                 >
-                  Game Designer
+                  <ScrambledText
+                    text="GAME DESIGNER"
+                    phase={scramblePhase}
+                    isSlow={isPlayingSlot}
+                    onComplete={() => {
+                      setScramblePhase('IDLE');
+                      setIsLockedAfterClick(false);
+                    }}
+                  />
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.div>
         </NavLink>
 
-        <div className="flex items-center gap-7 h-full">
+        <div className="flex items-center gap-5 h-full">
           <ThemeToggle hideText iconSize={20} />
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -297,14 +496,32 @@ export default function Sidebar() {
         <div className="flex-1">
           {/* [DESKTOP] Brand Logo Section */}
           <div className="mb-8 hidden lg:block">
-            <NavLink to="/" onClick={handleHomeClick} className="block mb-2">
+            <NavLink
+              to="/"
+              onClick={handleHomeClick}
+              onMouseEnter={handleHeaderMouseEnter}
+              onMouseLeave={handleHeaderMouseLeave}
+              className="block mb-2"
+            >
               <h1 className="font-display text-xl tracking-[1.25px] leading-none whitespace-nowrap uppercase mb-0">
                 <SlotMachineText
                   isPlaying={isPlayingSlot}
+                  scramblePhase={scramblePhase}
+                  isLocked={isLockedAfterClick}
                   onComplete={handleSlotComplete}
                 />
               </h1>
-              <span className="text-[14px] tracking-[1px] text-muted uppercase">Game Designer</span>
+              <span className="text-[14px] tracking-[1px] text-muted uppercase">
+                <ScrambledText
+                  text="GAME DESIGNER"
+                  phase={scramblePhase}
+                  isSlow={isPlayingSlot}
+                  onComplete={() => {
+                    setScramblePhase('IDLE');
+                    setIsLockedAfterClick(false);
+                  }}
+                />
+              </span>
             </NavLink>
           </div>
 
@@ -315,7 +532,7 @@ export default function Sidebar() {
 
         {/* Footer Navigation: Links, Theme, and Copyright */}
         <div className="mt-auto pt-12 pb-6">
-          <div className="mb-10 hidden lg:block">
+          <div className="mb-10 hidden lg:flex flex-col gap-4">
             <ThemeToggle />
           </div>
 

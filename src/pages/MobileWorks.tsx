@@ -192,7 +192,7 @@ export default function MobileWorks() {
         >
           <div
             ref={bannerRef}
-            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
+            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer transition-colors duration-500 ease-out"
             style={isTouching ? {
               backgroundColor: nextProject.accentColor,
               color: 'white',

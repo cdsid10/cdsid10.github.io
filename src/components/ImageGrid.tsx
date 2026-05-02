@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import ImageGallery from './ImageGallery';
 
 type Props = {
@@ -35,13 +36,15 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
           }}
         >
           {images.map((src, i) => (
-            <img
+            <motion.img
               key={i}
               src={src}
+              whileTap={{ scale: 0.98 }}
               alt={caption || ''}
               onClick={() => openGallery(i)}
               loading="lazy"
               decoding="async"
+              className="cursor-pointer transition-opacity duration-300 hover:opacity-75"
               style={{
                 width: "100%",
                 height: rows ? `calc(100% / ${rows})` : "auto",
@@ -49,7 +52,6 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
                 objectFit: "cover",
                 borderRadius: "0px",
                 display: "block",
-                cursor: "pointer",
                 backgroundColor: "#0f0f0f"
               }}
             />

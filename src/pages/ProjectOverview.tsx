@@ -34,8 +34,9 @@ function MarkdownImage(props: any) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <img
+      <motion.img
         {...props}
+        whileTap={{ scale: 0.98 }}
         onClick={(e: React.MouseEvent) => {
           e.stopPropagation();
           setIsOpen(true);
@@ -43,7 +44,8 @@ function MarkdownImage(props: any) {
         }}
         loading="lazy"
         decoding="async"
-        style={{ ...props.style, cursor: 'pointer', backgroundColor: '#0f0f0f' }}
+        className={`cursor-pointer transition-opacity duration-300 hover:opacity-75 ${props.className || ''}`}
+        style={{ ...props.style, backgroundColor: '#0f0f0f' }}
       />
       <ImageGallery
         images={[props.src].filter(Boolean)}
@@ -530,11 +532,16 @@ export default function ProjectOverview() {
         This section handles rendering the top image gallery.
         [DESKTOP] specifically overrides padding for wider screen aspect ratio layout horizontally.
       */}
-      <div className="px-6 lg:px-20 pt-8 lg:pt-14 w-full max-w-[1560px] mx-auto">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="px-6 lg:px-20 pt-8 lg:pt-14 w-full max-w-[1560px] mx-auto"
+      >
         <div className="relative aspect-16-9 w-full overflow-hidden bg-[#0A0A0A] shadow-[0_60px_100px_-20px_rgba(0,0,0,0.2),0_30px_60px_-30px_rgba(0,0,0,0.3),0_0_20_0_rgba(0,0,0,0.05)]">
           <ImageGallery images={displayImages} alt={project.title} />
         </div>
-      </div>
+      </motion.div>
 
       {/* 
         [GLOBAL] styling for spacing. 
@@ -732,7 +739,7 @@ export default function ProjectOverview() {
         >
           <div
             ref={bannerRef}
-            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer"
+            className="px-6 lg:px-20 py-6 lg:py-10 flex flex-col items-center justify-center text-center group-hover:bg-[var(--hover-bg)] group-hover:text-white cursor-pointer transition-colors duration-500 ease-out"
             style={isTouchDevice && isTouching ? {
               backgroundColor: nextProject.accentColor,
               color: 'white',

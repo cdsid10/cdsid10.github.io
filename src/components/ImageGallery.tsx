@@ -250,27 +250,49 @@ export default function ImageGallery({
           src={images[currentIndex]}
           custom={direction}
           decoding="async"
-          initial={{ 
-            opacity: 0, 
-            x: direction > 0 ? (windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 30 : 50) : (windowWidth >= CONFIG.MOBILE_BREAKPOINT ? -30 : -50),
-            filter: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 'blur(6px)' : 'blur(6px)',
-            scale: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 1.02 : 1
-          }}
-          animate={{ 
-            opacity: 1, 
-            x: 0,
-            filter: 'blur(0px)',
-            scale: 1
-          }}
-          exit={{ 
-            opacity: 0, 
-            x: direction > 0 ? (windowWidth >= CONFIG.MOBILE_BREAKPOINT ? -30 : -50) : (windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 30 : 50),
-            filter: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 'blur(6px)' : 'blur(6px)',
-            scale: windowWidth >= CONFIG.MOBILE_BREAKPOINT ? 0.98 : 1
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
           className={`absolute inset-0 ${isModal ? 'w-[90%] h-[90%] m-auto object-contain' : 'w-full h-full object-cover'}`}
           alt={alt || "Project Gallery Image"}
           referrerPolicy="no-referrer"
+          onClick={(e) => {
+            if (!isModal) return;
+            
+            // Mathematically check if click was inside the actual rendered image pixels 
+            // vs the empty letterboxed space of the object-contain container
+            const img = e.currentTarget as HTMLImageElement;
+            const rect = img.getBoundingClientRect();
+            
+            const imgRatio = img.naturalWidth / img.naturalHeight;
+            const boxRatio = rect.width / rect.height;
+            
+            let renderWidth = rect.width;
+            let renderHeight = rect.height;
+            
+            if (imgRatio > boxRatio) {
+              renderHeight = rect.width / imgRatio;
+            } else {
+              renderWidth = rect.height * imgRatio;
+            }
+            
+            const xOffset = (rect.width - renderWidth) / 2;
+            const yOffset = (rect.height - renderHeight) / 2;
+            
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            
+            const isInsideImagePixels = 
+              clickX >= xOffset && 
+              clickX <= rect.width - xOffset &&
+              clickY >= yOffset && 
+              clickY <= rect.height - yOffset;
+              
+            if (isInsideImagePixels) {
+              e.stopPropagation(); // Only prevent closing if they clicked the literal image
+            }
+          }}
         />
       </AnimatePresence>
 
@@ -279,7 +301,7 @@ export default function ImageGallery({
         <motion.button
           onClick={toggleFullscreen}
           whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.5)" }}
-          whileTap={{ scale: 0.9 }}
+          whileTap={{ scale: 0.85 }}
           className={cn(
             "absolute top-4 right-4 p-2 bg-black/20 backdrop-blur-md rounded-full text-white transition-opacity z-20",
             (isIndicatorDimmed) ? "opacity-25" : "opacity-100 group-hover:opacity-100"
@@ -295,9 +317,9 @@ export default function ImageGallery({
         <motion.button
           onClick={toggleFullscreen}
           whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
-          whileTap={{ scale: 0.9 }}
+          whileTap={{ scale: 0.85 }}
           className={cn(
-            "absolute top-6 right-6 p-3 bg-white/10 backdrop-blur-md rounded-full text-white z-50 transition-all duration-300",
+            "absolute top-6 right-10 p-3 bg-white/10 backdrop-blur-md rounded-full text-white z-50 transition-all duration-300",
             isIndicatorDimmed ? "opacity-25" : "opacity-100"
           )}
           aria-label="Close fullscreen"
@@ -315,7 +337,7 @@ export default function ImageGallery({
             onTouchStart={(e) => { e.stopPropagation(); resetInactivityTimer(); }}
             onTouchEnd={(e) => e.stopPropagation()}
             whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.2)" }}
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: 0.85 }}
             className={cn(
               "absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 p-1.5 lg:p-2 bg-black/10 backdrop-blur-md rounded-full text-white transition-opacity z-20",
               isIndicatorDimmed ? "opacity-25" : "opacity-100 group-hover:opacity-100",
@@ -331,7 +353,7 @@ export default function ImageGallery({
             onTouchStart={(e) => { e.stopPropagation(); resetInactivityTimer(); }}
             onTouchEnd={(e) => e.stopPropagation()}
             whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.2)" }}
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: 0.85 }}
             className={cn(
               "absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 p-1.5 lg:p-2 bg-black/10 backdrop-blur-md rounded-full text-white transition-opacity z-20",
               isIndicatorDimmed ? "opacity-25" : "opacity-100 group-hover:opacity-100",
@@ -384,16 +406,16 @@ export default function ImageGallery({
         <AnimatePresence>
           {isFullscreen && (
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 0.001 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              exit={{ opacity: 0, pointerEvents: "none" }}
               transition={{ duration: 0.3 }}
               className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl"
               onClick={toggleFullscreen}
             >
               <div 
                 className="w-full h-full relative" 
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image itself
+                // Removed stopPropagation here so clicking black space closes modal
               >
                 {renderContent(true)}
               </div>

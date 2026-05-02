@@ -134,7 +134,8 @@ export const projects: Project[] = [
     category: 'featured-works',
     thumbnail_16_9: '/images/Katavader/Level_5_SS_NEW.webp',
     thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile.webp',
-    accentColor: '#7A1F2B', // [DESKTOP] Triggered on ProjectCard hover
+    accentColor: '#801927', // [DESKTOP] Triggered on ProjectCard hover
+    //accentColor: '#7A1F2B', // [DESKTOP] Triggered on ProjectCard hover
     year: '2026',
     roles: ['Technical Game Designer'],
     tech: ['Unity', 'C#'],

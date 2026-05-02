@@ -100,6 +100,27 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
   }, []);
 
   /**
+   * [GLOBAL] Initial Hover Check
+   * If the component mounts while the mouse is already positioned over it 
+   * (e.g., after navigation), native 'onMouseEnter' will not fire. 
+   * This logic manually triggers the hover state to ensure visual consistency.
+   */
+  useEffect(() => {
+    if (isTouchDevice) return;
+
+    const checkHover = () => {
+      if (containerRef.current?.matches(':hover')) {
+        onHoverStart();
+      }
+    };
+
+    // Check immediately and after a short delay for browser synchronization
+    checkHover();
+    const timer = setTimeout(checkHover, 50);
+    return () => clearTimeout(timer);
+  }, [onHoverStart, isTouchDevice]);
+
+  /**
    * [DESKTOP] Hover Timing Logic
    * Adds a subtle delay before the zoom and parallax effects kick in.
    * [MOBILE] Bypasses this delay so that the zoom is instant on tap.
