@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import type { Variants } from 'motion/react';
 import { projects, mobileProjects } from '../data/projects';
 import OtherWorkCard from '../components/OtherWorkCard';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const SPRING_CONFIG = { damping: 20, stiffness: 100 };
 const PARALLAX_RANGE = 15;
@@ -16,6 +17,7 @@ const DESKTOP_BREAKPOINT = 1024;
  * showcasing professional commercial works for iOS and Android.
  */
 export default function MobileWorks() {
+  usePageTitle('Mobile Releases');
   const navigate = useNavigate();
   const bannerRef = useRef<HTMLDivElement>(null);
   

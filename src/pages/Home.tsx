@@ -6,6 +6,7 @@ import { projects } from '../data/projects';
 import ProjectCard from '../components/ProjectCard';
 import DesktopCollectionCard from '../components/DesktopCollectionCard';
 import MobileHome from './MobileHome';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 /**
  * [GLOBAL]
@@ -527,6 +528,8 @@ export default function Home() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  usePageTitle('Home');
 
   if (windowWidth < DESKTOP_BREAKPOINT) {
     return <MobileHome />;

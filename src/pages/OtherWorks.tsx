@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import type { Variants } from 'motion/react';
 import { otherProjects } from '../data/projects';
 import OtherWorkCard from '../components/OtherWorkCard';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 /**
  * OtherWorks Page
@@ -10,6 +11,7 @@ import OtherWorkCard from '../components/OtherWorkCard';
  * technical experiments, game jams, and collaborative projects.
  */
 export default function OtherWorks() {
+  usePageTitle('Archive');
 
   // [GLOBAL] Stagger animation container
   const containerVariants: Variants = {

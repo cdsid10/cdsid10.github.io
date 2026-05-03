@@ -1,6 +1,8 @@
 import { motion } from 'motion/react';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 export default function Resume() {
+  usePageTitle('Resume');
   return (
     <motion.div 
       initial={{ opacity: 0 }}

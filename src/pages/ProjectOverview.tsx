@@ -8,6 +8,7 @@ import { projects, techDefinitions } from '../data/projects';
 import ImageGallery from '../components/ImageGallery';
 import ImageGrid from "../components/ImageGrid";
 import TechnicalDocs from '../components/TechnicalDocs';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 /**
  * [GLOBAL]
@@ -223,6 +224,8 @@ export default function ProjectOverview() {
   const { id } = useParams();
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === id);
+
+  usePageTitle(project?.title || 'Project');
 
   // --- STATE ---
 
