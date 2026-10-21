@@ -5,6 +5,8 @@ import { cn } from '../lib/utils';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import ThemeToggle from './ThemeToggle';
+import { CONTACT } from '../data/contact';
+import { isImproved } from '../lib/portfolioVersion';
 
 /**
  * CONFIGURATION CONSTANTS
@@ -503,9 +505,9 @@ export default function Sidebar() {
             />
             {/* [MOBILE] Subtitle visible only when menu is open to balance header layout */}
             <AnimatePresence mode="wait">
-              {isOpen && (
+              {(isOpen || isImproved) && (
                 <motion.div
-                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  initial={isImproved ? false : { opacity: 0, height: 0, marginTop: 0 }}
                   animate={{ opacity: 1, height: 'auto', marginTop: 4 }}
                   exit={{ opacity: 0, height: 0, marginTop: 0 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -604,16 +606,18 @@ export default function Sidebar() {
             <div className="mb-8">
               <ul className="space-y-2 pl-2">
                 <li><NavLink to="/other-works" className={({ isActive }) => getNavItemClasses(isActive)}>Archive</NavLink></li>
-                <li>
-                  <a
-                    href="https://drive.google.com/file/d/1fUZGZj15KHAnnprw0oM6lnPwB2GHeqOl/view?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={getNavItemClasses(false)}
-                  >
-                    Resumé
-                  </a>
-                </li>
+                {!(isImproved && CONTACT.resumeUrl) && (
+                  <li>
+                    <a
+                      href={CONTACT.resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={getNavItemClasses(false)}
+                    >
+                      Resumé
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
 
@@ -621,6 +625,15 @@ export default function Sidebar() {
             <div className="mt-10">
               <div className="font-display text-[12px] tracking-[1.25px] text-muted mb-4 uppercase font-semibold">More</div>
               <ul className="space-y-2 pl-2">
+                {/* [IMPROVED] Email and Resumé lead the list; an unconfigured value renders nothing (see data/contact.ts). */}
+                {isImproved && CONTACT.email && (
+                  <li><a href={`mailto:${CONTACT.email}`} className={getNavItemClasses(false)}>Email</a></li>
+                )}
+                {isImproved && CONTACT.resumeUrl && (
+                  <li>
+                    <a href={CONTACT.resumeUrl} target="_blank" rel="noopener noreferrer" className={getNavItemClasses(false)}>Resumé</a>
+                  </li>
+                )}
                 {CONFIG.SOCIAL_LINKS.map((item) => (
                   <li key={item.label}>
                     <a
