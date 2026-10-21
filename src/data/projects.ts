@@ -619,11 +619,8 @@ It’s where everything I’ve learned begins to compound.**
     storefronts: [
       { type: 'itch', url: 'https://el-studios.itch.io/self-apart', label: 'View on Itch.io' },
     ],
-    source:
-    {
-      url: "https://thegdwc.com/pages/game.php?game_guid=6bfe1aaf-7571-4fa6-bdfc-b15a0412880b",
-      label: "View on GDWC"
-    },
+    // The former "View on GDWC" link (thegdwc.com game page) returns 404 and was removed;
+    // restore a `source` entry here if an authoritative replacement URL becomes available.
     gallery: [
       '/images/SelfApart/1.webp',
       '/images/SelfApart/2.webp',

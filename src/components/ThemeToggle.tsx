@@ -73,8 +73,9 @@ export default function ThemeToggle({
     <button
       onClick={toggleTheme}
       className={cn(
-        "flex items-center gap-3 py-1 text-sm text-muted opacity-60 transition-all duration-150 group",
-        "hover:opacity-100" // [DESKTOP] Visual feedback on mouse hover
+        "flex items-center gap-3 py-1 text-sm text-muted transition-all duration-150 group",
+        hideText && "px-1 -mx-1", // [MOBILE] 28 px wide tap target; the -mx-1 keeps the header layout unchanged
+        "hover:text-ink" // [DESKTOP] Visual feedback on mouse hover (was opacity 0.6 -> 1; the stacked opacity failed contrast)
       )}
       aria-label="Toggle visual theme"
     >
@@ -111,7 +112,7 @@ export default function ThemeToggle({
         Shown in the Sidebar for clarity.
       */}
       {!hideText && (
-        <span className="uppercase tracking-[2px] text-[10px] font-medium">
+        <span className="uppercase tracking-[2px] text-[11px] font-medium">
           {isDark ? 'Light Mode' : 'Dark Mode'}
         </span>
       )}

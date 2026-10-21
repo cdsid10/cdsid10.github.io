@@ -1,14 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import OtherWorks from './pages/OtherWorks';
 import ProjectOverview from './pages/ProjectOverview';
-import About from './pages/About';
-import Resume from './pages/Resume';
-import Contact from './pages/Contact';
 import MobileWorks from './pages/MobileWorks';
-import { AnimatePresence } from 'motion/react';
+import NotFound from './pages/NotFound';
+import { MotionConfig } from 'motion/react';
 
 function AnimatedRoutes() {
   return (
@@ -18,11 +16,8 @@ function AnimatedRoutes() {
           <Route index element={<Home />} />
           <Route path="project/:id" element={<ProjectOverview />} />
           <Route path="other-works" element={<OtherWorks />} />
-          <Route path="about" element={<About />} />
-          <Route path="resume" element={<Resume />} />
-          <Route path="contact" element={<Contact />} />
           <Route path="mobile-works" element={<MobileWorks />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>
@@ -31,8 +26,12 @@ function AnimatedRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AnimatedRoutes />
-    </BrowserRouter>
+    // [GLOBAL] reducedMotion="user": when the visitor prefers reduced motion, Motion keeps opacity and
+    // colour changes but drops transform/layout movement (parallax, slides, scale).
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <AnimatedRoutes />
+      </BrowserRouter>
+    </MotionConfig>
   );
 }

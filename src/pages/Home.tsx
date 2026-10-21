@@ -7,6 +7,7 @@ import ProjectCard from '../components/ProjectCard';
 import DesktopCollectionCard from '../components/DesktopCollectionCard';
 import MobileHome from './MobileHome';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { prefersReducedMotion } from '../lib/utils';
 
 /**
  * [GLOBAL]
@@ -44,12 +45,17 @@ function ScrollIndicators({
       */
       className={`fixed right-4 lg:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-0 items-center transition-all duration-700 scroll-indicators ${isSidebarOpen ? 'opacity-0 pointer-events-none' : (isIndicatorDimmed ? 'opacity-[0.45]' : 'opacity-100')
         }`}
+      role="group"
+      aria-label="Featured work sections"
     >
-      {projects.map((_, index) => (
+      {projects.map((project, index) => (
         <button
           key={index}
+          type="button"
           onClick={() => onDotClick(index)}
-          className="group p-1.25 cursor-pointer flex items-center justify-center transition-all duration-150"
+          aria-label={`Go to ${project.title}`}
+          aria-current={activeSection === index ? 'true' : undefined}
+          className="group p-1.25 min-w-6 min-h-6 cursor-pointer flex items-center justify-center transition-all duration-150"
         >
           <div
             /*
@@ -325,7 +331,7 @@ function DesktopHome() {
   const scrollToSection = (index: number) => {
     const clampedIndex = Math.max(0, Math.min(index, projects.length - 1));
     const projectSections = document.querySelectorAll('.project-section');
-    projectSections[clampedIndex]?.scrollIntoView({ behavior: 'smooth' });
+    projectSections[clampedIndex]?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   };
 
   /**
@@ -400,19 +406,49 @@ function DesktopHome() {
       setTimeout(() => { isScrollLocked.current = false; }, SCROLL_LOCK_MS);
     };
 
+    // Keyboard paging: the scroller is #scroll-container, not the viewport, so native scroll keys do nothing until it has focus.
+    // Listen on document, move one section per press, and leave keys alone when a control or open drawer owns them.
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey) return;
+      if ((mainEl as HTMLElement).inert) return;
+      const t = e.target as HTMLElement | null;
+      if (t?.closest('a, button, input, textarea, select, summary, [contenteditable], [role=dialog]')) return;
+
+      const last = projects.length - 1;
+      let target: number;
+      switch (e.key) {
+        case 'ArrowDown': case 'PageDown': target = activeSectionRef.current + 1; break;
+        case 'ArrowUp': case 'PageUp': target = activeSectionRef.current - 1; break;
+        case ' ': target = activeSectionRef.current + (e.shiftKey ? -1 : 1); break;
+        case 'Home': target = 0; break;
+        case 'End': target = last; break;
+        default: return;
+      }
+      e.preventDefault();
+      if (isScrollLocked.current || target < 0 || target > last || target === activeSectionRef.current) return;
+
+      isScrollLocked.current = true;
+      beginScroll();
+      scrollToSection(target);
+      setTimeout(() => { isScrollLocked.current = false; }, SCROLL_LOCK_MS);
+    };
+
     mainEl.addEventListener('wheel', handleWheel, { passive: false });
     mainEl.addEventListener('touchstart', handleTouchStart, { passive: true });
     mainEl.addEventListener('touchend', handleTouchEnd, { passive: true });
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       mainEl.removeEventListener('wheel', handleWheel);
       mainEl.removeEventListener('touchstart', handleTouchStart);
       mainEl.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
   return (
     <div ref={homeRef} className="relative">
+      <h1 className="sr-only">Featured Work</h1>
 
       {/* 
         [GLOBAL]
@@ -529,7 +565,7 @@ export default function Home() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  usePageTitle('Home');
+  usePageTitle('Siddhant Rathor'); // the site name alone, matching the static <title> of the Home page
 
   if (windowWidth < DESKTOP_BREAKPOINT) {
     return <MobileHome />;

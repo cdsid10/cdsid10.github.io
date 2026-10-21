@@ -107,12 +107,12 @@ export default function TechnicalDocs({ docs }: TechnicalDocsProps) {
 
         {/* Mobile Scroll Indicators */}
         {docs.length > 1 && (
-          <div className="flex lg:hidden justify-center items-center gap-2 mt-6">
+          <div className="flex lg:hidden justify-center items-center gap-0 mt-6">
             {docs.map((_, index) => (
               <button
                 key={index}
                 onClick={() => handleScrollToCard(index)}
-                className="py-2 px-1 -my-2 -mx-1 flex items-center justify-center cursor-pointer"
+                className="py-2 px-1 -my-2 min-w-6 min-h-6 flex items-center justify-center cursor-pointer"
                 aria-label={`Scroll to document ${index + 1}`}
               >
                 <div

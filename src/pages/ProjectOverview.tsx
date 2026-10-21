@@ -9,6 +9,9 @@ import ImageGallery from '../components/ImageGallery';
 import ImageGrid from "../components/ImageGrid";
 import TechnicalDocs from '../components/TechnicalDocs';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { parseImageList } from '../lib/utils';
+import ManagedVideo from '../components/ManagedVideo';
+import NotFound from './NotFound';
 
 /**
  * [GLOBAL]
@@ -35,19 +38,27 @@ function MarkdownImage(props: any) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <motion.img
-        {...props}
+      {/* [GLOBAL] A real button (not a tab-focusable <img>) so Enter and Space open the lightbox. */}
+      <motion.button
+        type="button"
         whileTap={{ scale: 0.98 }}
         onClick={(e: React.MouseEvent) => {
           e.stopPropagation();
           setIsOpen(true);
           if (props.onClick) props.onClick(e);
         }}
-        loading="lazy"
-        decoding="async"
-        className={`cursor-pointer transition-opacity duration-300 hover:opacity-75 ${props.className || ''}`}
-        style={{ ...props.style, backgroundColor: '#0f0f0f' }}
-      />
+        className="group/zoom block w-full p-0 border-0 bg-transparent text-left cursor-pointer"
+        aria-label={props.alt ? `Enlarge image: ${props.alt}` : 'Enlarge image'}
+        aria-haspopup="dialog"
+      >
+        <img
+          {...props}
+          loading="lazy"
+          decoding="async"
+          className={`transition-opacity duration-300 group-hover/zoom:opacity-75 ${props.className || ''}`}
+          style={{ ...props.style, backgroundColor: '#0f0f0f' }}
+        />
+      </motion.button>
       <ImageGallery
         images={[props.src].filter(Boolean)}
         alt={props.alt}
@@ -63,15 +74,17 @@ function MarkdownImage(props: any) {
 
 
 const markdownComponents: any = {
-  h1: ({ children }: any) => <h1 className="text-3xl lg:text-5xl tracking-[1px] mb-12 mt-20 first:mt-0">{children}</h1>,
-  h2: ({ children }: any) => <h2 className="text-xl lg:text-2xl tracking-[1px] mb-8 mt-16">{children}</h2>,
-  h3: ({ children }: any) => <h3 className="text-lg lg:text-xl tracking-[1px] mb-6 mt-12">{children}</h3>,
+  // Markdown headings sit one level below the page h1 (the project title); classes are unchanged.
+  h1: ({ children }: any) => <h2 className="text-3xl lg:text-5xl tracking-[1px] mb-12 mt-20 first:mt-0">{children}</h2>,
+  h2: ({ children }: any) => <h3 className="text-xl lg:text-2xl tracking-[1px] mb-8 mt-16">{children}</h3>,
+  h3: ({ children }: any) => <h4 className="text-lg lg:text-xl tracking-[1px] mb-6 mt-12">{children}</h4>,
   p: ({ children }: any) => <div className="text-lg lg:text-xl font-light text-ink/80 mb-8 leading-relaxed">{children}</div>,
   ul: ({ children }: any) => <ul className="space-y-4 mb-10 list-disc pl-6 text-ink/70">{children}</ul>,
   li: ({ children }: any) => <li className="text-lg font-light">{children}</li>,
 
   imagegrid: ({ node, ...props }: any) => {
-    const images = JSON.parse(props.images);
+    const images = parseImageList(props.images);
+    if (images.length === 0) return null;
 
     return (
       <ImageGrid
@@ -83,6 +96,8 @@ const markdownComponents: any = {
     );
   },
   img: ({ node, ...props }: any) => <MarkdownImage {...props} />,
+  // [GLOBAL] Raw <video> blocks in the Markdown: deferred loading, posters and a keyboard-operable play/pause button.
+  video: ({ node, ...props }: any) => <ManagedVideo {...props} />,
 };
 
 /**
@@ -225,7 +240,7 @@ export default function ProjectOverview() {
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === id);
 
-  usePageTitle(project?.title || 'Project');
+  usePageTitle(project ? project.title : null); // an unknown id renders <NotFound />, which sets its own title
 
   // --- STATE ---
 
@@ -332,47 +347,6 @@ export default function ProjectOverview() {
     return () => window.removeEventListener('click', handleGlobalClick);
   }, [activeTooltip]);
 
-  useEffect(() => {
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-
-    const timeout = setTimeout(() => {
-      const wraps = document.querySelectorAll('.vid-wrap');
-
-      wraps.forEach((wrap) => {
-        const video = wrap.querySelector('video') as HTMLVideoElement | null;
-        const overlay = wrap.querySelector('.vid-overlay') as HTMLElement | null;
-
-        if (!video) return;
-
-        // prevent duplicate listeners
-        if ((video as any)._initialized) return;
-        (video as any)._initialized = true;
-
-        // Desktop autoplay
-        if (!isTouchDevice) {
-          video.play()
-            .then(() => {
-              if (overlay) overlay.style.opacity = '0';
-            })
-            .catch(() => { });
-        }
-
-        // Click / Tap toggle
-        wrap.addEventListener('click', () => {
-          if (video.paused) {
-            video.play();
-            if (overlay) overlay.style.opacity = '0';
-          } else {
-            video.pause();
-            if (overlay) overlay.style.opacity = '1';
-          }
-        });
-      });
-    }, 100); // wait for markdown render
-
-    return () => clearTimeout(timeout);
-  }, [project]);
-
   // --- HANDLERS ---
 
   /**
@@ -478,46 +452,7 @@ export default function ProjectOverview() {
     }
   };
 
-  /**
-   * [GLOBAL]
-   * Intersection Observer for all video elements in the markdown content.
-   * This ensures videos only play when they are visible on screen, 
-   * covering both Markdown-rendered and raw HTML videos.
-   */
-  useEffect(() => {
-    const videoObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) {
-            video.play().catch(() => {
-              // Standard browsers block autoplay without interaction
-            });
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    // Give the DOM a moment to render the markdown content
-    const timer = setTimeout(() => {
-      const videos = document.querySelectorAll('.markdown-body video');
-      videos.forEach((video) => {
-        // Force pause initially to prevent rogue autoplay
-        (video as HTMLVideoElement).pause();
-        videoObserver.observe(video);
-      });
-    }, 100);
-
-    return () => {
-      clearTimeout(timer);
-      videoObserver.disconnect();
-    };
-  }, [id, project?.deep_dive_content]);
-
-  if (!project) return <div className="p-20">Project not found</div>;
+  if (!project) return <NotFound />;
 
   const currentIndex = projects.findIndex(p => p.id === id);
   const nextProjectIndex = (currentIndex + 1) % projects.length;
@@ -630,7 +565,7 @@ export default function ProjectOverview() {
             <div className="w-full lg:w-1/3 grid grid-cols-2 lg:flex lg:flex-col gap-x-2 gap-y-6 lg:gap-x-4 lg:gap-y-4 pt-4 lg:pt-2">
               <div className="w-full">
                 {/* [GLOBAL] Roles array mapping sequence into StaticTags */}
-                <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Roles</h3>
+                <h2 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Roles</h2>
                 <div className="flex flex-col lg:flex-row lg:flex-wrap gap-1.5 lg:gap-2 mt-2 lg:mt-0">
                   {project.roles.map(role => (
                     <StaticTag key={role} label={role} />
@@ -640,7 +575,7 @@ export default function ProjectOverview() {
 
               <div className="w-full">
                 {/* [GLOBAL] Year array mapping directly into simplified StaticTags */}
-                <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Year</h3>
+                <h2 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Year</h2>
                 <div className="flex flex-col lg:flex-row lg:flex-wrap gap-1.5 lg:gap-2 mt-2 lg:mt-0">
                   <StaticTag label={project.year} />
                 </div>
@@ -651,7 +586,7 @@ export default function ProjectOverview() {
                   [GLOBAL] Tech block handles iteration over specific software arrays.
                   Calls InteractiveTag for localized definitions.
                 */}
-                <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Tech</h3>
+                <h2 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Tech</h2>
                 <div className="flex flex-col lg:flex-row lg:flex-wrap gap-2 lg:gap-2 mt-2 lg:mt-0">
                   {project.tech.map(techItem => (
                     <InteractiveTag
@@ -672,7 +607,7 @@ export default function ProjectOverview() {
               */}
               {project.systems && project.systems.length > 0 && (
                 <div className="w-full relative">
-                  <h3 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Systems</h3>
+                  <h2 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-2 lg:mb-1.5 border-b border-ink/10 pb-2 lg:border-none lg:pb-0">Systems</h2>
                   <div className="flex flex-col lg:flex-row lg:flex-wrap gap-2 lg:gap-2 mt-2 lg:mt-0">
                     {project.systems.map(systemItem => (
                       <InteractiveTag

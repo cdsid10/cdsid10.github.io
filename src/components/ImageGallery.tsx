@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useModalDialog } from '../lib/modal';
 
 /**
  * CONFIGURATION CONSTANTS
@@ -40,6 +41,8 @@ export default function ImageGallery({
   const isFullscreen = modalOnly ? isOpen : internalIsFullscreen;
   const [isIndicatorDimmed, setIsIndicatorDimmed] = useState(false);
   const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (modalOnly && isOpen) {
@@ -201,16 +204,27 @@ export default function ImageGallery({
   };
 
   /**
+   * [GLOBAL] Fullscreen Dialog Behaviour
+   * The fullscreen view is a true modal: focus moves to the close button, Tab stays inside,
+   * Escape closes it, the page behind is inert, and focus returns to the opener on close.
+   */
+  useModalDialog({
+    isOpen: isFullscreen,
+    containerRef: dialogRef,
+    initialFocusRef: closeButtonRef,
+    onClose: () => {
+      if (modalOnly) onClose?.();
+      else setInternalIsFullscreen(false);
+    }
+  });
+
+  /**
    * [DESKTOP] Keyboard & Scroll Lock
-   * 1. Adds Arrow Key and Escape key listeners when in Fullscreen mode.
+   * 1. Adds Arrow Key listeners when in Fullscreen mode (Escape/Tab are handled by useModalDialog).
    * 2. Locks body scrolling to prevent background movement while viewing the portal.
    */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isFullscreen) {
-        if (modalOnly) onClose?.();
-        else setInternalIsFullscreen(false);
-      }
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'ArrowLeft') handlePrev();
     };
@@ -239,6 +253,8 @@ export default function ImageGallery({
       className={`relative group w-full h-full overflow-hidden bg-[#0a0a0a] ${isModal ? 'flex items-center justify-center overscroll-none' : ''}`}
       style={{ touchAction: isModal ? 'pan-x pan-y pinch-zoom' : 'pan-y' }} // Allow native pinch-zoom and panning in modal
       onMouseMove={resetInactivityTimer}
+      onFocus={resetInactivityTimer}
+      onKeyDown={resetInactivityTimer}
       onTouchStart={(e) => { resetInactivityTimer(); handleTouchStart(e); }}
       onTouchEnd={handleTouchEnd}
       onTouchMove={handleTouchMove}
@@ -315,6 +331,8 @@ export default function ImageGallery({
       {/* [GLOBAL] Close Toggle (Floating button for Portal view) */}
       {isModal && (
         <motion.button
+          ref={closeButtonRef}
+          type="button"
           onClick={toggleFullscreen}
           whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
           whileTap={{ scale: 0.85 }}
@@ -377,7 +395,7 @@ export default function ImageGallery({
                 onTouchEnd={(e) => e.stopPropagation()}
                 whileHover={{ scale: 1.15 }}
                 whileTap={{ scale: 0.85 }}
-                className={`group/dot ${isModal ? 'p-1.5' : 'p-1 lg:p-1.5'} cursor-pointer transition-all duration-300`}
+                className={`group/dot ${isModal ? 'p-1.5' : 'p-1 lg:p-1.5'} min-w-6 min-h-6 flex items-center justify-center cursor-pointer transition-all duration-300`}
                 aria-label={`Go to slide ${index + 1}`}
               >
                 <div className={`rounded-full shadow-sm transition-all duration-500 ease-out ${isModal ? 'h-1.5' : 'h-1 lg:h-1.5'} ${
@@ -406,11 +424,16 @@ export default function ImageGallery({
         <AnimatePresence>
           {isFullscreen && (
             <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={alt ? `Enlarged image: ${alt}` : 'Enlarged image viewer'}
+              tabIndex={-1}
               initial={{ opacity: 0.001 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, pointerEvents: "none" }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl"
+              className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl outline-none"
               onClick={toggleFullscreen}
             >
               <div 

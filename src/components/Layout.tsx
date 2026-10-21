@@ -1,5 +1,6 @@
 import { useLocation, useOutlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import ErrorBoundary from './ErrorBoundary';
 import { AnimatePresence, motion } from 'motion/react';
 import { cn } from '../lib/utils';
 
@@ -33,6 +34,19 @@ export default function Layout() {
      */
     <div className="flex h-[100dvh] overflow-hidden bg-paper">
 
+      {/* [GLOBAL] Skip link: first tab stop, visible only while focused. Focuses <main> directly because the hash
+          would add a history entry and the router owns the URL. Hidden while the mobile drawer is open (main is inert then). */}
+      <a
+        href="#scroll-container"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById('scroll-container')?.focus();
+        }}
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:bg-paper-elevated focus:text-ink focus:border focus:border-ink/20 [.sidebar-open_&]:hidden text-xs uppercase tracking-[2px] font-semibold"
+      >
+        Skip to content
+      </a>
+
       {/* [GLOBAL] Navigation Sidebar */}
       <Sidebar />
 
@@ -55,13 +69,14 @@ export default function Layout() {
              * key={location.pathname} forces Framer Motion to recognize a route change and trigger animations.
              */
             id="scroll-container"
+            tabIndex={-1}
             key={location.pathname}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: CONFIG.TRANSITION_DURATION, ease: 'easeOut' }}
             className={cn(
-              "absolute w-full overflow-y-auto [scrollbar-gutter:stable]",
+              "absolute w-full overflow-y-auto [scrollbar-gutter:stable] outline-none",
 
               /**
                * [MOBILE] Header Offset
@@ -73,7 +88,8 @@ export default function Layout() {
                 : "inset-0 h-full snap-y snap-mandatory hide-scrollbar"
             )}
           >
-            {currentOutlet}
+            {/* [GLOBAL] A page that fails to render shows a contained message; the sidebar stays usable. */}
+            <ErrorBoundary key={location.pathname}>{currentOutlet}</ErrorBoundary>
           </motion.main>
         </AnimatePresence>
       </div>
