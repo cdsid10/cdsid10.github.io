@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useLocation, useOutlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import ErrorBoundary from './ErrorBoundary';
 import { AnimatePresence, motion } from 'motion/react';
 import { cn } from '../lib/utils';
+import { keepPortfolioParam } from '../lib/portfolioVersion';
 
 /**
  * CONFIGURATION CONSTANTS
@@ -18,6 +20,9 @@ const CONFIG = {
 export default function Layout() {
   const location = useLocation();
   const currentOutlet = useOutlet();
+
+  // [GLOBAL] Keep ?portfolio=... in the address bar across client-side navigation (see lib/portfolioVersion.ts).
+  useEffect(() => { keepPortfolioParam(); }, [location.pathname]);
 
   /**
    * [GLOBAL] Route Check

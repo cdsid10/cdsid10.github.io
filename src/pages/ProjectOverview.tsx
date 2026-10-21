@@ -12,6 +12,7 @@ import { usePageTitle } from '../hooks/usePageTitle';
 import { parseImageList } from '../lib/utils';
 import ManagedVideo from '../components/ManagedVideo';
 import NotFound from './NotFound';
+import { isImproved } from '../lib/portfolioVersion';
 
 /**
  * [GLOBAL]
@@ -500,6 +501,11 @@ export default function ProjectOverview() {
               <p className="text-lg lg:text-xl font-light text-ink/80 mb-10 leading-relaxed max-w-2xl">
                 {project.summary}
               </p>
+              {isImproved && project.contribution && (
+                <p className="text-lg lg:text-xl font-light text-ink/80 mb-10 leading-relaxed max-w-2xl -mt-6">
+                  {project.contribution}
+                </p>
+              )}
               <div className="flex flex-wrap items-center gap-4">
 
                 {/* 
