@@ -274,3 +274,26 @@ body.sidebar-open .scroll-indicators {
     display: none;
   }
 }
+
+/*
+   DEFAULT typography: the system-font look the site had before the fonts were self-hosted. The self-hosted Inter and
+   Roboto above are kept for the hidden comparison switch ?fontMode=current (see src/lib/fontMode.ts).
+   Before the fonts were self-hosted, the Google Fonts @import was discarded by the build, so no web font ever loaded:
+   "Roboto" and "Inter" only matched fonts installed on the device, and everything else fell through to
+   ui-sans-serif / system-ui (San Francisco on iOS, the system font on Android, Segoe UI on Windows).
+   The local-only aliases below reproduce that. They never download anything, and the real "Inter" and "Roboto"
+   @font-face rules would otherwise shadow device-installed fonts of the same name.
+*/
+@font-face { font-family: "Roboto Previous"; font-weight: 300; src: local("Roboto Light"), local("Roboto-Light"); }
+@font-face { font-family: "Roboto Previous"; font-weight: 400; src: local("Roboto"), local("Roboto Regular"), local("Roboto-Regular"); }
+@font-face { font-family: "Roboto Previous"; font-weight: 500; src: local("Roboto Medium"), local("Roboto-Medium"); }
+@font-face { font-family: "Roboto Previous"; font-weight: 700; src: local("Roboto Bold"), local("Roboto-Bold"); }
+@font-face { font-family: "Inter Previous"; font-weight: 400; src: local("Inter"), local("Inter Regular"), local("Inter-Regular"); }
+@font-face { font-family: "Inter Previous"; font-weight: 500; src: local("Inter Medium"), local("Inter-Medium"); }
+@font-face { font-family: "Inter Previous"; font-weight: 600; src: local("Inter SemiBold"), local("Inter-SemiBold"), local("Inter Semi Bold"); }
+@font-face { font-family: "Inter Previous"; font-weight: 700; src: local("Inter Bold"), local("Inter-Bold"); }
+
+html:not([data-font-mode="current"]) {
+  --font-sans: "Roboto Previous", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter Previous", ui-sans-serif, system-ui, sans-serif;
+}
