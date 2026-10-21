@@ -145,8 +145,10 @@ export default function MobileHome() {
     return () => window.removeEventListener('collectionItemHovered', handleCollectionHover as EventListener);
   }, []);
 
-  // Location reset
+  // Location reset. Skipped once the URL has left Home: the page is only fading out then and still reads the new
+  // location, so resetting would snap the highlighted title back to ink mid-fade.
   useEffect(() => {
+    if (location.pathname !== '/') return;
     setIsHoveringActiveCard(false);
     setActiveCollectionColor(null);
   }, [location.pathname]);
