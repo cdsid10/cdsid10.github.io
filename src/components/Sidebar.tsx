@@ -249,9 +249,58 @@ const SlotMachineText = ({
   );
 };
 
+/**
+ * [GLOBAL] Nav Group Sub-Component
+ * Renders categorized lists (Featured Works, etc).
+ * Declared at module level (not inside Sidebar) so React keeps the same component type between
+ * renders; otherwise the list remounts whenever Sidebar state changes and keyboard focus is lost.
+ */
+const NavGroup = ({
+  title,
+  items,
+  getNavItemClasses
+}: {
+  title: string;
+  items: any[];
+  getNavItemClasses: (isActive: boolean, projectId?: string) => string;
+}) => (
+  <div className="mb-8">
+    <div className="font-display text-[12px] tracking-[1.25px] text-muted mb-4 uppercase font-semibold">
+      {title}
+    </div>
+    <ul className="space-y-2 pl-2">
+      {items.map(item => {
+        const isExternal = item.isExternalOnly && item.link;
+        return (
+          <li key={item.id}>
+            {isExternal ? (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={getNavItemClasses(false, item.id)}
+              >
+                {item.title}
+              </a>
+            ) : (
+              <NavLink
+                to={item.customInternalLink || `/project/${item.id}`}
+                className={({ isActive }) => getNavItemClasses(isActive, item.id)}
+              >
+                {item.title}
+              </NavLink>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+);
+
 export default function Sidebar() {
   // --- STATE & HOOKS ---
   const [isOpen, setIsOpen] = useState(false); // [MOBILE] Toggle for mobile drawer
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const [isPlayingSlot, setIsPlayingSlot] = useState(false); // [GLOBAL] Animation trigger
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null); // [GLOBAL] Tracks highlighted work
   const [scramblePhase, setScramblePhase] = useState<'IDLE' | 'SHUFFLING' | 'RESOLVING'>('IDLE');
@@ -365,6 +414,53 @@ export default function Sidebar() {
   }, [isOpen]);
 
   /**
+   * [MOBILE] Drawer Accessibility
+   * While the drawer is open the page behind it (covered by the backdrop) is made inert so keyboard
+   * focus stays in the header + drawer, Escape closes the drawer and returns focus to the menu
+   * button, and focus moves to the first drawer link on open. Resizing up to the desktop layout
+   * closes the drawer so the inert state can never be left behind.
+   */
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const page = document.getElementById('scroll-container');
+    page?.setAttribute('inert', '');
+
+    // The drawer is `visibility: hidden` until the browser applies the open state and hidden elements
+    // cannot take focus, so retry briefly (max ~0.5s) until focus lands inside the drawer.
+    // The desktop brand link inside the drawer is `display: none` on mobile, so pick the first rendered link.
+    let attempts = 0;
+    let focusTimer: ReturnType<typeof setTimeout>;
+    const focusFirstLink = () => {
+      Array.from(sidebarRef.current?.querySelectorAll<HTMLElement>('a[href]') ?? [])
+        .find((link) => link.getClientRects().length > 0)?.focus();
+      if (!sidebarRef.current?.contains(document.activeElement) && attempts++ < 16) {
+        focusTimer = setTimeout(focusFirstLink, 30);
+      }
+    };
+    focusTimer = setTimeout(focusFirstLink, 0);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    const desktopQuery = window.matchMedia('(min-width: 1024px)');
+    const handleDesktop = (e: MediaQueryListEvent) => { if (e.matches) setIsOpen(false); };
+
+    window.addEventListener('keydown', handleKeyDown);
+    desktopQuery.addEventListener('change', handleDesktop);
+
+    return () => {
+      clearTimeout(focusTimer);
+      window.removeEventListener('keydown', handleKeyDown);
+      desktopQuery.removeEventListener('change', handleDesktop);
+      document.getElementById('scroll-container')?.removeAttribute('inert');
+    };
+  }, [isOpen]);
+
+  /**
    * [GLOBAL] Navigation Styling Helper
    * Logic to determine if a link should appear "active" based on URL or 
    * custom project-highlighting logic.
@@ -378,44 +474,6 @@ export default function Sidebar() {
       shouldHighlight ? "text-ink" : "text-ink/50 hover:text-ink"
     );
   };
-
-  /**
-   * [GLOBAL] Nav Group Sub-Component
-   * Internal helper to render categorized lists (Featured Works, More, etc).
-   */
-  const NavGroup = ({ title, items }: { title: string, items: any[] }) => (
-    <div className="mb-8">
-      <h3 className="text-[12px] tracking-[1.25px] text-muted mb-4 opacity-75 uppercase font-semibold">
-        {title}
-      </h3>
-      <ul className="space-y-2 pl-2">
-        {items.map(item => {
-          const isExternal = item.isExternalOnly && item.link;
-          return (
-            <li key={item.id}>
-              {isExternal ? (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={getNavItemClasses(false, item.id)}
-                >
-                  {item.title}
-                </a>
-              ) : (
-                <NavLink
-                  to={item.customInternalLink || `/project/${item.id}`}
-                  className={({ isActive }) => getNavItemClasses(isActive, item.id)}
-                >
-                  {item.title}
-                </NavLink>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
 
   return (
     <>
@@ -471,9 +529,12 @@ export default function Sidebar() {
         <div className="flex items-center gap-5 h-full">
           <ThemeToggle hideText iconSize={20} />
           <button
+            ref={menuButtonRef}
             onClick={() => setIsOpen(!isOpen)}
             className="text-ink"
-            aria-label="Toggle Menu"
+            aria-label="Navigation menu"
+            aria-expanded={isOpen}
+            aria-controls="site-drawer"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -485,12 +546,15 @@ export default function Sidebar() {
         Always visible on [DESKTOP], slide-in drawer on [MOBILE].
       */}
       <aside
+        id="site-drawer"
         ref={sidebarRef}
         className={cn(
-          "fixed top-0 left-0 h-full bg-paper-elevated z-[55] transition-transform duration-500",
+          // [MOBILE] `max-lg:invisible` removes the closed drawer from the tab order and the accessibility
+          // tree. Visibility switches at the end of the slide-out and at the start of the slide-in.
+          "fixed top-0 left-0 h-full bg-paper-elevated z-[55] transition-[transform,visibility] duration-500",
           "w-[260px] lg:w-[300px] border-r border-ink/5 pt-20 lg:pt-12 px-8 lg:px-10 overflow-y-auto flex flex-col",
           "lg:translate-x-0 lg:shadow-[4px_0_24px_rgba(0,0,0,0.05)]",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full max-lg:invisible"
         )}
       >
         <div className="flex-1">
@@ -503,14 +567,14 @@ export default function Sidebar() {
               onMouseLeave={handleHeaderMouseLeave}
               className="block mb-2"
             >
-              <h1 className="font-display text-xl tracking-[1.25px] leading-none whitespace-nowrap uppercase mb-0">
+              <div className="font-display font-bold text-xl tracking-[1.25px] leading-none whitespace-nowrap uppercase mb-0">
                 <SlotMachineText
                   isPlaying={isPlayingSlot}
                   scramblePhase={scramblePhase}
                   isLocked={isLockedAfterClick}
                   onComplete={handleSlotComplete}
                 />
-              </h1>
+              </div>
               <span className="text-[14px] tracking-[1px] text-muted uppercase">
                 <ScrambledText
                   text="GAME DESIGNER"
@@ -525,8 +589,8 @@ export default function Sidebar() {
             </NavLink>
           </div>
 
-          <nav className="mt-1 lg:mt-10">
-            <NavGroup title="Featured Works" items={projects} />
+          <nav aria-label="Featured works" className="mt-1 lg:mt-10">
+            <NavGroup title="Featured Works" items={projects} getNavItemClasses={getNavItemClasses} />
           </nav>
         </div>
 
@@ -536,13 +600,11 @@ export default function Sidebar() {
             <ThemeToggle />
           </div>
 
-          <nav>
+          <nav aria-label="Archive and links">
             <div className="mb-8">
               <ul className="space-y-2 pl-2">
                 <li><NavLink to="/other-works" className={({ isActive }) => getNavItemClasses(isActive)}>Archive</NavLink></li>
-                {/*<li><NavLink to="/about" className={({ isActive }) => getNavItemClasses(isActive)}>About Me</NavLink></li>*/}
                 <li>
-                  {/*<NavLink to="/resume" className={({ isActive }) => getNavItemClasses(isActive)}>Resumé</NavLink>*/}
                   <a
                     href="https://drive.google.com/file/d/1fUZGZj15KHAnnprw0oM6lnPwB2GHeqOl/view?usp=sharing"
                     target="_blank"
@@ -557,7 +619,7 @@ export default function Sidebar() {
 
             {/* Social Links Section */}
             <div className="mt-10">
-              <h3 className="text-[12px] tracking-[1.25px] text-muted mb-4 opacity-75 uppercase font-semibold">More</h3>
+              <div className="font-display text-[12px] tracking-[1.25px] text-muted mb-4 uppercase font-semibold">More</div>
               <ul className="space-y-2 pl-2">
                 {CONFIG.SOCIAL_LINKS.map((item) => (
                   <li key={item.label}>
@@ -577,7 +639,7 @@ export default function Sidebar() {
           </nav>
 
           <div className="mt-8 pb--2">
-            <p className="text-[9px] tracking-[1.5px] text-muted opacity-80 uppercase font-medium">
+            <p className="text-[9px] tracking-[1.5px] text-muted uppercase font-medium">
               © 2026 Siddhant Rathor<br />
               Game Design Portfolio
             </p>
@@ -595,7 +657,8 @@ export default function Sidebar() {
           "lg:hidden fixed inset-0 bg-ink/5 backdrop-blur-sm z-30 transition-all duration-500",
           isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         )}
-        onClick={() => setIsOpen(false)}
+        onClick={() => { setIsOpen(false); menuButtonRef.current?.focus(); }}
+        aria-hidden="true"
       />
     </>
   );

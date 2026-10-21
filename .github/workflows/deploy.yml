@@ -29,8 +29,10 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Create 404.html (Redirection hack for GitHub Pages)
-        run: cp dist/index.html dist/404.html
+      # dist/404.html and the per-route pages (dist/project/<id>/index.html, ...) are written by seo-pages.ts
+      # during the build. Do not copy index.html over 404.html: that would give unknown URLs the Home metadata.
+      - name: Verify generated 404.html and route pages
+        run: node scripts/verify-routes.mjs dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

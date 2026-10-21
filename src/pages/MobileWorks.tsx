@@ -129,6 +129,7 @@ export default function MobileWorks() {
   return (
     <>
       <div className="min-h-screen px-6 lg:px-20 pt-6 lg:pt-19 pb-14 max-w-[1560px] mx-auto">
+        <h1 className="sr-only">Mobile Releases</h1>
 
       {/* ── PAGE HEADER ─────────────────────────────────────────────── */}
       <motion.header
@@ -209,9 +210,9 @@ export default function MobileWorks() {
                   className={`flex items-center justify-center mb-4 lg:mb-6 ${isTouching ? 'text-white/80' : 'text-muted group-hover:text-white/80'}`}
                   style={{ gap: 'var(--eyebrow-gap)' }}
                 >
-                  <span className="eyebrow">Next Featured Work</span>
+                  <span className="eyebrow" style={{ opacity: 1 }}>Next Featured Work</span>
                   <span className="eyebrow-dot" />
-                  <span className="eyebrow">0{nextProjectIndex + 1}</span>
+                  <span className="eyebrow" style={{ opacity: 1 }}>0{nextProjectIndex + 1}</span>
                 </div>
                 <h2 className="text-2xl lg:text-4xl tracking-[2px] font-display mb-4.5 lg:mb-5 group-hover:scale-105 transition-transform duration-300">
                   {nextProject.title}

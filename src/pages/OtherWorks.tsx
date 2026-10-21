@@ -37,6 +37,7 @@ export default function OtherWorks() {
 
   return (
     <div className="min-h-screen px-6 lg:px-20 pt-6 lg:pt-19 pb-14 max-w-[1560px] mx-auto">
+      <h1 className="sr-only">Archive</h1>
 
       {/* ── PAGE HEADER ─────────────────────────────────────────────── */}
       <motion.header

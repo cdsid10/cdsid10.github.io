@@ -1,6 +1,7 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 import './index.css';
 
 // [GLOBAL] Prevent the browser from restoring scroll position on hard reload.
@@ -9,6 +10,8 @@ window.history.scrollRestoration = 'manual';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>,
 );

@@ -1,5 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
+import { parseImageList } from '../lib/utils';
+import { useModalDialog } from '../lib/modal';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -19,17 +22,25 @@ function MarkdownImage(props: any) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <img
-        {...props}
+      {/* [GLOBAL] A real button so the enlarge action works with Enter and Space as well as pointer input. */}
+      <button
+        type="button"
+        className="block w-full p-0 border-0 bg-transparent text-left cursor-pointer"
+        aria-label={props.alt ? `Enlarge image: ${props.alt}` : 'Enlarge image'}
+        aria-haspopup="dialog"
         onClick={(e: React.MouseEvent) => {
           e.stopPropagation();
           setIsOpen(true);
           if (props.onClick) props.onClick(e);
         }}
-        loading="lazy"
-        decoding="async"
-        style={{ ...props.style, cursor: 'pointer', backgroundColor: '#0f0f0f' }}
-      />
+      >
+        <img
+          {...props}
+          loading="lazy"
+          decoding="async"
+          style={{ ...props.style, backgroundColor: '#0f0f0f' }}
+        />
+      </button>
       <ImageGallery
         images={[props.src].filter(Boolean)}
         alt={props.alt}
@@ -66,7 +77,8 @@ const markdownComponents: any = {
   pre: ({ children }: any) => <pre className="bg-ink/[0.02] border border-ink/10 p-6 rounded-sm overflow-x-auto mb-10 custom-scrollbar">{children}</pre>,
 
   imagegrid: ({ node, ...props }: any) => {
-    const images = JSON.parse(props.images);
+    const images = parseImageList(props.images);
+    if (images.length === 0) return null;
     return (
       <ImageGrid
         images={images}
@@ -82,6 +94,15 @@ const markdownComponents: any = {
 
 export default function DocModal({ isOpen, onClose, title, content }: DocModalProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const dialogRootRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  /**
+   * [GLOBAL] Dialog Behaviour
+   * Focus moves to the close button on open, Tab stays inside, Escape closes, the page behind is
+   * inert, and focus returns to the document card that opened it.
+   */
+  useModalDialog({ isOpen, containerRef: dialogRootRef, initialFocusRef: closeButtonRef, onClose });
 
   /**
    * [IPAD FIX] Detect true touch capability to distinguish iPhone (fullscreen modal)
@@ -202,10 +223,10 @@ export default function DocModal({ isOpen, onClose, title, content }: DocModalPr
   const heightClass = isSmallTouchScreen ? 'h-[100dvh]' : 'h-[100dvh]';
 
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center">
+        <div ref={dialogRootRef} tabIndex={-1} className="fixed inset-0 z-[100] flex items-center justify-center outline-none">
           {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -218,6 +239,9 @@ export default function DocModal({ isOpen, onClose, title, content }: DocModalPr
           
           {/* Modal Content */}
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="doc-modal-title"
             initial={{ opacity: 0, y: "0.5%", scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: "0.5%", scale: 0.98 }}
@@ -229,10 +253,12 @@ export default function DocModal({ isOpen, onClose, title, content }: DocModalPr
           >
             {/* Header */}
             <div className="flex items-center justify-between h-16 lg:h-auto p-6 lg:px-10 lg:py-8 border-b border-ink/10 flex-shrink-0 bg-paper z-10">
-              <h2 className="text-md lg:text-lg font-display font-semibold tracking-[1px] truncate pr-4 uppercase">
+              <h2 id="doc-modal-title" className="text-md lg:text-lg font-display font-semibold tracking-[1px] truncate pr-4 uppercase">
                 {title}
               </h2>
               <motion.button
+                ref={closeButtonRef}
+                type="button"
                 whileTap={{ scale: 0.85 }}
                 onClick={onClose}
                 className="p-2 hover:bg-ink/5 rounded-full transition-colors shrink-0 cursor-pointer"
@@ -263,6 +289,7 @@ export default function DocModal({ isOpen, onClose, title, content }: DocModalPr
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

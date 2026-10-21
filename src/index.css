@@ -1,5 +1,47 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&family=Roboto:wght@300;400&family=Source+Sans+3:wght@300;400&display=swap');
+
+/*
+   Self-hosted Inter (display) and Roboto (body), Latin subset. These are the same faces and weights the
+   former Google Fonts @import requested (Inter 400/700, Roboto 300/400); that @import sat after other rules,
+   so the build discarded it and no web font ever loaded. Both files are variable fonts (SIL OFL 1.1), so one
+   file serves each family. Montserrat and Source Sans 3 were requested but never used, and are not included.
+*/
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/inter-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/roboto-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/roboto-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @theme {
   --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
@@ -17,7 +59,7 @@
     --paper: #FAFAFA;
     --paper-elevated: #FFFFFF;
     --ink: #1A1A1A;
-    --muted: #888888;
+    --muted: #707070;     /* 4.7:1 on --paper at full opacity (was #888, 3.4:1) */
   }
 
   /* Explicit dark mode variables */
@@ -26,7 +68,7 @@
     --paper: #0F0F0F;     /* Deep near-black */
     --paper-elevated: #181818; /* Barely elevated, cuts the grey feel */
     --ink: #DDDDDD;       /* Very soft, matte text to kill sharpness completely */
-    --muted: #868686;     /* Balanced muted tone */
+    --muted: #8A8A8A;     /* 5.1:1 on --paper-elevated at full opacity (was #868686) */
   }
 
   html, body {
@@ -81,7 +123,7 @@
   --caption-size:     14px;
   --caption-tracking: 1px;
   --caption-weight:   350; /* Normal weight to fix "heavy" look */
-  --caption-opacity:  0.5;
+  --caption-opacity:  0.65;
 }
 
 .eyebrow {
@@ -99,6 +141,11 @@
     font-size:      var(--eyebrow-size-lg);
     letter-spacing: var(--eyebrow-tracking-lg);
   }
+}
+
+/* Muted labels already carry their softness in --muted; stacking opacity on top dropped them below 4.5:1. */
+.eyebrow.text-muted {
+  opacity: 1;
 }
 
 /* The separator · between label segments */
@@ -214,3 +261,16 @@ body.sidebar-open .scroll-indicators {
   animation: master-shine 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
+
+/* ─────────────────────────────────────────────────────────
+   REDUCED MOTION
+   Visitors who ask for reduced motion keep every colour/opacity change (including the accent
+   bloom) but lose the looping shine sweep. Movement driven by Motion (parallax, scale, slides)
+   is handled by <MotionConfig reducedMotion="user"> in App.tsx.
+───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .shine-layer {
+    animation: none;
+    display: none;
+  }
+}

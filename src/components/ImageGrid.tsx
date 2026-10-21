@@ -36,25 +36,32 @@ export default function ImageGrid({ images, caption, cols = 3, rows }: Props) {
           }}
         >
           {images.map((src, i) => (
-            <motion.img
+            <motion.button
               key={i}
-              src={src}
+              type="button"
               whileTap={{ scale: 0.98 }}
-              alt={caption || ''}
               onClick={() => openGallery(i)}
-              loading="lazy"
-              decoding="async"
-              className="cursor-pointer transition-opacity duration-300 hover:opacity-75"
-              style={{
-                width: "100%",
-                height: rows ? `calc(100% / ${rows})` : "auto",
-                aspectRatio: "16 / 9",
-                objectFit: "cover",
-                borderRadius: "0px",
-                display: "block",
-                backgroundColor: "#0f0f0f"
-              }}
-            />
+              className="group/zoom block w-full p-0 border-0 bg-transparent cursor-pointer"
+              aria-label={caption ? `Enlarge image ${i + 1} of ${images.length}: ${caption}` : `Enlarge image ${i + 1} of ${images.length}`}
+              aria-haspopup="dialog"
+            >
+              <img
+                src={src}
+                alt={caption || ''}
+                loading="lazy"
+                decoding="async"
+                className="transition-opacity duration-300 group-hover/zoom:opacity-75"
+                style={{
+                  width: "100%",
+                  height: rows ? `calc(100% / ${rows})` : "auto",
+                  aspectRatio: "16 / 9",
+                  objectFit: "cover",
+                  borderRadius: "0px",
+                  display: "block",
+                  backgroundColor: "#0f0f0f"
+                }}
+              />
+            </motion.button>
           ))}
         </div>
 

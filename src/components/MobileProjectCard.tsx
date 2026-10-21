@@ -156,12 +156,12 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
         <div className="mt-4 flex flex-col items-start w-full">
 
           {/* Title */}
-          <h3 className={cn(
+          <h2 className={cn(
             "text-[20px] font-bold tracking-[0.5px] transition-colors",
             isEffectActive ? "text-white" : "text-ink"
           )}>
             {project.title}
-          </h3>
+          </h2>
 
           {/* Metadata (Roles and Year) */}
           <div className={cn(

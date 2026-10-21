@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { projects } from '../data/projects';
 import MobileProjectCard from '../components/MobileProjectCard';
 import MobileCollectionCard from '../components/MobileCollectionCard';
+import { prefersReducedMotion } from '../lib/utils';
 
 /**
  * [MOBILE]
@@ -60,7 +61,7 @@ function MobileScrollIndicators({
       */}
       <button
         onClick={() => onDotClick(activeSection - 1)}
-        className={`p-0 transition-all duration-100 flex items-center justify-center drop-shadow-sm active:scale-90 ${
+        className={`p-1 -m-1 transition-all duration-100 flex items-center justify-center drop-shadow-sm active:scale-90 ${
           canScrollUp ? 'opacity-100 text-ink/80 hover:text-ink/90' : 'opacity-0 pointer-events-none'
         }`}
         aria-label="Scroll Up"
@@ -88,7 +89,7 @@ function MobileScrollIndicators({
       */}
       <button
         onClick={() => onDotClick(activeSection + 1)}
-        className={`p-0 transition-all duration-100 flex items-center justify-center drop-shadow-sm active:scale-90 ${
+        className={`p-1 -m-1 transition-all duration-100 flex items-center justify-center drop-shadow-sm active:scale-90 ${
           canScrollDown ? 'opacity-100 text-ink/80 hover:text-ink/90' : 'opacity-0 pointer-events-none'
         }`}
         aria-label="Scroll Down"
@@ -232,7 +233,7 @@ export default function MobileHome() {
   const scrollToSection = (index: number) => {
     const clampedIndex = Math.max(0, Math.min(index, projects.length - 1));
     const projectSections = document.querySelectorAll('.mobile-project-section');
-    projectSections[clampedIndex]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    projectSections[clampedIndex]?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' });
   };
 
   // [MOBILE] Handle home-click events from the Sidebar/Header
@@ -271,6 +272,7 @@ export default function MobileHome() {
       ref={homeRef}
       className="relative flex flex-col overflow-y-auto overflow-x-hidden snap-y snap-mandatory h-[100dvh] w-[100vw] hide-scrollbar"
     >
+      <h1 className="sr-only">Featured Work</h1>
 
       {/* Bloom Background Layer */}
       <div
