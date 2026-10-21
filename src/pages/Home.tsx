@@ -166,8 +166,11 @@ function DesktopHome() {
    * [GLOBAL]
    * This logic forcefully flushes interaction data preventing ghost visual bugs 
    * whenever native URL structures mutate unexpectedly out of scope.
+   * Skipped once the URL has left Home: the page is then only fading out (Layout's exit animation) and still
+   * reads the new location, so resetting here would snap the hovered title from white back to ink mid-fade.
    */
   useEffect(() => {
+    if (location.pathname !== '/') return;
     setIsHoveringActiveCard(false);
     setIsScrolling(false);
   }, [location.pathname]);
