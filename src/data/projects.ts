@@ -76,6 +76,10 @@ export interface Project {
   summary: string;
   /** [IMPROVED] Optional one-line statement of the author's own contribution, shown under the summary unless ?portfolio=original. */
   contribution?: string;
+  /** [IMPROVED] Optional short list of core systems the author designed, shown under `contribution` unless ?portfolio=original. */
+  contributionPoints?: string[];
+  /** [IMPROVED] Optional small note shown after `contributionPoints` (e.g. a credit or caveat). */
+  contributionNote?: string;
   keyFeatures: string[];
   /** [GLOBAL] Full Markdown content for the Deep Dive page */
   deep_dive_content: string;
@@ -139,7 +143,7 @@ export const projects: Project[] = [
     title: 'Katavader',
     category: 'featured-works',
     thumbnail_16_9: '/images/Katavader/Level_5_SS_NEW.webp',
-    thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile.webp',
+    thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile_1600.webp',
     thumbnail_home_16_9: '/images/Katavader/Level_5_SS_NEW_1600.webp',
     thumbnail_home_mobile: '/images/Katavader/Level_5_SS_NEW_800sq.webp',
     accentColor: '#801927', // [DESKTOP] Triggered on ProjectCard hover
@@ -149,7 +153,14 @@ export const projects: Project[] = [
     tech: ['Unity', 'C#'],
     systems: ['State Machines', 'Behaviour Trees', 'Save System'],
     summary: 'A combat-focused action RPG where every encounter demands a decision. Players read enemy behavior, react with precision, and choose the correct response, turning combat into a constant negotiation between timing, risk, and control.',
-    contribution: 'Designed and built the combat system, enemy behaviour, and save system for a solo-developed boss-rush action RPG in Unity/C#. Preparing the game for release on Steam.',
+    contribution: 'Unreleased, coming soon on Steam. An independently developed Unity/C# game, with positive feedback so far and ongoing iteration.',
+    contributionPoints: [
+      'Stamina- and posture-based combat',
+      'Node-based enemy AI',
+      'Combat progression and boss scaling',
+      'JSON save system',
+    ],
+    contributionNote: 'Characters and environments use third-party assets or modifications of them.',
     keyFeatures: [
     ],
     storefronts: [
@@ -402,7 +413,7 @@ Scope was deliberately reduced, allowing the project to refocus on its strongest
 <figure>
   <div class="img-wrap" style="position:relative; width:100%;">
     <img
-      src="/images/Katavader/Blog/Unity_Final_Concept.webp"
+      src="/images/Katavader/Blog/Unity_Final_Concept_1600.webp"
       alt="Final Version Scene"
       style="display:block; width:100%;"
     />
