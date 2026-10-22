@@ -76,10 +76,6 @@ export interface Project {
   summary: string;
   /** [IMPROVED] Optional one-line statement of the author's own contribution, shown under the summary unless ?portfolio=original. */
   contribution?: string;
-  /** [IMPROVED] Optional short list of core systems the author designed, shown under `contribution` unless ?portfolio=original. */
-  contributionPoints?: string[];
-  /** [IMPROVED] Optional small note shown after `contributionPoints` (e.g. a credit or caveat). */
-  contributionNote?: string;
   keyFeatures: string[];
   /** [GLOBAL] Full Markdown content for the Deep Dive page */
   deep_dive_content: string;
@@ -153,14 +149,7 @@ export const projects: Project[] = [
     tech: ['Unity', 'C#'],
     systems: ['State Machines', 'Behaviour Trees', 'Save System'],
     summary: 'A combat-focused action RPG where every encounter demands a decision. Players read enemy behavior, react with precision, and choose the correct response, turning combat into a constant negotiation between timing, risk, and control.',
-    contribution: 'Unreleased, coming soon on Steam. An independently developed Unity/C# game, with positive feedback so far and ongoing iteration.',
-    contributionPoints: [
-      'Stamina- and posture-based combat',
-      'Node-based enemy AI',
-      'Combat progression and boss scaling',
-      'JSON save system',
-    ],
-    contributionNote: 'Characters and environments use third-party assets or modifications of them.',
+    contribution: 'Unreleased, coming soon on Steam. I designed the gameplay and core systems for this independently developed Unity/C# game, including combat, enemy AI, progression, and saving. Characters and environments use third-party assets or modifications of them.',
     keyFeatures: [
     ],
     storefronts: [
