@@ -330,6 +330,7 @@ export default function MobileHome() {
               ) : (
                 <MobileProjectCard
                   project={project}
+                  priority={index === 0}
                   onHoverStart={() => handleHoverStart(index)}
                   onHoverEnd={handleHoverEnd}
                   isHovered={isActiveComponent}

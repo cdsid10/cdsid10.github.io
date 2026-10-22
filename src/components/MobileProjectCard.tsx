@@ -30,9 +30,11 @@ interface MobileProjectCardProps {
   onHoverEnd: () => void;
   isHovered: boolean;
   isActive: boolean;
+  /** [GLOBAL] First Home card only: its thumbnail is the likely LCP image, so it is fetched eagerly at high priority. */
+  priority?: boolean;
 }
 
-export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: MobileProjectCardProps) {
+export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, isHovered, isActive, priority = false }: MobileProjectCardProps) {
   const [isEffectActive, setIsEffectActive] = useState(false);
 
   const containerRef = useRef<HTMLAnchorElement>(null);
@@ -141,7 +143,8 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
           <motion.img
             src={project.thumbnail_mobile || project.thumbnail_16_9}
             alt={project.title}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : undefined}
             decoding="async"
             referrerPolicy="no-referrer"
             animate={{
