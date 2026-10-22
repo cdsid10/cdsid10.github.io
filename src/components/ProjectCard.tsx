@@ -316,7 +316,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
           <motion.img
             src={windowWidth < CONFIG.MOBILE_BREAKPOINT && project.thumbnail_mobile
               ? project.thumbnail_mobile
-              : project.thumbnail_16_9
+              : (project.thumbnail_home_16_9 || project.thumbnail_16_9)
             }
             alt={project.title}
             loading={priority ? 'eager' : 'lazy'}

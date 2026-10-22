@@ -141,7 +141,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
           )}
 
           <motion.img
-            src={project.thumbnail_mobile || project.thumbnail_16_9}
+            src={project.thumbnail_home_mobile || project.thumbnail_mobile || project.thumbnail_16_9}
             alt={project.title}
             loading={priority ? 'eager' : 'lazy'}
             fetchPriority={priority ? 'high' : undefined}
