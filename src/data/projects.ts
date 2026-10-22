@@ -70,7 +70,7 @@ export interface Project {
 
   // Content
   summary: string;
-  /** [IMPROVED] Optional one-line statement of the author's own contribution, shown under the summary when ?portfolio=improved. */
+  /** [IMPROVED] Optional one-line statement of the author's own contribution, shown under the summary unless ?portfolio=original. */
   contribution?: string;
   keyFeatures: string[];
   /** [GLOBAL] Full Markdown content for the Deep Dive page */
