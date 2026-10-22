@@ -143,6 +143,7 @@ export const projects: Project[] = [
     tech: ['Unity', 'C#'],
     systems: ['State Machines', 'Behaviour Trees', 'Save System'],
     summary: 'A combat-focused action RPG where every encounter demands a decision. Players read enemy behavior, react with precision, and choose the correct response, turning combat into a constant negotiation between timing, risk, and control.',
+    contribution: 'Designed and built the combat system, enemy behaviour, and save system for a solo-developed boss-rush action RPG in Unity/C#. Preparing the game for release on Steam.',
     keyFeatures: [
     ],
     storefronts: [
@@ -615,6 +616,7 @@ It’s where everything I’ve learned begins to compound.**
     tech: ['Unity', 'C#'],
     systems: [],
     summary: 'A chaotic physics-puzzler where you play as Mr. Limbs, a fragmented monster trying to rebuild his body piece by piece. Each limb reshapes how you move, turning progression into a constant negotiation with physics and control.',
+    contribution: 'Designed the limb-based interaction system, integrated it into the puzzles, and designed the minimal UI for a 48-hour game jam, contributing additional programming.',
     keyFeatures: [
     ],
     link: 'https://el-studios.itch.io/self-apart',

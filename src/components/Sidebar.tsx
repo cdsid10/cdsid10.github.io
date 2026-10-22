@@ -621,19 +621,27 @@ export default function Sidebar() {
               </ul>
             </div>
 
+            {/* [IMPROVED] Contact section between Archive and More; an unconfigured value renders nothing (see data/contact.ts). */}
+            {isImproved && (CONTACT.email || CONTACT.resumeUrl) && (
+              <div className="mt-10">
+                <div className="font-display text-[12px] tracking-[1.25px] text-muted mb-4 uppercase font-semibold">Contact</div>
+                <ul className="space-y-2 pl-2">
+                  {CONTACT.email && (
+                    <li><a href={`mailto:${CONTACT.email}`} className={getNavItemClasses(false)}>Email</a></li>
+                  )}
+                  {CONTACT.resumeUrl && (
+                    <li>
+                      <a href={CONTACT.resumeUrl} target="_blank" rel="noopener noreferrer" className={getNavItemClasses(false)}>Resumé</a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
+
             {/* Social Links Section */}
             <div className="mt-10">
               <div className="font-display text-[12px] tracking-[1.25px] text-muted mb-4 uppercase font-semibold">More</div>
               <ul className="space-y-2 pl-2">
-                {/* [IMPROVED] Email and Resumé lead the list; an unconfigured value renders nothing (see data/contact.ts). */}
-                {isImproved && CONTACT.email && (
-                  <li><a href={`mailto:${CONTACT.email}`} className={getNavItemClasses(false)}>Email</a></li>
-                )}
-                {isImproved && CONTACT.resumeUrl && (
-                  <li>
-                    <a href={CONTACT.resumeUrl} target="_blank" rel="noopener noreferrer" className={getNavItemClasses(false)}>Resumé</a>
-                  </li>
-                )}
                 {CONFIG.SOCIAL_LINKS.map((item) => (
                   <li key={item.label}>
                     <a
