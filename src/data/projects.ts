@@ -149,7 +149,6 @@ export const projects: Project[] = [
     tech: ['Unity', 'C#'],
     systems: ['State Machines', 'Behaviour Trees', 'Save System'],
     summary: 'A combat-focused action RPG where every encounter demands a decision. Players read enemy behavior, react with precision, and choose the correct response, turning combat into a constant negotiation between timing, risk, and control.',
-    contribution: 'Unreleased, coming soon on Steam. I designed the gameplay and core systems for this independently developed Unity/C# game, including combat, enemy AI, progression, and saving. Characters and environments use third-party assets or modifications of them.',
     keyFeatures: [
     ],
     storefronts: [
