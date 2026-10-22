@@ -622,7 +622,6 @@ It’s where everything I’ve learned begins to compound.**
     tech: ['Unity', 'C#'],
     systems: [],
     summary: 'A chaotic physics-puzzler where you play as Mr. Limbs, a fragmented monster trying to rebuild his body piece by piece. Each limb reshapes how you move, turning progression into a constant negotiation with physics and control.',
-    contribution: 'Designed the limb-based interaction system, integrated it into the puzzles, and designed the minimal UI for a 48-hour game jam, contributing additional programming.',
     keyFeatures: [
     ],
     link: 'https://el-studios.itch.io/self-apart',
