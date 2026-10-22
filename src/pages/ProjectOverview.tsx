@@ -506,6 +506,19 @@ export default function ProjectOverview() {
                   {project.contribution}
                 </p>
               )}
+              {isImproved && project.contributionPoints && project.contributionPoints.length > 0 && (
+                <div className="-mt-4 mb-10 max-w-2xl">
+                  <h2 className="text-[10px] tracking-[1.5px] text-muted font-bold uppercase mb-3">Systems I designed</h2>
+                  <ul className="space-y-1.5 list-disc pl-6 text-ink/70">
+                    {project.contributionPoints.map(point => (
+                      <li key={point} className="text-lg font-light">{point}</li>
+                    ))}
+                  </ul>
+                  {project.contributionNote && (
+                    <p className="text-base font-light text-ink/60 leading-relaxed mt-4">{project.contributionNote}</p>
+                  )}
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-4">
 
                 {/* 
