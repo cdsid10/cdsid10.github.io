@@ -56,6 +56,10 @@ export interface Project {
   thumbnail_16_9: string;
   /** [MOBILE] Optional mobile-specific display image */
   thumbnail_mobile?: string;
+  /** [HOME] Optional smaller 16:9 image for the desktop Home card only (falls back to thumbnail_16_9) */
+  thumbnail_home_16_9?: string;
+  /** [HOME] Optional square-cropped image for the mobile Home card only (falls back to thumbnail_mobile) */
+  thumbnail_home_mobile?: string;
   /** [DESKTOP] Primary color used for hover states and UI highlights */
   accentColor: string;
   /** [GLOBAL] Array of strings for the ImageGallery component */
@@ -136,6 +140,8 @@ export const projects: Project[] = [
     category: 'featured-works',
     thumbnail_16_9: '/images/Katavader/Level_5_SS_NEW.webp',
     thumbnail_mobile: '/images/Katavader/Mobile/Level_5_SS_NEW_Mobile.webp',
+    thumbnail_home_16_9: '/images/Katavader/Level_5_SS_NEW_1600.webp',
+    thumbnail_home_mobile: '/images/Katavader/Level_5_SS_NEW_800sq.webp',
     accentColor: '#801927', // [DESKTOP] Triggered on ProjectCard hover
     //accentColor: '#7A1F2B', // [DESKTOP] Triggered on ProjectCard hover
     year: '2026',
