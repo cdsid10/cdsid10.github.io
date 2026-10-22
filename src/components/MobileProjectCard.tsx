@@ -160,7 +160,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
 
           {/* Title */}
           <h2 className={cn(
-            "text-[20px] font-bold tracking-[0.5px] transition-colors",
+            "text-[20px] font-bold tracking-[0.5px] transition-colors duration-200",
             isEffectActive ? "text-white" : "text-ink"
           )}>
             {project.title}
@@ -168,7 +168,7 @@ export default function MobileProjectCard({ project, onHoverStart, onHoverEnd, i
 
           {/* Metadata (Roles and Year) */}
           <div className={cn(
-            "flex flex-col w-full text-[11px] sm:text-[12px] tracking-[1.125px] uppercase transition-colors",
+            "flex flex-col w-full text-[11px] sm:text-[12px] tracking-[1.125px] uppercase transition-colors duration-200",
             isEffectActive ? "text-white/70" : "text-muted"
           )}>
             {/* Roles Row */}

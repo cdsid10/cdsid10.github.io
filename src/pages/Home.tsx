@@ -55,7 +55,7 @@ function ScrollIndicators({
           onClick={() => onDotClick(index)}
           aria-label={`Go to ${project.title}`}
           aria-current={activeSection === index ? 'true' : undefined}
-          className="group p-1.25 min-w-6 min-h-6 cursor-pointer flex items-center justify-center transition-all duration-150"
+          className="group relative p-1.25 min-w-6 min-h-6 cursor-pointer flex items-center justify-center transition-all duration-150 after:content-[''] after:absolute after:inset-y-0 after:-inset-x-2"
         >
           <div
             /*
@@ -63,9 +63,9 @@ function ScrollIndicators({
               Dynamic styling changes color and height drastically based on whether 
               this dot represents the currently viewed section, incorporating bloom hover overrides.
             */
-            className={`w-1.5 rounded-full transition-all duration-150 ease-out ${activeSection === index
-              ? (isHoveringActiveCard ? 'h-8 bg-white' : 'h-8 bg-ink')
-              : (isHoveringActiveCard ? 'h-1.5 bg-white/20 group-hover:bg-white/40' : 'h-1.5 bg-ink/20 group-hover:bg-ink/40 shadow-sm')
+            className={`w-1.5 transition-all duration-100 ease-out ${activeSection === index
+              ? (isHoveringActiveCard ? 'h-8 bg-white' : 'h-8 bg-ink') + ' motion-safe:group-hover:scale-[1.15] motion-safe:group-focus-visible:scale-[1.15]'
+              : (isHoveringActiveCard ? 'h-1.5 bg-white/20 group-hover:bg-white/40' : 'h-1.5 bg-ink/20 group-hover:bg-ink/40 shadow-sm') + ' motion-safe:group-hover:scale-[1.333] motion-safe:group-focus-visible:scale-[1.333]'
               }`}
           />
         </button>
@@ -508,13 +508,13 @@ function DesktopHome() {
                   Uses shared .eyebrow + .eyebrow-dot tokens from index.css for a single source of truth.
                   [DESKTOP] transitions text-white/text-muted via lg:transition-colors naturally relying on bloom overlays.
                 */}
-                <span className={`eyebrow ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow transition-colors duration-200 ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`}>
                   Featured Work
                 </span>
-                <span className={`eyebrow-dot ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow-dot transition-colors duration-200 ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`} />
-                <span className={`eyebrow ${isActiveComponent ? 'text-white' : 'text-muted'
+                <span className={`eyebrow transition-colors duration-200 ${isActiveComponent ? 'text-white' : 'text-muted'
                   }`}>
                   0{index + 1}
                 </span>

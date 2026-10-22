@@ -271,15 +271,15 @@ export default function MobileCollectionCard({ project, onHoverStart, onHoverEnd
         {/* Project Metadata Footer - Dynamic */}
         <div className="mt-4 flex flex-col items-start w-full">
           <h2 className={cn(
-            "text-[22px] sm:text-2xl tracking-[1px] mb-1 transition-colors font-bold text-left",
-            isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white` : "text-ink"
+            "text-[22px] sm:text-2xl tracking-[1px] mb-1 transition-colors duration-200 font-bold text-left",
+            isEffectActive ? "text-white" : "text-ink"
           )}>
             {activeItem.title}
           </h2>
 
           <div className={cn(
-            "flex flex-col w-full text-[11px] sm:text-[12px] tracking-[1.125px] uppercase transition-colors",
-            isEffectActive ? `duration-[${CONFIG.TRANSITION_MOBILE}ms] text-white/70` : "text-muted"
+            "flex flex-col w-full text-[11px] sm:text-[12px] tracking-[1.125px] uppercase transition-colors duration-200",
+            isEffectActive ? "text-white/70" : "text-muted"
           )}>
             <div className="flex flex-col sm:flex-row gap-0 sm:gap-2 text-left w-full leading-relaxed overflow-hidden">
                <div className="flex gap-2 whitespace-nowrap">
