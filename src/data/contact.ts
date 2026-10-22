@@ -5,6 +5,6 @@
  * `resumeUrl`: a full URL, or a file placed in /public (e.g. '/resume.pdf').
  */
 export const CONTACT = {
-  email: '',
+  email: 'cdsid10@gmail.com',
   resumeUrl: 'https://drive.google.com/file/d/1fUZGZj15KHAnnprw0oM6lnPwB2GHeqOl/view?usp=sharing',
 };
