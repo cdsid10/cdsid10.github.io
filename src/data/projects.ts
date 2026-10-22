@@ -616,6 +616,7 @@ It’s where everything I’ve learned begins to compound.**
     isExternalOnly: false,
     thumbnail_16_9: '/images/SelfApart/0.webp',
     thumbnail_mobile: '/images/SelfApart/0.webp',
+    thumbnail_home_16_9: '/images/SelfApart/0_1920.webp',
     accentColor: '#4C7F33',
     year: '2022',
     roles: ['Game Designer', 'Additional Developer'],
@@ -695,6 +696,7 @@ Designed and refined the limb-based interaction system, focusing on responsive i
     customInternalLink: '/mobile-works',
     thumbnail_16_9: '/images/Football_Academy/1.webp',
     thumbnail_mobile: '/images/Football_Academy/1.webp',
+    thumbnail_home_16_9: '/images/Football_Academy/1_1920.webp',
     accentColor: '#599ad8', //'#59A5D8'
     year: '2023-2024',
     roles: ['Junior Developer - Rawky Games'],
