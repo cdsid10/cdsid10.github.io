@@ -29,9 +29,11 @@ interface ProjectCardProps {
   onHoverEnd: () => void;
   isHovered: boolean;
   isActive: boolean;
+  /** [GLOBAL] First Home card only: its thumbnail is the likely LCP image, so it is fetched eagerly at high priority. */
+  priority?: boolean;
 }
 
-export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHovered, isActive }: ProjectCardProps) {
+export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHovered, isActive, priority = false }: ProjectCardProps) {
   // [GLOBAL] State for responsiveness and navigation
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const [isEffectActive, setIsEffectActive] = useState(false);
@@ -317,7 +319,8 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
               : project.thumbnail_16_9
             }
             alt={project.title}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : undefined}
             decoding="async"
             referrerPolicy="no-referrer"
             animate={{
