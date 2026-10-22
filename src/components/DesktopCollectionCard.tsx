@@ -291,19 +291,15 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
         <div className="mt-6 sm:mt-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-1 sm:gap-0">
           <div className="flex flex-col w-full sm:w-auto">
             <h2 className={cn(
-              "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 transition-colors font-bold",
-              isEffectActive
-                ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms] text-white`
-                : "text-ink"
+              "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 transition-colors duration-200 font-bold",
+              isEffectActive ? "text-white" : "text-ink"
             )}>
               {activeItem.title}
             </h2>
 
             <div className={cn(
-              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase transition-colors",
-              isEffectActive
-                ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms] text-white/70`
-                : "text-muted"
+              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase transition-colors duration-200",
+              isEffectActive ? "text-white/70" : "text-muted"
             )}>
               <div className="flex flex-col sm:flex-row sm:gap-2 w-full sm:w-auto overflow-hidden">
                 <div className="flex gap-2 whitespace-nowrap">
@@ -328,9 +324,8 @@ export default function DesktopCollectionCard({ project, onHoverStart, onHoverEn
           {/* Accent Line / Call to Action */}
           <div className="hidden sm:flex flex-col items-end gap-2 shrink-0 translate-y-[-2.5px]">
             <span className={cn(
-              "text-[11px] tracking-[1px] uppercase transition-all block",
-              isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink',
-              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : ''
+              "text-[11px] tracking-[1px] uppercase transition-all duration-200 block",
+              isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink'
             )}>
               View Project
             </span>

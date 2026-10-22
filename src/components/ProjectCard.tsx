@@ -340,24 +340,16 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
           <div className="flex flex-col w-full sm:w-auto">
             {/* Project Title: Switches from ink to white on hover */}
             <h2 className={cn(
-              "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 font-bold",
-              isEffectActive
-                ? (windowWidth < CONFIG.MOBILE_BREAKPOINT
-                  ? `duration-[${CONFIG.TRANSITION_MOBILE}ms]`
-                  : `duration-[${CONFIG.TRANSITION_DESKTOP}ms]`) + " text-white"
-                : "text-ink"
+              "text-xl sm:text-2xl tracking-[0.5px] mb-1.5 font-bold transition-colors duration-200",
+              isEffectActive ? "text-white" : "text-ink"
             )}>
               {project.title}
             </h2>
 
             {/* Role and Year List */}
             <div className={cn(
-              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase transition-colors",
-              isEffectActive
-                ? (windowWidth < CONFIG.MOBILE_BREAKPOINT
-                  ? `duration-[${CONFIG.TRANSITION_MOBILE}ms]`
-                  : `duration-[${CONFIG.TRANSITION_DESKTOP}ms]`) + " text-white/70"
-                : "text-muted"
+              "flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 text-[10px] sm:text-[12px] tracking-[1.25px] uppercase transition-colors duration-200",
+              isEffectActive ? "text-white/70" : "text-muted"
             )}>
               <div className="flex flex-col sm:flex-row sm:gap-2 w-full sm:w-auto">
                 {project.roles.map((role, i) => (
@@ -394,10 +386,9 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
           {/* [DESKTOP & IPAD] Accent Line / Call to Action */}
           <div className="hidden sm:flex flex-col items-end gap-2 shrink-0 translate-y-[-2.5px]">
             <span className={cn(
-              "text-[11px] tracking-[1px] uppercase transition-all",
+              "text-[11px] tracking-[1px] uppercase transition-all duration-200",
               isTouchDevice ? "hidden" : "block",
-              isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink',
-              isEffectActive ? `duration-[${CONFIG.TRANSITION_DESKTOP}ms]` : ''
+              isEffectActive ? 'opacity-80 text-white' : 'opacity-0 text-ink'
             )}>
               View Project
             </span>
