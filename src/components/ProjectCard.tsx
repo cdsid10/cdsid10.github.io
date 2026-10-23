@@ -277,7 +277,8 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
     <Component
       ref={containerRef as any}
       {...(linkProps as any)}
-      className="group block"
+      draggable={false}
+      className="group block transition-transform duration-100 motion-safe:active:scale-99"
       /* [MOBILE] Using a single click handler ensures perfect hit-detection on edges 
          while still allowing our custom bloom delay to play out. */
       onClick={handleCardClick}
@@ -323,6 +324,7 @@ export default function ProjectCard({ project, onHoverStart, onHoverEnd, isHover
             fetchPriority={priority ? 'high' : undefined}
             decoding="async"
             referrerPolicy="no-referrer"
+            draggable={false}
             animate={{
               scale: isEffectActive ? 1.05 : 1
             }}
