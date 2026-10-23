@@ -64,8 +64,8 @@ function ScrollIndicators({
               this dot represents the currently viewed section, incorporating bloom hover overrides.
             */
             className={`w-1.5 transition-all duration-100 ease-out ${activeSection === index
-              ? (isHoveringActiveCard ? 'h-8 bg-white' : 'h-8 bg-ink') + ' motion-safe:group-hover:scale-[1.15] motion-safe:group-focus-visible:scale-[1.15]'
-              : (isHoveringActiveCard ? 'h-1.5 bg-white/20 group-hover:bg-white/40' : 'h-1.5 bg-ink/20 group-hover:bg-ink/40 shadow-sm') + ' motion-safe:group-hover:scale-[1.333] motion-safe:group-focus-visible:scale-[1.333]'
+              ? (isHoveringActiveCard ? 'h-8 bg-white' : 'h-8 bg-ink') + ' motion-safe:group-hover:scale-[1.15] motion-safe:group-focus-visible:scale-[1.15] motion-safe:group-active:scale-90'
+              : (isHoveringActiveCard ? 'h-1.5 bg-white/20 group-hover:bg-white/40' : 'h-1.5 bg-ink/20 group-hover:bg-ink/40 shadow-sm') + ' motion-safe:group-hover:scale-[1.333] motion-safe:group-focus-visible:scale-[1.333] motion-safe:group-active:scale-90'
               }`}
           />
         </button>
